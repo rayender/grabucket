@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7309228644823889"
-     crossorigin="anonymous"></script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Grabucket — Color Converter</title>
@@ -160,6 +158,63 @@ footer { border-top:1px solid var(--border); padding:1.75rem 3rem; display:flex;
   .pal-grid{grid-template-columns:1fr;}
   footer{flex-direction:column;align-items:flex-start;}
 }
+/* Accessibility section */
+.a11y-section{background:var(--surface);border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:1.25rem;}
+.a11y-section-head{padding:.85rem 1.4rem;font-size:.56rem;letter-spacing:.18em;text-transform:uppercase;color:var(--dim);border-bottom:1px solid var(--border);}
+.a11y-rows{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);}
+.a11y-row{background:var(--surface);display:flex;align-items:center;gap:.9rem;padding:.95rem 1.2rem;transition:background .15s;}
+.a11y-row:hover{background:var(--surface2);}
+.a11y-box{display:flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:6px;font-size:.82rem;font-weight:700;flex-shrink:0;border:1px solid rgba(255,255,255,.05);letter-spacing:.02em;}
+.a11y-info{flex:1;min-width:110px;}
+.a11y-lbl{font-size:.58rem;color:var(--muted);margin-bottom:3px;}
+.a11y-ratio{font-family:var(--mono);font-size:.9rem;font-weight:600;color:var(--text);}
+.a11y-badges{display:flex;gap:4px;flex-wrap:wrap;margin-top:5px;}
+.a11y-badge{font-size:.53rem;letter-spacing:.07em;text-transform:uppercase;padding:2px 6px;border-radius:3px;font-weight:600;}
+.a11y-pass{background:rgba(120,212,137,.1);color:#78d489;border:1px solid rgba(120,212,137,.2);}
+.a11y-fail{background:rgba(224,112,112,.08);color:#e07070;border:1px solid rgba(224,112,112,.18);}
+/* Swatch pick */
+.swatch-pick{cursor:pointer;position:relative;}
+.swatch-pick:hover{opacity:.85;}
+.swatch-pick::after{content:'Pick';position:absolute;bottom:-8px;left:50%;transform:translateX(-50%);font-size:.48rem;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);white-space:nowrap;opacity:0;transition:opacity .15s;}
+.swatch-pick:hover::after{opacity:1;}
+@media(max-width:768px){.a11y-rows{grid-template-columns:1fr;}}
+/* Dynamic logo */
+.logo-icon path { fill: var(--accent); transition: fill .4s ease; }
+/* Wheel toggle button */
+.btn-wheel { display:inline-flex; align-items:center; gap:5px; font-family:var(--sans); font-size:.64rem; font-weight:500; color:var(--muted); background:transparent; border:1px solid var(--border); border-radius:20px; padding:5px 12px; cursor:pointer; transition:border-color .18s,color .18s,background .18s; letter-spacing:.03em; }
+.btn-wheel:hover { border-color:var(--border-h); color:var(--text); }
+.btn-wheel.open { border-color:var(--accent); color:var(--accent); background:rgba(28,152,213,.07); }
+.btn-wheel svg { width:13px; height:13px; flex-shrink:0; transition:transform .25s; }
+.btn-wheel.open svg { transform:rotate(90deg); }
+/* Wheel panel */
+.wheel-panel { display:none; background:var(--surface); border:1px solid var(--border); border-radius:12px; overflow:hidden; margin-bottom:1.5rem; }
+.wheel-panel.open { display:flex; flex-wrap:wrap; }
+.wheel-canvas-area { padding:1.5rem; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+#colorWheel { display:block; cursor:crosshair; border-radius:50%; }
+.wheel-side { flex:1; min-width:190px; padding:1.5rem 1.5rem 1.5rem 0; display:flex; flex-direction:column; gap:1.1rem; }
+.wheel-side-lbl { font-size:.55rem; letter-spacing:.18em; text-transform:uppercase; color:var(--dim); margin-bottom:.55rem; }
+.wheel-opt-row { display:flex; gap:6px; flex-wrap:wrap; }
+.wheel-opt-btn { background:transparent; border:1px solid var(--border); border-radius:20px; color:var(--muted); font-family:var(--sans); font-size:.62rem; font-weight:500; padding:4px 11px; cursor:pointer; transition:border-color .15s,color .15s,background .15s; }
+.wheel-opt-btn:hover { border-color:var(--border-h); color:var(--text); }
+.wheel-opt-btn.on { background:var(--accent); border-color:var(--accent); color:#fff; }
+/* Alpha slider */
+.alpha-row { display:flex; align-items:center; gap:9px; }
+.alpha-track { position:relative; flex:1; height:10px; border-radius:5px; }
+.alpha-track-bg { position:absolute; inset:0; border-radius:5px; background:repeating-conic-gradient(#555 0% 25%, #333 0% 50%) 0 0 / 10px 10px; }
+.alpha-track-fg { position:absolute; inset:0; border-radius:5px; }
+.alpha-slider { position:absolute; inset:0; width:100%; opacity:0; cursor:pointer; margin:0; }
+.alpha-val { font-family:var(--mono); font-size:.65rem; color:var(--muted); min-width:30px; text-align:right; }
+/* Wheel current color display */
+.wheel-curr { background:var(--surface2); border:1px solid var(--border); border-radius:8px; padding:.85rem 1rem; }
+.wheel-curr-swatch { width:36px; height:36px; border-radius:7px; border:1px solid rgba(255,255,255,.07); margin-bottom:.5rem; transition:background .2s; }
+.wheel-curr-hex { font-family:var(--mono); font-size:.75rem; color:var(--text); font-weight:500; }
+.wheel-curr-sub { font-size:.58rem; color:var(--dim); margin-top:3px; letter-spacing:.04em; }
+.wheel-curr-alpha { font-size:.58rem; color:var(--accent); margin-top:2px; display:none; }
+.wheel-curr-alpha.vis { display:block; }
+@media(max-width:640px) {
+  .wheel-panel.open { flex-direction:column; }
+  .wheel-side { padding:0 1.25rem 1.25rem; }
+}
 </style>
 </head>
 <body>
@@ -168,8 +223,8 @@ footer { border-top:1px solid var(--border); padding:1.75rem 3rem; display:flex;
   <div class="logo">
     <div class="logo-icon" id="logoDot">
       <svg width="32" height="32" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:block;background:transparent;overflow:visible">
-        <path d="M46.9066 48.3164C52.2506 47.1018 56.8032 48.4786 59.014 50.9326C59.5662 51.5656 59.8568 52.1613 60.0081 52.8271C60.4536 54.7876 59.3919 56.4484 57.3949 56.9023C55.8602 57.2511 54.5605 56.9248 53.3089 55.8672C51.6689 54.4699 50.2332 54.0566 48.347 54.4854C45.0188 55.2421 43.6806 58.4254 44.7611 63.1787C45.8668 68.043 48.765 70.4381 52.2044 69.6562C54.7562 69.0762 56.2446 67.2399 55.9788 65.0439L55.932 64.666L54.3968 65.0146C52.6401 65.4139 51.2833 64.7495 50.9007 63.0664C50.5183 61.3834 51.4362 60.2023 53.2113 59.7988L58.3704 58.626C60.8667 58.0586 62.6269 59.2146 63.224 61.8408C64.666 68.1849 61.3746 74.0686 53.4232 75.876C44.9543 77.8009 38.8121 73.9647 36.7982 65.1055C34.8096 56.3569 38.6778 50.1869 46.9066 48.3164Z" fill="#1C98D5"/>
-        <path fill-rule="evenodd" clip-rule="evenodd" d="M58.4398 8C60.7704 8.00008 62.6909 9.74593 62.9701 12.001C72.5504 15.2259 79.4505 24.2817 79.4505 34.9492V35.5078C82.2728 37.6395 82.9268 41.1837 82.3099 44.0225L73.9994 82.25C73.8916 82.7456 73.6752 83.594 73.1273 84.4424C71.2601 87.3333 65.5649 92.501 49.7611 92.501C33.9573 92.5009 28.2621 87.3333 26.3949 84.4424C25.847 83.594 25.6305 82.7455 25.5228 82.25L17.2132 44.0225C16.6694 41.5203 17.113 38.4705 19.1585 36.3223V34.9492C19.1585 23.929 26.5226 14.6296 36.598 11.7012C37.0028 9.59294 38.857 8 41.0833 8H58.4398ZM49.7611 36.7764C35.0066 36.7761 27.6333 39.6099 24.5638 41.2822C24.4843 41.3256 24.4267 41.3779 24.3734 41.5234C24.307 41.705 24.2591 42.035 24.3538 42.4707L32.6497 80.6348C33.3037 81.4696 36.9203 85.1924 49.7611 85.1924C62.5992 85.1924 66.2164 81.4706 66.8714 80.6348L75.1683 42.4707C75.263 42.0351 75.2151 41.706 75.1488 41.5244C75.0954 41.3786 75.038 41.3256 74.9583 41.2822C73.7882 40.6448 71.9927 39.8395 69.4017 39.0859V51.3926C69.4015 52.6535 68.3794 53.6755 67.1185 53.6758C65.8573 53.6758 64.8346 52.6537 64.8343 51.3926V45.9072C64.4523 46.1948 63.9791 46.3681 63.4642 46.3682C62.2029 46.3682 61.18 45.3453 61.18 44.084V37.4414C60.3107 37.3308 59.3979 37.2299 58.4398 37.1436V40.4297C58.4398 41.691 57.4169 42.7139 56.1556 42.7139C54.8944 42.7138 53.8724 41.6909 53.8724 40.4297V36.8535C52.5704 36.8032 51.2008 36.7764 49.7611 36.7764ZM37.4037 15.2744C29.2543 17.7411 23.2443 25.1309 22.8353 33.9844C27.6209 31.8007 35.9652 29.4685 49.7611 29.4688C62.6968 29.469 70.8392 31.5203 75.7494 33.5762C75.1949 25.1682 69.5863 18.1422 61.932 15.5088C61.0941 16.5026 59.8414 17.1347 58.4398 17.1348H41.0833C39.574 17.1348 38.2353 16.4029 37.4037 15.2744Z" fill="#1C98D5"/>
+        <path d="M46.9066 48.3164C52.2506 47.1018 56.8032 48.4786 59.014 50.9326C59.5662 51.5656 59.8568 52.1613 60.0081 52.8271C60.4536 54.7876 59.3919 56.4484 57.3949 56.9023C55.8602 57.2511 54.5605 56.9248 53.3089 55.8672C51.6689 54.4699 50.2332 54.0566 48.347 54.4854C45.0188 55.2421 43.6806 58.4254 44.7611 63.1787C45.8668 68.043 48.765 70.4381 52.2044 69.6562C54.7562 69.0762 56.2446 67.2399 55.9788 65.0439L55.932 64.666L54.3968 65.0146C52.6401 65.4139 51.2833 64.7495 50.9007 63.0664C50.5183 61.3834 51.4362 60.2023 53.2113 59.7988L58.3704 58.626C60.8667 58.0586 62.6269 59.2146 63.224 61.8408C64.666 68.1849 61.3746 74.0686 53.4232 75.876C44.9543 77.8009 38.8121 73.9647 36.7982 65.1055C34.8096 56.3569 38.6778 50.1869 46.9066 48.3164Z"/>
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M58.4398 8C60.7704 8.00008 62.6909 9.74593 62.9701 12.001C72.5504 15.2259 79.4505 24.2817 79.4505 34.9492V35.5078C82.2728 37.6395 82.9268 41.1837 82.3099 44.0225L73.9994 82.25C73.8916 82.7456 73.6752 83.594 73.1273 84.4424C71.2601 87.3333 65.5649 92.501 49.7611 92.501C33.9573 92.5009 28.2621 87.3333 26.3949 84.4424C25.847 83.594 25.6305 82.7455 25.5228 82.25L17.2132 44.0225C16.6694 41.5203 17.113 38.4705 19.1585 36.3223V34.9492C19.1585 23.929 26.5226 14.6296 36.598 11.7012C37.0028 9.59294 38.857 8 41.0833 8H58.4398ZM49.7611 36.7764C35.0066 36.7761 27.6333 39.6099 24.5638 41.2822C24.4843 41.3256 24.4267 41.3779 24.3734 41.5234C24.307 41.705 24.2591 42.035 24.3538 42.4707L32.6497 80.6348C33.3037 81.4696 36.9203 85.1924 49.7611 85.1924C62.5992 85.1924 66.2164 81.4706 66.8714 80.6348L75.1683 42.4707C75.263 42.0351 75.2151 41.706 75.1488 41.5244C75.0954 41.3786 75.038 41.3256 74.9583 41.2822C73.7882 40.6448 71.9927 39.8395 69.4017 39.0859V51.3926C69.4015 52.6535 68.3794 53.6755 67.1185 53.6758C65.8573 53.6758 64.8346 52.6537 64.8343 51.3926V45.9072C64.4523 46.1948 63.9791 46.3681 63.4642 46.3682C62.2029 46.3682 61.18 45.3453 61.18 44.084V37.4414C60.3107 37.3308 59.3979 37.2299 58.4398 37.1436V40.4297C58.4398 41.691 57.4169 42.7139 56.1556 42.7139C54.8944 42.7138 53.8724 41.6909 53.8724 40.4297V36.8535C52.5704 36.8032 51.2008 36.7764 49.7611 36.7764ZM37.4037 15.2744C29.2543 17.7411 23.2443 25.1309 22.8353 33.9844C27.6209 31.8007 35.9652 29.4685 49.7611 29.4688C62.6968 29.469 70.8392 31.5203 75.7494 33.5762C75.1949 25.1682 69.5863 18.1422 61.932 15.5088C61.0941 16.5026 59.8414 17.1347 58.4398 17.1348H41.0833C39.574 17.1348 38.2353 16.4029 37.4037 15.2744Z"/>
       </svg>
     </div>
     <span class="logo-name">Grabucket</span>
@@ -185,7 +240,8 @@ footer { border-top:1px solid var(--border); padding:1.75rem 3rem; display:flex;
 
 <main class="converter">
   <div class="input-zone">
-    <div class="big-swatch" id="bigSwatch"></div>
+    <div class="big-swatch swatch-pick" id="bigSwatch" onclick="document.getElementById('colorPicker').click()" title="Click to open color picker"></div>
+    <input type="color" id="colorPicker" style="position:absolute;opacity:0;width:0;height:0;pointer-events:none;" value="#ffffff">
     <div class="input-inner">
       <div class="input-lbl">Paste color value</div>
       <input id="colorInput" autocomplete="off" spellcheck="false"
@@ -203,6 +259,45 @@ footer { border-top:1px solid var(--border); padding:1.75rem 3rem; display:flex;
     <button class="pill" onclick="fc('hsl(220, 100%, 55%)')">hsl(220,100%,55%)</button>
     <button class="pill" onclick="fc('Pantone Warm Red C')">Warm Red C</button>
   </div>
+  <div style="display:flex;align-items:center;gap:8px;margin-bottom:1rem;">
+    <button class="btn-wheel" id="btnWheel" onclick="toggleWheel()">
+      <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="7" cy="7" r="6" stroke="currentColor" stroke-width="1.4"/><circle cx="7" cy="7" r="2" stroke="currentColor" stroke-width="1.4"/><line x1="7" y1="1" x2="7" y2="4.2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><line x1="7" y1="9.8" x2="7" y2="13" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><line x1="1" y1="7" x2="4.2" y2="7" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><line x1="9.8" y1="7" x2="13" y2="7" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+      Color Wheel
+    </button>
+  </div>
+
+  <div class="wheel-panel" id="wheelPanel">
+    <div class="wheel-canvas-area">
+      <canvas id="colorWheel" width="250" height="250"></canvas>
+    </div>
+    <div class="wheel-side">
+      <div>
+        <div class="wheel-side-lbl">Options</div>
+        <div class="wheel-opt-row">
+          <button class="wheel-opt-btn on" id="optHarm" onclick="wToggleHarm()">Harmonies</button>
+          <button class="wheel-opt-btn" id="optAlpha" onclick="wToggleAlpha()">Alpha</button>
+        </div>
+      </div>
+      <div id="alphaSection" style="display:none;">
+        <div class="wheel-side-lbl">Opacity</div>
+        <div class="alpha-row">
+          <div class="alpha-track">
+            <div class="alpha-track-bg"></div>
+            <div class="alpha-track-fg" id="alphaFg" style="background:linear-gradient(to right,transparent,var(--accent))"></div>
+            <input type="range" class="alpha-slider" id="alphaSlider" min="0" max="100" value="100" oninput="wUpdateAlpha(this.value)">
+          </div>
+          <span class="alpha-val" id="alphaVal">100%</span>
+        </div>
+      </div>
+      <div class="wheel-curr">
+        <div class="wheel-curr-swatch" id="wSwatch" style="background:#ffffff;"></div>
+        <div class="wheel-curr-hex" id="wHex">#FFFFFF</div>
+        <div class="wheel-curr-sub" id="wSub">H 0° · S 0% · V 100%</div>
+        <div class="wheel-curr-alpha" id="wAlphaDisp">rgba(255, 255, 255, 1.00)</div>
+      </div>
+    </div>
+  </div>
+
   <div id="results"></div>
 </main>
 
@@ -211,7 +306,7 @@ footer { border-top:1px solid var(--border); padding:1.75rem 3rem; display:flex;
   <div class="ftags">
     <span class="ftag">Hex</span><span class="ftag">RGB</span><span class="ftag">CMYK</span>
     <span class="ftag">HSL</span><span class="ftag">HSV</span><span class="ftag">RAL</span>
-    <span class="ftag">Pantone</span><span class="ftag">Swift</span>
+    <span class="ftag">Pantone</span><span class="ftag">Swift</span><span class="ftag">oklch</span><span class="ftag">oklab</span>
   </div>
 </footer>
 
@@ -241,7 +336,46 @@ const PANTONE={
   "2727 C":"#307FE2","300 C":"#005EB8","301 C":"#004C97",
   "320 C":"#009CA6","326 C":"#00B2A9","072 C":"#10069F",
   "2945 C":"#006CB7","279 C":"#418FDE","549 C":"#7BA4DB",
-  "7461 C":"#009CDE","3005 C":"#0067A5"
+  "7461 C":"#009CDE","3005 C":"#0067A5",
+  "100 C":"#F6EB61","101 C":"#F7EA48","102 C":"#F9E526","103 C":"#C6AD0F","104 C":"#AD9B14","105 C":"#8C7B19",
+  "106 C":"#F8E220","107 C":"#F6DC00","108 C":"#F0D400","109 C":"#ECC900","110 C":"#C6A800","112 C":"#A18700",
+  "113 C":"#F9D849","114 C":"#F9D429","115 C":"#F7CC28","117 C":"#C6A200","118 C":"#A68900","119 C":"#8A7400",
+  "137 C":"#FAAD3D","138 C":"#E9960E","139 C":"#C08000","144 C":"#F58220","151 C":"#FF7900","152 C":"#E87722",
+  "165 C":"#FF6720","166 C":"#FA5B2C","167 C":"#DF4A23","168 C":"#9E3519",
+  "175 C":"#C47B5B","176 C":"#F4A2A2","177 C":"#F6745A","178 C":"#F4533C","179 C":"#F4412E","180 C":"#DF3922",
+  "181 C":"#AF3226","186 C":"#C8102E","187 C":"#C11230","188 C":"#9D1939",
+  "192 C":"#F5607A","193 C":"#F05474","194 C":"#EE3A5D","195 C":"#D6244D","196 C":"#C41642",
+  "210 C":"#F4759B","211 C":"#F0527A","212 C":"#E8395C","213 C":"#DC1E62","214 C":"#C61E5E",
+  "Pink C":"#E56DB1","Red 032 C":"#EF3340","Bright Red C":"#F22F20",
+  "220 C":"#A51C53","221 C":"#C05785","222 C":"#AB4D79","253 C":"#AE3E96","254 C":"#9B3090","255 C":"#72246C",
+  "256 C":"#C5A5CD","257 C":"#B587BC","258 C":"#9063A6","259 C":"#703D8F","260 C":"#602F88",
+  "261 C":"#572881","262 C":"#4B2775","265 C":"#9572B5","267 C":"#5B368C","268 C":"#4A2B80","2685 C":"#33006F",
+  "2705 C":"#594FA8","2715 C":"#6D6CC9","2725 C":"#5A4EB5","2735 C":"#2C2490","2745 C":"#24218A",
+  "072 C":"#10069F","280 C":"#0A2D78","281 C":"#0C2770","282 C":"#0A1F5B",
+  "288 C":"#003083","289 C":"#002C5E","290 C":"#BFDBF5","291 C":"#9FD8EE","292 C":"#69B3E7","293 C":"#003DA5",
+  "294 C":"#003087","295 C":"#00205B","297 C":"#6FC6E2","298 C":"#41BADF","299 C":"#00A9E0",
+  "Process Blue C":"#0085CA","306 C":"#00B2E3","307 C":"#005F8C","308 C":"#004F71",
+  "312 C":"#00B0CA","314 C":"#00859B","315 C":"#006B78","317 C":"#A5DCEB","318 C":"#6BC9DF",
+  "319 C":"#00B4CC","321 C":"#00929B","322 C":"#007A82","324 C":"#A2D4D5","325 C":"#5FC0C5",
+  "327 C":"#009C95","328 C":"#00857D","329 C":"#006E6A","333 C":"#8FDAC9","334 C":"#00B59F",
+  "335 C":"#00907A","336 C":"#00725D","339 C":"#00A887","340 C":"#009070","341 C":"#007558",
+  "342 C":"#006048","343 C":"#004F3C","347 C":"#009B55","348 C":"#008549","349 C":"#007038",
+  "354 C":"#00A651","361 C":"#43B02A","362 C":"#44883B","363 C":"#3F7E44","364 C":"#3D6B36",
+  "368 C":"#72BB53","369 C":"#64AD45","370 C":"#4E912C","371 C":"#44783D",
+  "375 C":"#97D700","376 C":"#84BD00","377 C":"#6FA600","382 C":"#C4D600","383 C":"#ADBA00","384 C":"#8F9A00",
+  "390 C":"#C5CF00","393 C":"#E0DC00","394 C":"#D0CB00","398 C":"#C6A400",
+  "400 C":"#B9A99C","401 C":"#AE9C90","402 C":"#A59186","403 C":"#9B867A","404 C":"#907A6E","405 C":"#87706C",
+  "420 C":"#C8C2B8","421 C":"#BCB6AC","422 C":"#B2ACA2","423 C":"#A5A098","424 C":"#96908A","425 C":"#7E7974",
+  "426 C":"#3D3B3B","427 C":"#D5D0CB","428 C":"#CCCAC5","429 C":"#B8B5AF","430 C":"#A3A09B","431 C":"#8E8C87",
+  "432 C":"#797876","433 C":"#606060","434 C":"#D9C8C3","438 C":"#7B5B65","439 C":"#6B4C57",
+  "Cool Gray 1 C":"#D9D9D6","Cool Gray 2 C":"#D0D0CE","Cool Gray 3 C":"#C8C9C7","Cool Gray 4 C":"#BBBCBC",
+  "Cool Gray 6 C":"#A7A8AA","Cool Gray 7 C":"#97999B","Cool Gray 8 C":"#888B8D","Cool Gray 9 C":"#75787B","Cool Gray 10 C":"#63666A",
+  "Warm Gray 1 C":"#D9D0C7","Warm Gray 2 C":"#CFC5BA","Warm Gray 3 C":"#C5BAB0","Warm Gray 4 C":"#BAB0A8",
+  "Warm Gray 5 C":"#AFA59C","Warm Gray 6 C":"#A39792","Warm Gray 7 C":"#978B85","Warm Gray 8 C":"#8B7D78",
+  "Warm Gray 9 C":"#7D6F6A","Warm Gray 10 C":"#6E5F5A","Warm Gray 11 C":"#5F5044",
+  "484 C":"#AE2928","486 C":"#DE6049","487 C":"#EF8A75","488 C":"#F6A98F",
+  "490 C":"#7A2A33","491 C":"#903344","492 C":"#B5616A","493 C":"#DBADAB",
+  "499 C":"#A45355","500 C":"#E0A4A0","501 C":"#E8B8B2","502 C":"#EFC7BF"
 };
 /* ─── Brand name engine ─── */
 /*
@@ -364,6 +498,33 @@ function closestRAL(r,g,b){let b2=null,bd=Infinity;for(const[k,v]of Object.entri
 function closestPantone(r,g,b){let b2=null,bd=Infinity;for(const[k,v]of Object.entries(PANTONE)){const rgb=h2r(v);if(!rgb)continue;const d=cdist(r,g,b,rgb.r,rgb.g,rgb.b);if(d<bd){bd=d;b2={code:k,hex:v,dist:d};}}return b2;}
 
 function hRot(h,d){return((h+d)%360+360)%360;}
+/* ─── oklch / oklab ─── */
+function lin(c){return c<=0.04045?c/12.92:Math.pow((c+0.055)/1.055,2.4);}
+function r2oklab(r,g,b){
+  const rl=lin(r/255),gl=lin(g/255),bl=lin(b/255);
+  const x=0.4122214708*rl+0.5363325363*gl+0.0514459929*bl;
+  const y=0.2119034982*rl+0.6806995451*gl+0.1073969566*bl;
+  const z=0.0883024619*rl+0.2817188376*gl+0.6299787005*bl;
+  const l_=Math.cbrt(0.8189330101*x+0.3618667424*y-0.1288597137*z);
+  const m_=Math.cbrt(0.0329845436*x+0.9293118715*y+0.0361456387*z);
+  const s_=Math.cbrt(0.0482003018*x+0.2643662691*y+0.6338517070*z);
+  return{
+    l:+(0.2104542553*l_+0.7936177850*m_-0.0040720468*s_).toFixed(4),
+    a:+(1.9779984951*l_-2.4285922050*m_+0.4505937099*s_).toFixed(4),
+    b:+(0.0259040371*l_+0.7827717662*m_-0.8086757660*s_).toFixed(4)
+  };
+}
+function r2oklch(r,g,b){
+  const lab=r2oklab(r,g,b);
+  const c=Math.sqrt(lab.a*lab.a+lab.b*lab.b);
+  let h=Math.atan2(lab.b,lab.a)*180/Math.PI;
+  if(h<0)h+=360;
+  return{l:lab.l,c:+c.toFixed(4),h:+h.toFixed(1)};
+}
+/* ─── WCAG ─── */
+function wcagLum(r,g,b){const v=[r,g,b].map(c=>{c/=255;return c<=0.03928?c/12.92:Math.pow((c+0.055)/1.055,2.4);});return 0.2126*v[0]+0.7152*v[1]+0.0722*v[2];}
+function contrastRatio(l1,l2){const li=Math.max(l1,l2),dk=Math.min(l1,l2);return +((li+0.05)/(dk+0.05)).toFixed(2);}
+
 
 function parseInput(raw){
   raw=raw.trim();let m;
@@ -666,6 +827,34 @@ function makeScaleSwatch(item){
   </div>`;
 }
 
+/* ─── Accessibility (WCAG 2.1) ─── */
+function makeA11ySection(r,g,b,hex){
+  function badge(label,pass){
+    return `<span class="a11y-badge ${pass?'a11y-pass':'a11y-fail'}">${pass?'✓':'✕'} ${label}</span>`;
+  }
+  function row(bg,fg,label,fgR,fgG,fgB,bgR,bgG,bgB){
+    const ratio=contrastRatio(wcagLum(fgR,fgG,fgB),wcagLum(bgR,bgG,bgB));
+    const aa=ratio>=4.5,aaL=ratio>=3,aaa=ratio>=7,aaaL=ratio>=4.5;
+    return `<div class="a11y-row">
+      <div class="a11y-box" style="background:${bg};color:${fg}">Aa</div>
+      <div class="a11y-info">
+        <div class="a11y-lbl">${label}</div>
+        <div class="a11y-ratio">${ratio}:1</div>
+        <div class="a11y-badges">${badge('AA',aa)}${badge('AA Large',aaL)}${badge('AAA',aaa)}${badge('AAA Large',aaaL)}</div>
+      </div>
+    </div>`;
+  }
+  return `<div class="a11y-section">
+    <div class="a11y-section-head">Accessibility — WCAG 2.1 contrast ratios</div>
+    <div class="a11y-rows">
+      ${row('#ffffff',hex,'Color on white',r,g,b,255,255,255)}
+      ${row('#000000',hex,'Color on black',r,g,b,0,0,0)}
+      ${row(hex,'#ffffff','White on color',255,255,255,r,g,b)}
+      ${row(hex,'#000000','Black on color',0,0,0,r,g,b)}
+    </div>
+  </div>`;
+}
+
 function colorSystem(r,g,b,name){
   const {h,s,l}=r2hsl(r,g,b);
   const scale=buildScale(h,s);
@@ -745,6 +934,167 @@ document.addEventListener('click', e=>{
   copyText(val, btn);
 });
 
+
+/* ─── Color Wheel ─── */
+let wH=0, wS=0, wV=1.0, wDrag=null, wShowHarm=true, wShowAlpha=false, wAlphaVal=100;
+const W_SIZE=250, W_RING=28;
+
+function wDims(){
+  const outerR=W_SIZE/2-5, innerR=outerR-W_RING, sqH=Math.floor(innerR*0.698);
+  return {cx:W_SIZE/2, cy:W_SIZE/2, outerR, innerR, sqH};
+}
+
+function drawWheel(h,s,v){
+  const canvas=document.getElementById('colorWheel');
+  if(!canvas) return;
+  const ctx=canvas.getContext('2d');
+  const {cx,cy,outerR,innerR,sqH}=wDims();
+  ctx.clearRect(0,0,W_SIZE,W_SIZE);
+
+  /* Hue ring */
+  for(let i=0;i<360;i++){
+    const a1=(i-0.7)*Math.PI/180, a2=(i+1.3)*Math.PI/180;
+    ctx.beginPath();
+    ctx.moveTo(cx,cy);
+    ctx.arc(cx,cy,outerR,a1,a2);
+    ctx.closePath();
+    ctx.fillStyle=`hsl(${i},100%,50%)`;
+    ctx.fill();
+  }
+  /* Hollow center */
+  ctx.save();
+  ctx.globalCompositeOperation='destination-out';
+  ctx.beginPath(); ctx.arc(cx,cy,innerR,0,Math.PI*2); ctx.fill();
+  ctx.restore();
+
+  /* SV square */
+  const sqX=cx-sqH, sqY=cy-sqH, sqW=sqH*2;
+  const gS=ctx.createLinearGradient(sqX,0,sqX+sqW,0);
+  gS.addColorStop(0,'#fff');
+  gS.addColorStop(1,`hsl(${Math.round(h)},100%,50%)`);
+  ctx.fillStyle=gS; ctx.fillRect(sqX,sqY,sqW,sqW);
+  const gV=ctx.createLinearGradient(0,sqY,0,sqY+sqW);
+  gV.addColorStop(0,'rgba(0,0,0,0)');
+  gV.addColorStop(1,'rgba(0,0,0,1)');
+  ctx.fillStyle=gV; ctx.fillRect(sqX,sqY,sqW,sqW);
+
+  /* Harmony dots on ring */
+  if(wShowHarm){
+    [[180,.75],[120,.45],[240,.45],[150,.28],[210,.28]].forEach(([d,a])=>{
+      const hm=((h+d)%360+360)%360;
+      const angle=hm*Math.PI/180, mr=(outerR+innerR)/2;
+      ctx.beginPath();
+      ctx.arc(cx+Math.cos(angle)*mr, cy+Math.sin(angle)*mr, 4, 0, Math.PI*2);
+      ctx.fillStyle=`rgba(255,255,255,${a})`; ctx.fill();
+    });
+  }
+
+  /* Hue handle */
+  const ha=h*Math.PI/180, mr=(outerR+innerR)/2;
+  const hx=cx+Math.cos(ha)*mr, hy=cy+Math.sin(ha)*mr;
+  ctx.beginPath(); ctx.arc(hx,hy,10,0,Math.PI*2);
+  ctx.fillStyle='rgba(0,0,0,.4)'; ctx.fill();
+  ctx.beginPath(); ctx.arc(hx,hy,8,0,Math.PI*2);
+  ctx.strokeStyle='rgba(255,255,255,.95)'; ctx.lineWidth=2; ctx.stroke();
+  ctx.beginPath(); ctx.arc(hx,hy,6,0,Math.PI*2);
+  ctx.fillStyle=`hsl(${Math.round(h)},100%,50%)`; ctx.fill();
+
+  /* SV handle */
+  const svX=sqX+s*sqW, svY=sqY+(1-v)*sqW;
+  const isDarkSV = v < 0.5 || (v < 0.7 && s > 0.5);
+  ctx.beginPath(); ctx.arc(svX,svY,8,0,Math.PI*2);
+  ctx.fillStyle='rgba(0,0,0,.35)'; ctx.fill();
+  ctx.beginPath(); ctx.arc(svX,svY,7,0,Math.PI*2);
+  ctx.strokeStyle=isDarkSV?'rgba(255,255,255,.9)':'rgba(0,0,0,.6)'; ctx.lineWidth=2; ctx.stroke();
+  ctx.beginPath(); ctx.arc(svX,svY,5,0,Math.PI*2);
+  const {r:wr,g:wg,b:wb}=hsv2r(Math.round(h),Math.round(s*100),Math.round(v*100));
+  ctx.fillStyle=r2h(wr,wg,wb); ctx.fill();
+
+  /* Update sidebar display */
+  const wHexVal=r2h(wr,wg,wb);
+  const swatchEl=document.getElementById('wSwatch');
+  if(swatchEl) swatchEl.style.background=wHexVal;
+  const hexEl=document.getElementById('wHex');
+  if(hexEl) hexEl.textContent=wHexVal;
+  const subEl=document.getElementById('wSub');
+  if(subEl) subEl.textContent=`H ${Math.round(h)}° · S ${Math.round(s*100)}% · V ${Math.round(v*100)}%`;
+  const alphaDisp=document.getElementById('wAlphaDisp');
+  if(alphaDisp&&wShowAlpha){
+    const a=(wAlphaVal/100).toFixed(2);
+    alphaDisp.textContent=`rgba(${wr}, ${wg}, ${wb}, ${a})`;
+  }
+}
+
+function wCoords(e, canvas){
+  const rect=canvas.getBoundingClientRect();
+  const pt=e.touches?e.touches[0]:e;
+  return{x:(pt.clientX-rect.left)*canvas.width/rect.width, y:(pt.clientY-rect.top)*canvas.height/rect.height};
+}
+
+function wZone(x,y){
+  const{cx,cy,outerR,innerR,sqH}=wDims();
+  const dx=x-cx,dy=y-cy,dist=Math.sqrt(dx*dx+dy*dy);
+  if(dist>=innerR-3&&dist<=outerR+3) return 'hue';
+  if(Math.abs(dx)<=sqH+3&&Math.abs(dy)<=sqH+3) return 'sq';
+  return null;
+}
+
+function wHandleAt(x,y){
+  const{cx,cy,innerR,sqH}=wDims();
+  if(wDrag==='hue'){
+    let a=Math.atan2(y-cy,x-cx)*180/Math.PI;
+    wH=((a%360)+360)%360;
+  } else if(wDrag==='sq'){
+    const sqX=cx-sqH, sqY=cy-sqH, sqW=sqH*2;
+    wS=Math.max(0,Math.min(1,(x-sqX)/sqW));
+    wV=Math.max(0,Math.min(1,1-(y-sqY)/sqW));
+  }
+  const{r,g,b}=hsv2r(Math.round(wH),Math.round(wS*100),Math.round(wV*100));
+  drawWheel(wH,wS,wV);
+  const hex=r2h(r,g,b);
+  document.getElementById('colorInput').value=hex;
+  convert();
+}
+
+function wInitEvents(){
+  const c=document.getElementById('colorWheel');
+  if(!c||c._wi) return; c._wi=true;
+  c.addEventListener('mousedown',e=>{const{x,y}=wCoords(e,c);wDrag=wZone(x,y);if(wDrag)wHandleAt(x,y);});
+  c.addEventListener('mousemove',e=>{if(!wDrag)return;const{x,y}=wCoords(e,c);wHandleAt(x,y);});
+  document.addEventListener('mouseup',()=>{wDrag=null;});
+  c.addEventListener('touchstart',e=>{e.preventDefault();const{x,y}=wCoords(e,c);wDrag=wZone(x,y);if(wDrag)wHandleAt(x,y);},{passive:false});
+  c.addEventListener('touchmove',e=>{if(!wDrag)return;e.preventDefault();const{x,y}=wCoords(e,c);wHandleAt(x,y);},{passive:false});
+  c.addEventListener('touchend',()=>{wDrag=null;});
+}
+
+function toggleWheel(){
+  const p=document.getElementById('wheelPanel'),b=document.getElementById('btnWheel');
+  const isOpen=p.classList.contains('open');
+  p.classList.toggle('open',!isOpen);
+  b.classList.toggle('open',!isOpen);
+  if(!isOpen){wInitEvents();drawWheel(wH,wS,wV);}
+}
+
+function wToggleHarm(){
+  wShowHarm=!wShowHarm;
+  document.getElementById('optHarm').classList.toggle('on',wShowHarm);
+  drawWheel(wH,wS,wV);
+}
+
+function wToggleAlpha(){
+  wShowAlpha=!wShowAlpha;
+  document.getElementById('optAlpha').classList.toggle('on',wShowAlpha);
+  document.getElementById('alphaSection').style.display=wShowAlpha?'block':'none';
+  const ad=document.getElementById('wAlphaDisp');
+  if(ad) ad.classList.toggle('vis',wShowAlpha);
+  if(wShowAlpha) drawWheel(wH,wS,wV);
+}
+
+function wUpdateAlpha(val){
+  wAlphaVal=+val;
+  document.getElementById('alphaVal').textContent=val+'%';
+  drawWheel(wH,wS,wV);
+}
 /* ─── Main ─── */
 function fc(v){document.getElementById('colorInput').value=v;convert();}
 
@@ -775,6 +1125,19 @@ function convert(){
   const swiftCopy=`${(r/255).toFixed(3)}, ${(g/255).toFixed(3)}, ${(b/255).toFixed(3)}`;
   const ralOk=ral&&ral.dist<30;
   const ptOk=pt&&pt.dist<40;
+  const oklchD=r2oklch(r,g,b);
+  const oklabD=r2oklab(r,g,b);
+  const oklchStr=`oklch(${oklchD.l} ${oklchD.c} ${oklchD.h})`;
+  const oklabStr=`oklab(${oklabD.l} ${oklabD.a} ${oklabD.b})`;
+  const oklchCopy=`${oklchD.l} ${oklchD.c} ${oklchD.h}`;
+  const oklabCopy=`${oklabD.l} ${oklabD.a} ${oklabD.b}`;
+
+  /* Dynamic accent & wheel sync */
+  document.documentElement.style.setProperty('--accent', hex);
+  const _alpFg = document.getElementById('alphaFg');
+  if(_alpFg) _alpFg.style.background = `linear-gradient(to right,transparent,${hex})`;
+  wH=hsv.h; wS=hsv.s/100; wV=hsv.v/100;
+  if(document.getElementById('wheelPanel')?.classList.contains('open')) drawWheel(wH,wS,wV);
 
   res.innerHTML=`
     <div class="name-card">
@@ -799,6 +1162,8 @@ function convert(){
       ${makeCard('CSS variable', `--color: ${hex};`, nh)}
       ${makeCard('Decimal', `${r}, ${g}, ${b}`, `${r}, ${g}, ${b}`)}
       ${makeCard('Swift / iOS', `UIColor(red:${(r/255).toFixed(3)},<br>green:${(g/255).toFixed(3)},<br>blue:${(b/255).toFixed(3)}, alpha:1)`, swiftCopy)}
+      ${makeCard('oklch (CSS4)', oklchStr, oklchCopy)}
+      ${makeCard('oklab (CSS4)', oklabStr, oklabCopy)}
     </div>
 
     <div class="info-bar">
@@ -817,12 +1182,19 @@ function convert(){
       </div>
     </div>
 
+    ${makeA11ySection(r,g,b,hex)}
     ${colorSystem(r,g,b,name)}
   `;
 }
 
 document.getElementById('colorInput').addEventListener('keydown',e=>{if(e.key==='Enter')convert();});
 document.getElementById('colorInput').addEventListener('paste',e=>{setTimeout(convert,60);});
+document.getElementById('colorPicker').addEventListener('input',e=>{
+  const v=e.target.value.toUpperCase();
+  document.getElementById('colorInput').value=v;
+  convert();
+});
+
 document.getElementById('bigSwatch').style.background='#FFFFFF';
 fc('#FFFFFF');
 </script>
