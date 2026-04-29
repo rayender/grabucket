@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grabucket — Color Converter</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgdmlld0JveD0iMCAwIDEwMCAxMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxwYXRoIGQ9Ik00Ni45MDY2IDQ4LjMxNjRDNTIuMjUwNiA0Ny4xMDE4IDU2LjgwMzIgNDguNDc4NiA1OS4wMTQgNTAuOTMyNkM1OS41NjYyIDUxLjU2NTYgNTkuODU2OCA1Mi4xNjEzIDYwLjAwODEgNTIuODI3MUM2MC40NTM2IDU0Ljc4NzYgNTkuMzkxOSA1Ni40NDg0IDU3LjM5NDkgNTYuOTAyM0M1NS44NjAyIDU3LjI1MTEgNTQuNTYwNSA1Ni45MjQ4IDUzLjMwODkgNTUuODY3MkM1MS42Njg5IDU0LjQ2OTkgNTAuMjMzMiA1NC4wNTY2IDQ4LjM0NyA1NC40ODU0QzQ1LjAxODggNTUuMjQyMSA0My42ODA2IDU4LjQyNTQgNDQuNzYxMSA2My4xNzg3QzQ1Ljg2NjggNjguMDQzIDQ4Ljc2NSA3MC40MzgxIDUyLjIwNDQgNjkuNjU2MkM1NC43NTYyIDY5LjA3NjIgNTYuMjQ0NiA2Ny4yMzk5IDU1Ljk3ODggNjUuMDQzOUw1NS45MzIgNjQuNjY2TDU0LjM5NjggNjUuMDE0NkM1Mi42NDAxIDY1LjQxMzkgNTEuMjgzMyA2NC43NDk1IDUwLjkwMDcgNjMuMDY2NEM1MC41MTgzIDYxLjM4MzQgNTEuNDM2MiA2MC4yMDIzIDUzLjIxMTMgNTkuNzk4OEw1OC4zNzA0IDU4LjYyNkM2MC44NjY3IDU4LjA1ODYgNjIuNjI2OSA1OS4yMTQ2IDYzLjIyNCA2MS44NDA4QzY0LjY2NiA2OC4xODQ5IDYxLjM3NDYgNzQuMDY4NiA1My40MjMyIDc1Ljg3NkM0NC45NTQzIDc3LjgwMDkgMzguODEyMSA3My45NjQ3IDM2Ljc5ODIgNjUuMTA1NUMzNC44MDk2IDU2LjM1NjkgMzguNjc3OCA1MC4xODY5IDQ2LjkwNjYgNDguMzE2NFoiIGZpbGw9IiMxQzk4RDUiLz4KPHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik01OC40Mzk4IDhDNjAuNzcwNCA4LjAwMDA4IDYyLjY5MDkgOS43NDU5MyA2Mi45NzAxIDEyLjAwMUM3Mi41NTA0IDE1LjIyNTkgNzkuNDUwNSAyNC4yODE3IDc5LjQ1MDUgMzQuOTQ5MlYzNS41MDc4QzgyLjI3MjggMzcuNjM5NSA4Mi45MjY4IDQxLjE4MzcgODIuMzA5OSA0NC4wMjI1TDczLjk5OTQgODIuMjVDNzMuODkxNiA4Mi43NDU2IDczLjY3NTIgODMuNTk0IDczLjEyNzMgODQuNDQyNEM3MS4yNjAxIDg3LjMzMzMgNjUuNTY0OSA5Mi41MDEgNDkuNzYxMSA5Mi41MDFDMzMuOTU3MyA5Mi41MDA5IDI4LjI2MjEgODcuMzMzMyAyNi4zOTQ5IDg0LjQ0MjRDMjUuODQ3IDgzLjU5NCAyNS42MzA1IDgyLjc0NTUgMjUuNTIyOCA4Mi4yNUwxNy4yMTMyIDQ0LjAyMjVDMTYuNjY5NCA0MS41MjAzIDE3LjExMyAzOC40NzA1IDE5LjE1ODUgMzYuMzIyM1YzNC45NDkyQzE5LjE1ODUgMjMuOTI5IDI2LjUyMjYgMTQuNjI5NiAzNi41OTggMTEuNzAxMkMzNy4wMDI4IDkuNTkyOTQgMzguODU3IDggNDEuMDgzMyA4SDU4LjQzOThaTTQ5Ljc2MTEgMzYuNzc2NEMzNS4wMDY2IDM2Ljc3NjEgMjcuNjMzMyAzOS42MDk5IDI0LjU2MzggNDEuMjgyMkMyNC40ODQzIDQxLjMyNTYgMjQuNDI2NyA0MS4zNzc5IDI0LjM3MzQgNDEuNTIzNEMyNC4zMDcgNDEuNzA1IDI0LjI1OTEgNDIuMDM1IDI0LjM1MzggNDIuNDcwN0wzMi42NDk3IDgwLjYzNDhDMzMuMzAzNyA4MS40Njk2IDM2LjkyMDMgODUuMTkyNCA0OS43NjExIDg1LjE5MjRDNjIuNTk5MiA4NS4xOTI0IDY2LjIxNjQgODEuNDcwNiA2Ni44NzE0IDgwLjYzNDhMNzUuMTY4MyA0Mi40NzA3Qzc1LjI2MyA0Mi4wMzUxIDc1LjIxNTEgNDEuNzA2IDc1LjE0ODggNDEuNTI0NEM3NS4wOTU0IDQxLjM3ODYgNzUuMDM4IDQxLjMyNTYgNzQuOTU4MyA0MS4yODIyQzczLjc4ODIgNDAuNjQ0OCA3MS45OTI3IDM5LjgzOTUgNjkuNDAxNyAzOS4wODU5VjUxLjM5MjZDNjkuNDAxNSA1Mi42NTM1IDY4LjM3OTQgNTMuNjc1NSA2Ny4xMTg1IDUzLjY3NThDNjUuODU3MyA1My42NzU4IDY0LjgzNDYgNTIuNjUzNyA2NC44MzQzIDUxLjM5MjZWNDUuOTA3MkM2NC40NTIzIDQ2LjE5NDggNjMuOTc5MSA0Ni4zNjgxIDYzLjQ2NDIgNDYuMzY4MkM2Mi4yMDI5IDQ2LjM2ODIgNjEuMTggNDUuMzQ1MyA2MS4xOCA0NC4wODRWMzcuNDQxNEM2MC4zMTA3IDM3LjMzMDggNTkuMzk3OSAzNy4yMjk5IDU4LjQzOTggMzcuMTQzNlY0MC40Mjk3QzU4LjQzOTggNDEuNjkxIDU3LjQxNjkgNDIuNzEzOSA1Ni4xNTU2IDQyLjcxMzlDNTQuODk0NCA0Mi43MTM4IDUzLjg3MjQgNDEuNjkwOSA1My44NzI0IDQwLjQyOTdWMzYuODUzNUM1Mi41NzA0IDM2LjgwMzIgNTEuMjAwOCAzNi43NzY0IDQ5Ljc2MTEgMzYuNzc2NFpNMzcuNDAzNyAxNS4yNzQ0QzI5LjI1NDMgMTcuNzQxMSAyMy4yNDQzIDI1LjEzMDkgMjIuODM1MyAzMy45ODQ0QzI3LjYyMDkgMzEuODAwNyAzNS45NjUyIDI5LjQ2ODUgNDkuNzYxMSAyOS40Njg4QzYyLjY5NjggMjkuNDY5IDcwLjgzOTIgMzEuNTIwMyA3NS43NDk0IDMzLjU3NjJDNzUuMTk0OSAyNS4xNjgyIDY5LjU4NjMgMTguMTQyMiA2MS45MzIgMTUuNTA4OEM2MS4wOTQxIDE2LjUwMjYgNTkuODQxNCAxNy4xMzQ3IDU4LjQzOTggMTcuMTM0OEg0MS4wODMzQzM5LjU3NCAxNy4xMzQ4IDM4LjIzNTMgMTYuNDAyOSAzNy40MDM3IDE1LjI3NDRaIiBmaWxsPSIjMUM5OEQ1Ii8+Cjwvc3ZnPgo=">
+
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg: #0e0e0f; --surface: #161618; --surface2: #1e1e21;
+  --border: rgba(255,255,255,0.07); --border-h: rgba(255,255,255,0.15);
+  --text: #f0ede8; --muted: #7a7878; --dim: #4a4848;
+  --accent: #1C98D5;
+  --sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+  --mono: ui-monospace, 'SF Mono', 'Cascadia Code', 'Consolas', monospace;
+  --serif: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+}
+html { scroll-behavior: smooth; }
+body { background:var(--bg); color:var(--text); font-family:var(--sans); font-weight:400; min-height:100vh; overflow-x:hidden; font-feature-settings:'kern' 1; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; }
+body::before {
+  content:''; position:fixed; inset:0; pointer-events:none; z-index:9999; opacity:.4;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.04'/%3E%3C/svg%3E");
+}
+header { display:flex; align-items:center; justify-content:space-between; padding:1.75rem 3rem; border-bottom:1px solid var(--border); }
+.logo { display:flex; align-items:center; gap:10px; }
+.logo-icon { width:32px; height:32px; flex-shrink:0; display:flex; align-items:center; justify-content:center; background:none; }
+.logo-name { font-family:var(--sans); font-size:1.15rem; font-weight:700; font-style:normal; color:var(--text); letter-spacing:-.01em; }
+.logo-badge { font-size:.6rem; letter-spacing:.14em; text-transform:uppercase; color:var(--dim); border:1px solid var(--border); padding:3px 8px; border-radius:2px; }
+.hero { padding:4.5rem 3rem 2.5rem; max-width:1160px; margin:0 auto; }
+.eyebrow { font-size:.6rem; letter-spacing:.22em; text-transform:uppercase; color:var(--dim); display:flex; align-items:center; gap:10px; margin-bottom:1.25rem; }
+.eyebrow::before { content:''; width:20px; height:1px; background:var(--dim); }
+h1 { font-family:var(--sans); font-size:clamp(2.2rem,5.5vw,4.4rem); font-weight:700; line-height:1.08; letter-spacing:-.025em; color:var(--text); margin-bottom:.75rem; max-width:680px; }
+h1 em { font-style:normal; color:var(--accent); }
+.hero-sub { font-size:.78rem; color:var(--muted); letter-spacing:.04em; margin-bottom:2.5rem; }
+.converter { max-width:1160px; margin:0 auto; padding:0 3rem 5rem; }
+.input-zone { background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:1.5rem 1.75rem; margin-bottom:1.5rem; display:flex; align-items:center; gap:1rem; transition:border-color .2s; }
+.input-zone:focus-within { border-color:var(--border-h); }
+.big-swatch { width:52px; height:52px; border-radius:8px; background:#FFFFFF; flex-shrink:0; border:1px solid rgba(255,255,255,.08); transition:background .35s; }
+.input-inner { flex:1; }
+.input-lbl { font-size:.58rem; letter-spacing:.18em; text-transform:uppercase; color:var(--dim); margin-bottom:5px; }
+#colorInput { background:transparent; border:none; outline:none; font-family:var(--mono); font-size:1rem; color:var(--text); width:100%; caret-color:var(--accent); }
+#colorInput::placeholder { color:var(--dim); font-size:.85rem; }
+.btn-go { background:var(--accent); color:#ffffff; border:none; font-family:var(--sans); font-size:.72rem; font-weight:600; letter-spacing:.06em; text-transform:uppercase; padding:0 1.4rem; height:42px; border-radius:6px; cursor:pointer; flex-shrink:0; transition:opacity .2s,transform .1s; }
+.btn-go:hover { opacity:.82; }
+.btn-go:active { transform:scale(.97); }
+.examples { display:flex; gap:7px; flex-wrap:wrap; align-items:center; margin-bottom:2.5rem; }
+.ex-lbl { font-size:.58rem; letter-spacing:.18em; text-transform:uppercase; color:var(--dim); margin-right:2px; }
+.pill { font-family:var(--sans); font-size:.68rem; font-weight:400; padding:4px 11px; border-radius:20px; border:1px solid var(--border); color:var(--muted); cursor:pointer; background:transparent; transition:border-color .15s,color .15s,background .15s; }
+.pill:hover { border-color:var(--border-h); color:var(--text); background:var(--surface2); }
+#results { animation:rise .3s ease; }
+@keyframes rise { from{opacity:0;transform:translateY(6px)} to{opacity:1;transform:translateY(0)} }
+.name-card { background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:1.6rem 1.75rem; display:flex; align-items:center; gap:1.4rem; margin-bottom:1.25rem; position:relative; overflow:hidden; }
+.name-card::before { content:''; position:absolute; left:0; top:0; bottom:0; width:3px; background:#1D68FF; transition:background .35s; }
+.name-swatch { width:42px; height:42px; border-radius:7px; flex-shrink:0; border:1px solid rgba(255,255,255,.08); transition:background .35s; }
+.name-info { flex:1; }
+.name-tag { font-size:.58rem; letter-spacing:.2em; text-transform:uppercase; color:var(--dim); margin-bottom:5px; }
+.name-val { font-family:var(--sans); font-size:1.4rem; font-weight:600; font-style:normal; color:var(--accent); letter-spacing:-.02em; line-height:1; }
+.name-meta { font-size:.68rem; color:var(--dim); margin-top:5px; letter-spacing:.06em; }
+.btn-sm { background:transparent; border:1px solid var(--border); border-radius:6px; color:var(--muted); font-family:var(--sans); font-size:.68rem; font-weight:500; padding:7px 13px; cursor:pointer; letter-spacing:.02em; flex-shrink:0; transition:border-color .15s,color .15s; }
+.btn-sm:hover { border-color:var(--border-h); color:var(--text); }
+.btn-sm.ok { color:#78d489; border-color:rgba(120,212,137,.3); }
+.grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(210px,1fr)); gap:1px; background:var(--border); border:1px solid var(--border); border-radius:12px; overflow:hidden; margin-bottom:1.25rem; }
+.card { background:var(--surface); padding:1.1rem 1.4rem; position:relative; transition:background .15s; min-height:90px; }
+.card:hover { background:var(--surface2); }
+.card-lbl { font-size:.56rem; letter-spacing:.18em; text-transform:uppercase; color:var(--dim); margin-bottom:7px; }
+.card-display { font-size:.82rem; color:var(--text); line-height:1.55; word-break:break-all; }
+.card-copies { font-size:.63rem; color:var(--dim); margin-top:5px; }
+.card-copies span { color:var(--accent); }
+.card-btn { position:absolute; top:10px; right:10px; background:transparent; border:1px solid var(--border); border-radius:4px; color:var(--dim); font-family:var(--sans); font-size:.6rem; font-weight:500; padding:3px 7px; cursor:pointer; opacity:0; transition:opacity .15s,border-color .15s,color .15s; white-space:nowrap; }
+.card:hover .card-btn { opacity:1; }
+.card-btn:hover { border-color:var(--border-h); color:var(--text); }
+.card-btn.ok { color:#78d489; border-color:rgba(120,212,137,.3); }
+.info-bar { display:flex; gap:1.75rem; align-items:center; padding:1.1rem 1.4rem; background:var(--surface); border:1px solid var(--border); border-radius:12px; margin-bottom:2.5rem; flex-wrap:wrap; }
+.info-item { display:flex; align-items:center; gap:9px; font-size:.7rem; color:var(--muted); }
+.info-sw { width:24px; height:24px; border-radius:4px; flex-shrink:0; border:1px solid rgba(255,255,255,.07); }
+.cpill { padding:4px 10px; border-radius:4px; font-size:.62rem; font-weight:500; letter-spacing:.06em; }
+.vd { width:1px; height:18px; background:var(--border); }
+/* Color system */
+.sys-head { display:flex; align-items:baseline; gap:12px; margin-bottom:1.25rem; }
+.sys-title { font-family:var(--sans); font-size:1.2rem; font-weight:600; font-style:normal; color:var(--text); }
+.sys-sub { font-size:.65rem; color:var(--dim); letter-spacing:.08em; }
+.scale-row { margin-bottom:1.25rem; background:var(--surface); border:1px solid var(--border); border-radius:12px; overflow:hidden; }
+.scale-top { padding:.9rem 1.4rem 0; font-size:.56rem; letter-spacing:.18em; text-transform:uppercase; color:var(--dim); }
+.strip { display:grid; grid-template-columns:repeat(auto-fill,minmax(62px,1fr)); gap:6px; padding:.75rem 1.4rem 1rem; }
+.sw-item { cursor:pointer; position:relative; }
+.sw-block { width:100%; aspect-ratio:1; border-radius:6px; border:1px solid rgba(255,255,255,.06); transition:transform .15s; margin-bottom:4px; }
+.sw-item:hover .sw-block { transform:scale(1.07); }
+.sw-step { font-size:.56rem; color:var(--dim); text-align:center; opacity:.6; }
+.sw-hex { font-size:.6rem; color:var(--dim); text-align:center; transition:color .2s; }
+.sw-item:active .sw-hex { color:var(--accent); }
+.pal-grid { display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--border); border:1px solid var(--border); border-radius:12px; overflow:hidden; margin-bottom:1.25rem; }
+.pal-card { background:var(--surface); padding:1.1rem 1.4rem; transition:background .15s; }
+.pal-card:hover { background:var(--surface2); }
+.pal-lbl { font-size:.56rem; letter-spacing:.18em; text-transform:uppercase; color:var(--dim); margin-bottom:10px; }
+.pal-swatches { display:flex; gap:6px; flex-wrap:wrap; }
+.ps { display:flex; flex-direction:column; align-items:center; gap:4px; cursor:pointer; }
+.ps-block { width:40px; height:40px; border-radius:6px; border:1px solid rgba(255,255,255,.06); transition:transform .15s; }
+.ps:hover .ps-block { transform:scale(1.1); }
+.ps-hex { font-size:.58rem; color:var(--dim); transition:color .2s; }
+.ps:active .ps-hex { color:var(--accent); }
+.export-card { background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:1.4rem 1.75rem; margin-bottom:1.25rem; }
+.export-head { display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem; }
+.export-lbl { font-size:.58rem; letter-spacing:.18em; text-transform:uppercase; color:var(--dim); }
+pre.css-out { font-family:var(--mono); font-size:.72rem; color:var(--muted); line-height:1.75; white-space:pre-wrap; word-break:break-all; }
+pre.css-out .k { color:#7ec8e3; }
+pre.css-out .v { color:var(--accent); }
+pre.css-out .p { color:var(--dim); }
+pre.css-out .c { color:var(--dim); font-style:italic; }
+/* Palette combinations */
+.combos-section { margin-bottom:2.5rem; }
+.combos-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:12px; }
+.combo-card {
+  background:var(--surface); border:1px solid var(--border); border-radius:12px;
+  overflow:hidden; cursor:pointer; transition:border-color .2s, transform .15s;
+  position:relative;
+}
+.combo-card:hover { border-color:var(--border-h); transform:translateY(-2px); }
+.combo-strip { display:flex; height:72px; }
+.combo-strip-swatch { flex:1; transition:flex .2s; }
+.combo-strip-swatch:hover { flex:1.4; }
+.combo-info { padding:.9rem 1.1rem 1rem; }
+.combo-name {
+  font-family:var(--sans); font-size:1rem; font-weight:600; font-style:normal;
+  color:var(--text); letter-spacing:-.01em; margin-bottom:4px; line-height:1.2;
+}
+.combo-mood { font-size:.6rem; letter-spacing:.14em; text-transform:uppercase; color:var(--dim); margin-bottom:8px; }
+.combo-hexes { display:flex; gap:6px; flex-wrap:wrap; }
+.combo-hex-chip {
+  font-size:.6rem; font-family:var(--mono); color:var(--muted);
+  background:var(--surface2); border:1px solid var(--border);
+  padding:2px 7px; border-radius:3px; letter-spacing:.04em;
+  transition:color .15s, border-color .15s;
+}
+.combo-card:hover .combo-hex-chip { color:var(--text); border-color:var(--border-h); }
+.combo-copy-row { display:flex; justify-content:space-between; align-items:center; margin-top:8px; }
+.combo-use { font-size:.6rem; color:var(--dim); letter-spacing:.06em; }
+.combo-copy-btn {
+  background:transparent; border:1px solid var(--border); border-radius:4px;
+  color:var(--dim); font-family:var(--sans); font-size:.58rem; font-weight:500; padding:3px 8px;
+  cursor:pointer; opacity:0; transition:opacity .15s, border-color .15s, color .15s;
+  letter-spacing:.02em;
+}
+.combo-card:hover .combo-copy-btn { opacity:1; }
+.combo-copy-btn:hover { border-color:var(--border-h); color:var(--text); }
+.combo-copy-btn.ok { color:#78d489; border-color:rgba(120,212,137,.3); }
+
+.error { font-size:.78rem; color:#e07070; padding:.75rem 0; }
+footer { border-top:1px solid var(--border); padding:1.75rem 3rem; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem; }
+.fnote { font-size:.62rem; color:var(--dim); letter-spacing:.07em; }
+.ftags { display:flex; gap:8px; flex-wrap:wrap; }
+.ftag { font-size:.58rem; letter-spacing:.1em; text-transform:uppercase; color:var(--dim); border:1px solid var(--border); padding:3px 7px; border-radius:2px; }
+@media(max-width:768px){
+  header,.hero,.converter{padding-left:1.25rem;padding-right:1.25rem;}
+  h1{font-size:2rem;} .hero{padding-top:2.5rem;}
+  .input-zone{flex-wrap:wrap;} .btn-go{width:100%;}
+  .pal-grid{grid-template-columns:1fr;}
+  footer{flex-direction:column;align-items:flex-start;}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    <div class="logo-icon" id="logoDot">
+      <svg width="32" height="32" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:block;background:transparent;overflow:visible">
+        <path d="M46.9066 48.3164C52.2506 47.1018 56.8032 48.4786 59.014 50.9326C59.5662 51.5656 59.8568 52.1613 60.0081 52.8271C60.4536 54.7876 59.3919 56.4484 57.3949 56.9023C55.8602 57.2511 54.5605 56.9248 53.3089 55.8672C51.6689 54.4699 50.2332 54.0566 48.347 54.4854C45.0188 55.2421 43.6806 58.4254 44.7611 63.1787C45.8668 68.043 48.765 70.4381 52.2044 69.6562C54.7562 69.0762 56.2446 67.2399 55.9788 65.0439L55.932 64.666L54.3968 65.0146C52.6401 65.4139 51.2833 64.7495 50.9007 63.0664C50.5183 61.3834 51.4362 60.2023 53.2113 59.7988L58.3704 58.626C60.8667 58.0586 62.6269 59.2146 63.224 61.8408C64.666 68.1849 61.3746 74.0686 53.4232 75.876C44.9543 77.8009 38.8121 73.9647 36.7982 65.1055C34.8096 56.3569 38.6778 50.1869 46.9066 48.3164Z" fill="#1C98D5"/>
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M58.4398 8C60.7704 8.00008 62.6909 9.74593 62.9701 12.001C72.5504 15.2259 79.4505 24.2817 79.4505 34.9492V35.5078C82.2728 37.6395 82.9268 41.1837 82.3099 44.0225L73.9994 82.25C73.8916 82.7456 73.6752 83.594 73.1273 84.4424C71.2601 87.3333 65.5649 92.501 49.7611 92.501C33.9573 92.5009 28.2621 87.3333 26.3949 84.4424C25.847 83.594 25.6305 82.7455 25.5228 82.25L17.2132 44.0225C16.6694 41.5203 17.113 38.4705 19.1585 36.3223V34.9492C19.1585 23.929 26.5226 14.6296 36.598 11.7012C37.0028 9.59294 38.857 8 41.0833 8H58.4398ZM49.7611 36.7764C35.0066 36.7761 27.6333 39.6099 24.5638 41.2822C24.4843 41.3256 24.4267 41.3779 24.3734 41.5234C24.307 41.705 24.2591 42.035 24.3538 42.4707L32.6497 80.6348C33.3037 81.4696 36.9203 85.1924 49.7611 85.1924C62.5992 85.1924 66.2164 81.4706 66.8714 80.6348L75.1683 42.4707C75.263 42.0351 75.2151 41.706 75.1488 41.5244C75.0954 41.3786 75.038 41.3256 74.9583 41.2822C73.7882 40.6448 71.9927 39.8395 69.4017 39.0859V51.3926C69.4015 52.6535 68.3794 53.6755 67.1185 53.6758C65.8573 53.6758 64.8346 52.6537 64.8343 51.3926V45.9072C64.4523 46.1948 63.9791 46.3681 63.4642 46.3682C62.2029 46.3682 61.18 45.3453 61.18 44.084V37.4414C60.3107 37.3308 59.3979 37.2299 58.4398 37.1436V40.4297C58.4398 41.691 57.4169 42.7139 56.1556 42.7139C54.8944 42.7138 53.8724 41.6909 53.8724 40.4297V36.8535C52.5704 36.8032 51.2008 36.7764 49.7611 36.7764ZM37.4037 15.2744C29.2543 17.7411 23.2443 25.1309 22.8353 33.9844C27.6209 31.8007 35.9652 29.4685 49.7611 29.4688C62.6968 29.469 70.8392 31.5203 75.7494 33.5762C75.1949 25.1682 69.5863 18.1422 61.932 15.5088C61.0941 16.5026 59.8414 17.1347 58.4398 17.1348H41.0833C39.574 17.1348 38.2353 16.4029 37.4037 15.2744Z" fill="#1C98D5"/>
+      </svg>
+    </div>
+    <span class="logo-name">Grabucket</span>
+  </div>
+  <span class="logo-badge">Color Converter</span>
+</header>
+
+<section class="hero">
+  <p class="eyebrow">Universal color format converter</p>
+  <h1>Every color,<br><em>every format.</em></h1>
+  <p class="hero-sub">Paste any color format — get all conversions, a full color system, and named palette combinations.</p>
+</section>
+
+<main class="converter">
+  <div class="input-zone">
+    <div class="big-swatch" id="bigSwatch"></div>
+    <div class="input-inner">
+      <div class="input-lbl">Paste color value</div>
+      <input id="colorInput" autocomplete="off" spellcheck="false"
+        placeholder="#1D68FF  ·  rgb(29,104,255)  ·  cmyk(89,59,0,0)  ·  RAL 5015  ·  Pantone 286 C …" />
+    </div>
+    <button class="btn-go" onclick="convert()">Convert →</button>
+  </div>
+  <div class="examples">
+    <span class="ex-lbl">Try</span>
+    <button class="pill" onclick="fc('#1D68FF')">#1D68FF</button>
+    <button class="pill" onclick="fc('rgb(255, 87, 34)')">rgb(255,87,34)</button>
+    <button class="pill" onclick="fc('cmyk(37, 21, 0, 8)')">cmyk(37,21,0,8)</button>
+    <button class="pill" onclick="fc('RAL 3020')">RAL 3020</button>
+    <button class="pill" onclick="fc('Pantone 286 C')">Pantone 286 C</button>
+    <button class="pill" onclick="fc('hsl(220, 100%, 55%)')">hsl(220,100%,55%)</button>
+    <button class="pill" onclick="fc('Pantone Warm Red C')">Warm Red C</button>
+  </div>
+  <div id="results"></div>
+</main>
+
+<footer>
+  <span class="fnote">Grabucket · RAL &amp; Pantone show closest library match — verify against physical swatches for print work.</span>
+  <div class="ftags">
+    <span class="ftag">Hex</span><span class="ftag">RGB</span><span class="ftag">CMYK</span>
+    <span class="ftag">HSL</span><span class="ftag">HSV</span><span class="ftag">RAL</span>
+    <span class="ftag">Pantone</span><span class="ftag">Swift</span>
+  </div>
+</footer>
+
+<script>
+/* ─── Data ─── */
+const RAL={
+  "1000":["#BEBD7F","Green beige"],"1001":["#C2B078","Beige"],"1002":["#C6A664","Sand yellow"],"1003":["#E5BE01","Signal yellow"],"1004":["#CDA434","Golden yellow"],"1005":["#A98307","Honey yellow"],"1006":["#E4A010","Maize yellow"],"1007":["#DC9D00","Daffodil yellow"],"1011":["#8A6642","Brown beige"],"1012":["#C7B446","Lemon yellow"],"1013":["#EAE6CA","Oyster white"],"1014":["#E1CC4F","Ivory"],"1015":["#E6D690","Light ivory"],"1016":["#EDFF21","Sulfur yellow"],"1017":["#F5D033","Saffron yellow"],"1018":["#F8F32B","Zinc yellow"],"1019":["#9E9764","Grey beige"],"1020":["#999950","Olive yellow"],"1021":["#F3DA0B","Rape yellow"],"1023":["#FAD201","Traffic yellow"],"1024":["#AEA04B","Ochre yellow"],"1026":["#FFFF00","Luminous yellow"],"1027":["#9D9101","Curry"],"1028":["#F4A900","Melon yellow"],"1032":["#D6AE01","Broom yellow"],"1033":["#F3A505","Dahlia yellow"],"1034":["#EFA94A","Pastel yellow"],"1035":["#6A5D4D","Pearl beige"],"1036":["#705335","Pearl gold"],"1037":["#F39F18","Sun yellow"],
+  "2000":["#ED760E","Yellow orange"],"2001":["#C93C20","Red orange"],"2002":["#CB2821","Vermilion"],"2003":["#FF7514","Pastel orange"],"2004":["#F44611","Pure orange"],"2005":["#FF2301","Luminous orange"],"2007":["#FFA420","Luminous bright orange"],"2008":["#F75E25","Bright red orange"],"2009":["#F54021","Traffic orange"],"2010":["#D84B20","Signal orange"],"2011":["#EC7C26","Deep orange"],"2012":["#E55137","Salmon orange"],"2013":["#C35831","Pearl orange"],
+  "3000":["#AF2B1E","Flame red"],"3001":["#A52019","Signal red"],"3002":["#A2231D","Carmine red"],"3003":["#9B111E","Ruby red"],"3004":["#75151E","Purple red"],"3005":["#5E2129","Wine red"],"3007":["#412227","Black red"],"3009":["#642424","Oxide red"],"3011":["#781F19","Brown red"],"3012":["#C1876B","Beige red"],"3013":["#A12312","Tomato red"],"3014":["#D36E70","Antique pink"],"3015":["#EA899A","Light pink"],"3016":["#B32821","Coral red"],"3017":["#E63244","Rose"],"3018":["#D53032","Strawberry red"],"3020":["#CC0605","Traffic red"],"3022":["#D95030","Salmon pink"],"3024":["#F80000","Luminous red"],"3026":["#FE0000","Luminous bright red"],"3027":["#C51D34","Raspberry red"],"3028":["#CB3234","Pure red"],"3031":["#B32428","Orient red"],"3032":["#721422","Pearl ruby red"],"3033":["#B44C43","Pearl pink"],
+  "4001":["#6D3F5B","Red lilac"],"4002":["#922B3E","Red violet"],"4003":["#DE4C8A","Heather violet"],"4004":["#641C34","Claret violet"],"4005":["#6C4675","Blue lilac"],"4006":["#A03472","Traffic purple"],"4007":["#4A192C","Purple violet"],"4008":["#924E7D","Signal violet"],"4009":["#A18594","Pastel violet"],"4010":["#CF3476","Telemagenta"],"4011":["#8673A1","Pearl violet"],"4012":["#6C6874","Pearl blackberry"],
+  "5000":["#354D73","Violet blue"],"5001":["#1F3438","Green blue"],"5002":["#20214F","Ultramarine blue"],"5003":["#1D1E33","Saphire blue"],"5004":["#18171C","Black blue"],"5005":["#1E2460","Signal blue"],"5007":["#3E5F8A","Brillant blue"],"5008":["#26252D","Grey blue"],"5009":["#025669","Azure blue"],"5010":["#0E294B","Gentian blue"],"5011":["#231A24","Steel blue"],"5012":["#3B83BD","Light blue"],"5013":["#1E213D","Cobalt blue"],"5014":["#606E8C","Pigeon blue"],"5015":["#2271B3","Sky blue"],"5017":["#063971","Traffic blue"],"5018":["#3F888F","Turquoise blue"],"5019":["#1B5583","Capri blue"],"5020":["#1D334A","Ocean blue"],"5021":["#256D7B","Water blue"],"5022":["#252850","Night blue"],"5023":["#49678D","Distant blue"],"5024":["#5D9B9B","Pastel blue"],"5025":["#2A6478","Pearl gentian blue"],"5026":["#102C54","Pearl night blue"],
+  "6000":["#316650","Patina green"],"6001":["#287233","Emerald green"],"6002":["#2D572C","Leaf green"],"6003":["#424632","Olive green"],"6004":["#1F3A3D","Blue green"],"6005":["#2F4538","Moss green"],"6006":["#3E3B32","Grey olive"],"6007":["#343B29","Bottle green"],"6008":["#39352A","Brown green"],"6009":["#31372B","Fir green"],"6010":["#35682D","Grass green"],"6011":["#587246","Reseda green"],"6012":["#343E40","Black green"],"6013":["#6C7156","Reed green"],"6014":["#47402E","Yellow olive"],"6015":["#3B3C36","Black olive"],"6016":["#1E5945","Turquoise green"],"6017":["#4C9141","May green"],"6018":["#57A639","Yellow green"],"6019":["#BDECB6","Pastel green"],"6020":["#2E3A23","Chrome green"],"6021":["#89AC76","Pale green"],"6022":["#25221B","Olive drab"],"6024":["#308446","Traffic green"],"6025":["#3D642D","Fern green"],"6026":["#015D52","Opal green"],"6027":["#84C3BE","Light green"],"6028":["#2C5545","Pine green"],"6029":["#20603D","Mint green"],"6032":["#317F43","Signal green"],"6033":["#497E76","Mint turquoise"],"6034":["#7FB5B5","Pastel turquoise"],"6035":["#1C542D","Pearl green"],"6036":["#193737","Pearl opal green"],"6037":["#008F39","Pure green"],"6038":["#00BB2D","Luminous green"],
+  "7000":["#78858B","Squirrel grey"],"7001":["#8A9597","Silver grey"],"7002":["#817F68","Olive grey"],"7003":["#7A7B6D","Moss grey"],"7004":["#9EA0A1","Signal grey"],"7005":["#6C7059","Mouse grey"],"7006":["#756F61","Beige grey"],"7008":["#745F3D","Khaki grey"],"7009":["#5B6259","Green grey"],"7010":["#575D57","Tarpaulin grey"],"7011":["#555D61","Iron grey"],"7012":["#596163","Basalt grey"],"7013":["#55493C","Brown grey"],"7015":["#51565C","Slate grey"],"7016":["#373F43","Anthracite grey"],"7021":["#2E3234","Black grey"],"7022":["#4B4D46","Umbra grey"],"7023":["#818479","Concrete grey"],"7024":["#474A51","Graphite grey"],"7026":["#374447","Granite grey"],"7030":["#939388","Stone grey"],"7031":["#5D6970","Blue grey"],"7032":["#B9B9A8","Pebble grey"],"7033":["#818979","Cement grey"],"7034":["#939176","Yellow grey"],"7035":["#D7D7D7","Light grey"],"7036":["#7F7679","Platinum grey"],"7037":["#7D7F7D","Dusty grey"],"7038":["#B5B8B1","Agate grey"],"7039":["#6B6E70","Quartz grey"],"7040":["#9DA3A6","Window grey"],"7042":["#8F9695","Traffic grey A"],"7043":["#4E5452","Traffic grey B"],"7044":["#CAC4B0","Silk grey"],"7045":["#909090","Telegrey 1"],"7046":["#82898F","Telegrey 2"],"7047":["#D0D0D0","Telegrey 4"],"7048":["#898176","Pearl mouse grey"],
+  "8000":["#826C34","Green brown"],"8001":["#955F20","Ochre brown"],"8002":["#6C3B2A","Signal brown"],"8003":["#734222","Clay brown"],"8004":["#8E402A","Copper brown"],"8007":["#59351F","Fawn brown"],"8008":["#6F4F28","Olive brown"],"8009":["#5B3A29","Nut brown"],"8010":["#592321","Terra brown"],"8011":["#28160C","Tobacco brown"],"8012":["#491F15","Signal brown 2"],"8014":["#4A3526","Sepia brown"],"8015":["#633A34","Chestnut brown"],"8016":["#4C2F27","Mahogany brown"],"8017":["#45322E","Chocolate brown"],"8019":["#403A3A","Grey brown"],"8022":["#212121","Black brown"],"8023":["#A65E2E","Orange brown"],"8024":["#79553D","Beige brown"],"8025":["#755C48","Pale brown"],"8028":["#4E3B31","Terra brown 2"],"8029":["#763C28","Pearl copper"],
+  "9001":["#FDF4E3","Cream"],"9002":["#E7EBDA","Grey white"],"9003":["#F4F4F4","Signal white"],"9004":["#282828","Signal black"],"9005":["#0A0A0A","Jet black"],"9006":["#A5A5A5","White aluminium"],"9007":["#8F8F8F","Grey aluminium"],"9010":["#FFFFFF","Pure white"],"9011":["#1C1C1C","Graphite black"],"9016":["#F6F6F6","Traffic white"],"9017":["#1E1E1E","Traffic black"],"9018":["#D7D7D7","Papyrus white"],"9022":["#9E9E9E","Pearl light grey"],"9023":["#828282","Pearl dark grey"]
+};
+const PANTONE={
+  "286 C":"#0032A0","287 C":"#003087","2728 C":"#1D4289",
+  "485 C":"#DA291C","186 C":"#C8102E","200 C":"#BA0C2F",
+  "355 C":"#009A44","368 C":"#72BB53","376 C":"#84BD00",
+  "116 C":"#FFCD00","123 C":"#FFC72C","130 C":"#F2A900",
+  "Orange 021 C":"#FE5000","021 C":"#FE5000",
+  "Process Black C":"#2B2B2C","Cool Gray 11 C":"#53565A","Cool Gray 5 C":"#B1B3B3",
+  "877 C":"#8A8D8F","Black C":"#2B2B2C","Reflex Blue C":"#001489",
+  "Warm Red C":"#F9423A","Green C":"#00A862","Purple C":"#9B26B6",
+  "Violet C":"#440099","Rhodamine Red C":"#E10098","Rubine Red C":"#CE0058",
+  "2727 C":"#307FE2","300 C":"#005EB8","301 C":"#004C97",
+  "320 C":"#009CA6","326 C":"#00B2A9","072 C":"#10069F",
+  "2945 C":"#006CB7","279 C":"#418FDE","549 C":"#7BA4DB",
+  "7461 C":"#009CDE","3005 C":"#0067A5"
+};
+/* ─── Brand name engine ─── */
+/*
+  Strategy: pick names that SOUND like they belong in a brand style guide.
+  Each hue range gets its own curated word pool, then lightness/saturation
+  selects a qualifier that reinforces the tone (deep/mid/pale + vivid/muted/neutral).
+  Final form: "[Qualifier] [HueName]"  e.g. "Deep Cobalt", "Pale Champagne", "True Vermilion"
+*/
+const BN = {
+  /* hue 0-14 or 345-360: reds */
+  red:    { base:["Vermilion","Crimson","Scarlet","Carmine","Garnet","Ruby","Fireside","Ember","Cinnabar","Cardinal"] },
+  /* 15-40: oranges */
+  orange: { base:["Amber","Copper","Sienna","Terra","Corten","Tangerine","Harvest","Cinnamon","Saffron","Marmalade"] },
+  /* 41-65: yellows */
+  yellow: { base:["Gold","Maize","Flax","Aureate","Dune","Champagne","Sunglow","Citrine","Straw","Goldenrod"] },
+  /* 66-150: yellow-greens & greens */
+  green:  { base:["Viridian","Sage","Fern","Malachite","Evergreen","Juniper","Moss","Laurel","Celadon","Verdigris"] },
+  /* 151-185: teals */
+  teal:   { base:["Teal","Verdigris","Patina","Celadon","Lagoon","Seafoam","Tide","Malachite","Jade","Aqua"] },
+  /* 186-215: cyans & sky blues */
+  cyan:   { base:["Cerulean","Azure","Horizon","Glacial","Cobalt","Cornflower","Haze","Iceberg","Serenity","Aquamarine"] },
+  /* 216-255: blues */
+  blue:   { base:["Cobalt","Sapphire","Ultramarine","Indigo","Blueprint","Pacific","Lapis","Marine","Denim","Aegean"] },
+  /* 256-290: blue-purples */
+  violet: { base:["Iris","Periwinkle","Wisteria","Hyacinth","Lavender","Amethyst","Thistle","Twilight","Storm","Dusk"] },
+  /* 291-330: purples & magentas */
+  purple: { base:["Plum","Mulberry","Orchid","Heather","Mauve","Grape","Aubergine","Byzantium","Cassis","Fuchsia"] },
+  /* 331-344: pinks */
+  pink:   { base:["Blush","Rose","Petal","Dusty Rose","Carnation","Flamingo","Quartz","Magnolia","Cameo","Coral"] },
+};
+
+/* Lightness-based prefix: sets the corporate tone */
+const BN_LIGHT = [
+  { max:18,  words:["Midnight","Abyss","Onyx","Noir","Obsidian","Depth","Eclipse","Shadow","Raven","Void"] },
+  { max:32,  words:["Deep","Dark","Rich","Bold","Intense","Profound","Strong","Heavy","Full","Dense"] },
+  { max:48,  words:["True","Core","Pure","Vivid","Prime","Classic","Original","Essential","Definitive","Genuine"] },
+  { max:62,  words:["Balanced","Refined","Measured","Considered","Tempered","Calibrated","Steady","Poised","Even","Grounded"] },
+  { max:76,  words:["Soft","Muted","Subdued","Gentle","Washed","Faded","Tonal","Hushed","Quiet","Pale"] },
+  { max:88,  words:["Light","Airy","Delicate","Frosted","Blush","Ivory","Chalk","Lunar","Mist","Cloud"] },
+  { max:101, words:["Ice","Frost","Ghost","Pearl","Powder","Snow","Alabaster","Linen","Milk","Silk"] },
+];
+
+/* Saturation override: very grey/neutral colours get a different base set */
+const BN_NEUTRAL = ["Slate","Graphite","Stone","Pebble","Flint","Ash","Fog","Smoke","Iron","Steel","Pewter","Zinc","Cinder","Mortar","Concrete"];
+const BN_WARM_NEUTRAL = ["Sand","Linen","Wheat","Cream","Ecru","Bone","Parchment","Canvas","Kraft","Muslin"];
+
+function cname(r, g, b) {
+  const {h, s, l} = r2hsl(r, g, b);
+
+  /* Achromatic / near-grey */
+  if (s < 8) {
+    const pool = l < 50 ? BN_NEUTRAL : BN_WARM_NEUTRAL;
+    const idx = Math.round(l / 100 * (pool.length - 1));
+    if (l < 12) return "Onyx";
+    if (l > 92) return "Chalk White";
+    return pool[idx % pool.length];
+  }
+
+  /* Muted/desaturated: skip qualifier, just use a soft descriptor */
+  const muted = s < 22;
+
+  /* Pick hue bucket */
+  let bucket;
+  if      (h < 15)  bucket = BN.red;
+  else if (h < 41)  bucket = BN.orange;
+  else if (h < 66)  bucket = BN.yellow;
+  else if (h < 151) bucket = BN.green;
+  else if (h < 186) bucket = BN.teal;
+  else if (h < 216) bucket = BN.cyan;
+  else if (h < 256) bucket = BN.blue;
+  else if (h < 291) bucket = BN.violet;
+  else if (h < 331) bucket = BN.purple;
+  else if (h < 345) bucket = BN.pink;
+  else              bucket = BN.red;
+
+  /* Pick base word — use hue position within bucket for variety */
+  const pool = bucket.base;
+  /* Spread selection across the hue range for this bucket so
+     adjacent hues pick different words */
+  const hueRanges = {
+    red:[345,374], orange:[15,40], yellow:[41,65], green:[66,150],
+    teal:[151,185], cyan:[186,215], blue:[216,255], violet:[256,290],
+    purple:[291,330], pink:[331,344]
+  };
+  const keys = Object.keys(hueRanges);
+  const bKey = keys.find(k=>bucket===BN[k]) || 'blue';
+  const [hMin, hMax] = hueRanges[bKey] || [0,360];
+  const hNorm = Math.max(0, Math.min(1, (h - hMin) / (hMax - hMin)));
+  const baseIdx = Math.floor(hNorm * pool.length) % pool.length;
+  const baseName = pool[baseIdx];
+
+  /* Saturation variant: shift index slightly for muted colours */
+  const satShift = muted ? Math.floor(pool.length / 3) : 0;
+  const finalBase = pool[(baseIdx + satShift) % pool.length];
+
+  /* Pick lightness qualifier */
+  const lBucket = BN_LIGHT.find(b => l <= b.max) || BN_LIGHT[BN_LIGHT.length-1];
+  /* Use hue to pick a specific word from the lightness set for variety */
+  const qIdx = Math.round((h / 360) * (lBucket.words.length - 1)) % lBucket.words.length;
+  const qualifier = lBucket.words[qIdx];
+
+  /* Mid-tone vivid colours: drop the qualifier — just the base name is stronger */
+  if (l >= 42 && l <= 58 && s >= 55) return finalBase;
+
+  return qualifier + ' ' + finalBase;
+}
+
+/* ─── Math ─── */
+function h2r(hex){hex=hex.replace(/^#/,'');if(hex.length===3)hex=hex.split('').map(c=>c+c).join('');const r=parseInt(hex.slice(0,2),16),g=parseInt(hex.slice(2,4),16),b=parseInt(hex.slice(4,6),16);return isNaN(r)?null:{r,g,b};}
+function r2h(r,g,b){return '#'+[r,g,b].map(v=>Math.round(Math.max(0,Math.min(255,v))).toString(16).padStart(2,'0')).join('').toUpperCase();}
+function r2cmyk(r,g,b){r/=255;g/=255;b/=255;const k=1-Math.max(r,g,b);if(k===1)return{c:0,m:0,y:0,k:100};return{c:Math.round((1-r-k)/(1-k)*100),m:Math.round((1-g-k)/(1-k)*100),y:Math.round((1-b-k)/(1-k)*100),k:Math.round(k*100)};}
+function cmyk2r(c,m,y,k){c/=100;m/=100;y/=100;k/=100;return{r:Math.round(255*(1-c)*(1-k)),g:Math.round(255*(1-m)*(1-k)),b:Math.round(255*(1-y)*(1-k))};}
+function r2hsl(r,g,b){r/=255;g/=255;b/=255;const mx=Math.max(r,g,b),mn=Math.min(r,g,b);let h=0,s=0,l=(mx+mn)/2;if(mx!==mn){const d=mx-mn;s=l>.5?d/(2-mx-mn):d/(mx+mn);switch(mx){case r:h=(g-b)/d+(g<b?6:0);break;case g:h=(b-r)/d+2;break;case b:h=(r-g)/d+4;break;}h/=6;}return{h:Math.round(h*360),s:Math.round(s*100),l:Math.round(l*100)};}
+function r2hsv(r,g,b){r/=255;g/=255;b/=255;const mx=Math.max(r,g,b),mn=Math.min(r,g,b),d=mx-mn;let h=0;const s=mx===0?0:d/mx,v=mx;if(d!==0){switch(mx){case r:h=(g-b)/d+(g<b?6:0);break;case g:h=(b-r)/d+2;break;case b:h=(r-g)/d+4;break;}h/=6;}return{h:Math.round(h*360),s:Math.round(s*100),v:Math.round(v*100)};}
+function hsl2r(h,s,l){s/=100;l/=100;const a=s*Math.min(l,1-l);const f=(n,k=(n+h/30)%12)=>l-a*Math.max(Math.min(k-3,9-k,1),-1);return{r:Math.round(f(0)*255),g:Math.round(f(8)*255),b:Math.round(f(4)*255)};}
+function hsv2r(h,s,v){s/=100;v/=100;const f=(n,k=(n+h/60)%6)=>v-v*s*Math.max(Math.min(k,4-k,1),0);return{r:Math.round(f(5)*255),g:Math.round(f(3)*255),b:Math.round(f(1)*255)};}
+function cdist(r1,g1,b1,r2,g2,b2){return Math.sqrt((r1-r2)**2+(g1-g2)**2+(b1-b2)**2);}
+function isDark(r,g,b){return(.299*r+.587*g+.114*b)<128;}
+function closestRAL(r,g,b){let b2=null,bd=Infinity;for(const[k,v]of Object.entries(RAL)){const rgb=h2r(v[0]);if(!rgb)continue;const d=cdist(r,g,b,rgb.r,rgb.g,rgb.b);if(d<bd){bd=d;b2={code:k,name:v[1],hex:v[0],dist:d};}}return b2;}
+function closestPantone(r,g,b){let b2=null,bd=Infinity;for(const[k,v]of Object.entries(PANTONE)){const rgb=h2r(v);if(!rgb)continue;const d=cdist(r,g,b,rgb.r,rgb.g,rgb.b);if(d<bd){bd=d;b2={code:k,hex:v,dist:d};}}return b2;}
+
+function hRot(h,d){return((h+d)%360+360)%360;}
+
+function parseInput(raw){
+  raw=raw.trim();let m;
+  m=raw.match(/^#?([0-9a-fA-F]{6}|[0-9a-fA-F]{3})$/);if(m){const rgb=h2r(raw);if(rgb)return rgb;}
+  m=raw.match(/rgba?\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)/i);if(m)return{r:+m[1],g:+m[2],b:+m[3]};
+  m=raw.match(/cmyk\(\s*(\d+\.?\d*)[%]?\s*,\s*(\d+\.?\d*)[%]?\s*,\s*(\d+\.?\d*)[%]?\s*,\s*(\d+\.?\d*)[%]?\s*\)/i);if(m)return cmyk2r(+m[1],+m[2],+m[3],+m[4]);
+  m=raw.match(/hsla?\(\s*(\d+\.?\d*)\s*,\s*(\d+\.?\d*)%?\s*,\s*(\d+\.?\d*)%?/i);if(m){const{r,g,b}=hsl2r(+m[1],+m[2],+m[3]);return{r,g,b};}
+  m=raw.match(/hsva?\(\s*(\d+\.?\d*)\s*,\s*(\d+\.?\d*)%?\s*,\s*(\d+\.?\d*)%?/i);if(m){const{r,g,b}=hsv2r(+m[1],+m[2],+m[3]);return{r,g,b};}
+  const rk=raw.replace(/^ral\s*/i,'').trim();if(RAL[rk])return h2r(RAL[rk][0]);
+  const rm=raw.match(/RAL\s*(\d{4})/i);if(rm&&RAL[rm[1]])return h2r(RAL[rm[1]][0]);
+  const pk=raw.replace(/^pantone\s*/i,'').trim();if(PANTONE[pk])return h2r(PANTONE[pk]);
+  for(const[k,v]of Object.entries(PANTONE)){if(raw.toLowerCase().includes(k.toLowerCase()))return h2r(v);}
+  return null;
+}
+
+/* ─── Copy (with textarea fallback) ─── */
+function copyText(text, btn){
+  const finish = (ok) => {
+    if(!btn) return;
+    const orig = btn.textContent;
+    btn.textContent = ok ? 'Copied ✓' : 'Failed';
+    btn.classList.toggle('ok', ok);
+    setTimeout(()=>{ btn.textContent=orig; btn.classList.remove('ok'); }, 1600);
+  };
+  if(navigator.clipboard && window.isSecureContext){
+    navigator.clipboard.writeText(text).then(()=>finish(true)).catch(()=>fallbackCopy(text, btn, finish));
+  } else { fallbackCopy(text, btn, finish); }
+}
+function fallbackCopy(text, btn, finish){
+  try {
+    const ta=document.createElement('textarea');
+    ta.value=text; ta.style.cssText='position:fixed;top:-1000px;left:-1000px;opacity:0;';
+    document.body.appendChild(ta); ta.focus(); ta.select();
+    const ok=document.execCommand('copy');
+    document.body.removeChild(ta);
+    finish(ok);
+  } catch(e){ finish(false); }
+}
+
+/* ─── Swatch click ─── */
+function swClick(hex, hexEl){
+  copyText(hex.replace('#',''), null);
+  const orig = hexEl.textContent;
+  hexEl.textContent = 'Copied!';
+  hexEl.style.color = '#78d489';
+  setTimeout(()=>{ hexEl.textContent=orig; hexEl.style.color=''; }, 1400);
+}
+
+/* ─── Palette combinations ─── */
+/*
+  Each combination is generated deterministically from the input hue/sat/light.
+  We produce 8 named palettes across different moods and use-cases, each with
+  3–5 colours and a descriptive name that sounds like a real brand palette.
+*/
+
+const COMBO_MOODS = {
+  /* [mood label, use-case hint] */
+  corporate:   ['Corporate Suite',    'Professional · Enterprise'],
+  editorial:   ['Editorial Weight',   'Publishing · Media · Press'],
+  tech:        ['Digital Interface',  'SaaS · App · Platform'],
+  luxury:      ['Luxury Tone',        'Premium · High-end · Fashion'],
+  nature:      ['Organic Palette',    'Sustainability · Wellness · Nature'],
+  bold:        ['Bold Statement',     'Brand · Campaign · Identity'],
+  minimal:     ['Minimal Contrast',   'Clean · Swiss · Typographic'],
+  warm:        ['Warm & Grounded',    'Hospitality · Food · Lifestyle'],
+};
+
+function mkH(h,s,l){ const {r,g,b}=hsl2r(((h%360)+360)%360,Math.max(0,Math.min(100,s)),Math.max(0,Math.min(100,l))); return r2h(r,g,b); }
+
+function buildCombinations(h, s, l, baseName) {
+  /* Derived hue helpers */
+  const comp  = hRot(h, 180);
+  const a30   = hRot(h,  30);
+  const b30   = hRot(h, -30);
+  const a60   = hRot(h,  60);
+  const b60   = hRot(h, -60);
+  const split1= hRot(h, 150);
+  const split2= hRot(h, 210);
+  const tri1  = hRot(h, 120);
+  const tri2  = hRot(h, 240);
+
+  /* Clamp saturation/lightness sensibly */
+  const vs  = Math.min(s, 85);   /* vivid sat */
+  const ms  = Math.round(s*.65); /* mid sat */
+  const ls  = Math.round(s*.3);  /* low sat */
+  const xs  = Math.round(s*.1);  /* almost grey */
+  const vl  = Math.min(l+8, 68); /* push slightly lighter for accent */
+  const dl  = Math.max(l-12,18); /* push slightly darker */
+  const pal = (colors, nameOverride) => ({ colors, name: nameOverride });
+
+  /* Name helpers: use cname on each hex */
+  const nm = (hex) => { const rgb=h2r(hex); return rgb ? cname(rgb.r,rgb.g,rgb.b) : hex; };
+
+  const combos = [
+    {
+      key:'corporate',
+      name: nm(mkH(h,vs,dl)) + ' Suite',
+      mood: COMBO_MOODS.corporate,
+      colors:[
+        mkH(h,   vs,   dl),
+        mkH(h,   ms,   Math.min(l+20,82)),
+        mkH(h,   xs,   94),
+        mkH(h,   xs,   16),
+      ]
+    },
+    {
+      key:'editorial',
+      name: baseName + ' & Ink',
+      mood: COMBO_MOODS.editorial,
+      colors:[
+        mkH(h,   vs,   Math.min(vl,60)),
+        mkH(h,   ls,   88),
+        mkH(h,   xs,   96),
+        mkH(h,   xs,   12),
+      ]
+    },
+    {
+      key:'tech',
+      name: 'Digital ' + nm(mkH(comp, vs, Math.min(vl,58))),
+      mood: COMBO_MOODS.tech,
+      colors:[
+        mkH(h,    vs,   Math.min(vl,58)),
+        mkH(comp, vs,   Math.min(vl,58)),
+        mkH(h,    xs,   96),
+        mkH(h,    xs,   10),
+        mkH(h,    ms,   Math.min(l+30,88)),
+      ]
+    },
+    {
+      key:'luxury',
+      name: 'Noir ' + baseName,
+      mood: COMBO_MOODS.luxury,
+      colors:[
+        mkH(h,   Math.round(vs*.7), Math.max(dl-6,14)),
+        mkH(h,   Math.round(vs*.5), Math.min(l+28,76)),
+        mkH(35,  Math.round(vs*.6), 62),   /* warm gold accent */
+        mkH(h,   xs,                96),
+        mkH(h,   xs,                8),
+      ]
+    },
+    {
+      key:'nature',
+      name: nm(mkH(a30, ms, 52)) + ' Earth',
+      mood: COMBO_MOODS.nature,
+      colors:[
+        mkH(a30,  ms,   52),
+        mkH(h,    ms,   Math.min(vl,62)),
+        mkH(b30,  ls,   72),
+        mkH(35,   ls,   84),   /* warm sand */
+        mkH(h,    xs,   22),
+      ]
+    },
+    {
+      key:'bold',
+      name: baseName + ' × ' + nm(mkH(comp, vs, Math.min(vl,56))),
+      mood: COMBO_MOODS.bold,
+      colors:[
+        mkH(h,    vs,   Math.min(vl,56)),
+        mkH(comp, vs,   Math.min(vl,56)),
+        mkH(h,    xs,   97),
+        mkH(h,    xs,   8),
+      ]
+    },
+    {
+      key:'minimal',
+      name: 'White & ' + baseName,
+      mood: COMBO_MOODS.minimal,
+      colors:[
+        mkH(h,   xs,   98),
+        mkH(h,   ls,   92),
+        mkH(h,   vs,   Math.min(vl,55)),
+        mkH(h,   xs,   14),
+      ]
+    },
+    {
+      key:'warm',
+      name: nm(mkH(a60, ms, 58)) + ' Warmth',
+      mood: COMBO_MOODS.warm,
+      colors:[
+        mkH(h,    ms,   Math.min(vl,62)),
+        mkH(a60,  ms,   58),
+        mkH(35,   Math.round(vs*.55), 72),
+        mkH(28,   ls,   90),
+        mkH(h,    xs,   18),
+      ]
+    },
+  ];
+
+  return combos;
+}
+
+function makeCombosSection(combos) {
+  const cards = combos.map(c => {
+    const hexList = c.colors.map(h => h).join(', ');
+    const stripHtml = c.colors.map(h =>
+      `<div class="combo-strip-swatch" style="background:${h}" title="${h}"></div>`
+    ).join('');
+    const chipHtml = c.colors.map(h =>
+      `<span class="combo-hex-chip" data-copy="${h.replace('#','')}">${h}</span>`
+    ).join('');
+    /* safe for data-copy attr */
+    const copyVal = c.colors.join(', ');
+    const safeCopy = copyVal.replace(/"/g, '&quot;');
+    return `<div class="combo-card">
+      <div class="combo-strip">${stripHtml}</div>
+      <div class="combo-info">
+        <div class="combo-mood">${c.mood[0]} &nbsp;·&nbsp; ${c.mood[1]}</div>
+        <div class="combo-name">${c.name}</div>
+        <div class="combo-hexes">${chipHtml}</div>
+        <div class="combo-copy-row">
+          <span class="combo-use"></span>
+          <button class="combo-copy-btn btn-sm" data-copy="${safeCopy}">Copy all</button>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+
+  return `
+    <div class="combos-section">
+      <div class="sys-head">
+        <span class="sys-title">Palette combinations</span>
+        <span class="sys-sub">8 named combinations — click any hex chip or "Copy all"</span>
+      </div>
+      <div class="combos-grid">${cards}</div>
+    </div>`;
+}
+
+/* ─── Color system ─── */
+function buildScale(h,s){
+  const lightnesses=[95,88,78,65,50,37,26,17,9];
+  return lightnesses.map((lt,i)=>{
+    const sat=i<2?Math.round(s*.4):i<4?Math.round(s*.65):i<7?s:Math.round(s*.85);
+    const {r,g,b}=hsl2r(h,Math.min(100,sat),lt);
+    return{hex:r2h(r,g,b),step:(i+1)*100,l:lt};
+  });
+}
+function buildPalettes(h,s,l){
+  const mk=(hh,ss,ll)=>{const {r,g,b}=hsl2r(hh,ss,ll);return r2h(r,g,b);};
+  const sat=Math.max(30,s), lit=Math.min(Math.max(l,35),62);
+  return{
+    complementary:[{label:'Base',hex:mk(h,sat,lit)},{label:'Complement',hex:mk(hRot(h,180),sat,lit)}],
+    analogous:[{label:'-30°',hex:mk(hRot(h,-30),sat,lit)},{label:'Base',hex:mk(h,sat,lit)},{label:'+30°',hex:mk(hRot(h,30),sat,lit)}],
+    triadic:[{label:'Base',hex:mk(h,sat,lit)},{label:'+120°',hex:mk(hRot(h,120),sat,lit)},{label:'+240°',hex:mk(hRot(h,240),sat,lit)}],
+    split:[{label:'Base',hex:mk(h,sat,lit)},{label:'+150°',hex:mk(hRot(h,150),sat,lit)},{label:'+210°',hex:mk(hRot(h,210),sat,lit)}],
+    tetradic:[{label:'Base',hex:mk(h,sat,lit)},{label:'+90°',hex:mk(hRot(h,90),sat,lit)},{label:'+180°',hex:mk(hRot(h,180),sat,lit)},{label:'+270°',hex:mk(hRot(h,270),sat,lit)}],
+    neutral:[{label:'50',hex:mk(h,Math.round(s*.12),96)},{label:'100',hex:mk(h,Math.round(s*.18),90)},{label:'200',hex:mk(h,Math.round(s*.14),78)},{label:'400',hex:mk(h,Math.round(s*.1),55)},{label:'700',hex:mk(h,Math.round(s*.09),28)},{label:'900',hex:mk(h,Math.round(s*.08),10)}]
+  };
+}
+function buildCSS(scale, pal, name){
+  const slug=name.toLowerCase().replace(/\s+/g,'-');
+  let lines=[`:root {`,`  /* ${name} color system */`,``];
+  scale.forEach(s=>lines.push(`  --${slug}-${s.step}: ${s.hex};`));
+  lines.push(``);
+  pal.neutral.forEach(n=>lines.push(`  --${slug}-neutral-${n.label}: ${n.hex};`));
+  lines.push(``);
+  lines.push(`  --${slug}: ${scale[4].hex};            /* base */`);
+  lines.push(`  --${slug}-light: ${scale[2].hex};      /* tint */`);
+  lines.push(`  --${slug}-dark: ${scale[6].hex};       /* shade */`);
+  lines.push(`  --${slug}-complement: ${pal.complementary[1].hex};`);
+  lines.push(`}`);
+  return lines.join('\n');
+}
+function hiCSS(raw){
+  return raw
+    .replace(/\/\*[^*]*\*\//g,m=>`<span class="c">${m}</span>`)
+    .replace(/(--[\w-]+)/g,'<span class="k">$1</span>')
+    .replace(/: *(#[0-9A-Fa-f]{6})/g,'<span class="p">: </span><span class="v">$1</span>')
+    .replace(/[{}]/g,m=>`<span class="p">${m}</span>`);
+}
+
+/* ─── HTML builders ─── */
+function makeCard(label, display, copyVal, sub){
+  const hexCopy = (copyVal||'').replace(/"/g,'&quot;');
+  const subHtml = sub ? `<div style="font-size:.67rem;color:var(--dim);margin-top:3px;">${sub}</div>` : '';
+  const btnHtml = copyVal
+    ? `<button class="card-btn" data-copy="${hexCopy}">Copy</button>`
+    : '';
+  return `<div class="card">
+    ${btnHtml}
+    <div class="card-lbl">${label}</div>
+    <div class="card-display">${display}${subHtml}</div>
+    <div class="card-copies">copies → <span>${(copyVal||'—').replace(/</g,'&lt;')}</span></div>
+  </div>`;
+}
+
+function makePalCard(title, items){
+  const swatchesHtml = items.map(it=>`
+    <div class="ps" data-copy="${it.hex.replace('#','')}">
+      <div class="ps-block" style="background:${it.hex}"></div>
+      <div class="ps-hex">${it.hex}</div>
+    </div>`).join('');
+  return `<div class="pal-card"><div class="pal-lbl">${title}</div><div class="pal-swatches">${swatchesHtml}</div></div>`;
+}
+
+function makeScaleSwatch(item){
+  return `<div class="sw-item" data-copy="${item.hex.replace('#','')}">
+    <div class="sw-block" style="background:${item.hex}"></div>
+    <div class="sw-step">${item.step}</div>
+    <div class="sw-hex">${item.hex}</div>
+  </div>`;
+}
+
+function colorSystem(r,g,b,name){
+  const {h,s,l}=r2hsl(r,g,b);
+  const scale=buildScale(h,s);
+  const pal=buildPalettes(h,s,l);
+  const css=buildCSS(scale,pal,name);
+  const cssSafe=css.replace(/&/g,'&amp;').replace(/</g,'&lt;');
+  const combos=buildCombinations(h,s,l,name);
+
+  return `
+    ${makeCombosSection(combos)}
+    <div class="sys-head">
+      <span class="sys-title">Color system</span>
+      <span class="sys-sub">HSL ${h}° ${s}% ${l}%</span>
+    </div>
+    <div class="scale-row">
+      <div class="scale-top">Tonal scale — click any swatch to copy hex</div>
+      <div class="strip">${scale.map(makeScaleSwatch).join('')}</div>
+    </div>
+    <div class="pal-grid">
+      ${makePalCard('Complementary (180°)', pal.complementary)}
+      ${makePalCard('Analogous (±30°)', pal.analogous)}
+      ${makePalCard('Triadic (120° intervals)', pal.triadic)}
+      ${makePalCard('Split-complementary', pal.split)}
+      ${makePalCard('Tetradic (90° intervals)', pal.tetradic)}
+      ${makePalCard('Neutral tones', pal.neutral)}
+    </div>
+    <div class="export-card">
+      <div class="export-head">
+        <span class="export-lbl">CSS custom properties</span>
+        <button class="btn-sm" data-copy="${css.replace(/"/g,'&quot;')}">Copy all vars</button>
+      </div>
+      <pre class="css-out">${hiCSS(cssSafe)}</pre>
+    </div>`;
+}
+
+/* ─── Update UI ─── */
+function setSwatches(hex){
+  document.getElementById('bigSwatch').style.background=hex;
+  document.getElementById('nameCardBar').style.background=hex;
+  document.getElementById('nameSwatch').style.background=hex;
+}
+
+/* ─── Event delegation for copy ─── */
+document.addEventListener('click', e=>{
+  /* Combo hex chip — copy just that one hex */
+  const chip = e.target.closest('.combo-hex-chip');
+  if(chip){
+    e.stopPropagation();
+    const val = chip.getAttribute('data-copy');
+    const orig = chip.textContent;
+    copyText(val, null);
+    chip.textContent = 'Copied!';
+    chip.style.color = '#78d489';
+    chip.style.borderColor = 'rgba(120,212,137,.3)';
+    setTimeout(()=>{ chip.textContent=orig; chip.style.color=''; chip.style.borderColor=''; }, 1400);
+    return;
+  }
+
+  const btn = e.target.closest('[data-copy]');
+  if(!btn) return;
+  const val = btn.getAttribute('data-copy');
+
+  /* swatch items: update the hex label */
+  if(btn.classList.contains('sw-item')||btn.classList.contains('ps')){
+    const hexEl = btn.querySelector('.sw-hex, .ps-hex');
+    copyText(val, null);
+    if(hexEl){
+      const orig=hexEl.textContent;
+      hexEl.textContent='Copied!';
+      hexEl.style.color='#78d489';
+      setTimeout(()=>{hexEl.textContent=orig;hexEl.style.color='';},1400);
+    }
+    return;
+  }
+
+  /* all other buttons (card-btn, btn-sm, combo-copy-btn) */
+  copyText(val, btn);
+});
+
+/* ─── Main ─── */
+function fc(v){document.getElementById('colorInput').value=v;convert();}
+
+function convert(){
+  const raw=document.getElementById('colorInput').value;
+  const res=document.getElementById('results');
+  if(!raw.trim()){res.innerHTML='';return;}
+
+  const rgb=parseInput(raw);
+  if(!rgb){
+    res.innerHTML='<div class="error">↳ Unrecognized. Try: #FF5722, rgb(255,87,34), cmyk(0,66,87,0), RAL 3020, Pantone 286 C, hsl(14,100%,57%)</div>';
+    return;
+  }
+
+  const {r,g,b}=rgb;
+  const hex=r2h(r,g,b);
+  const cmyk=r2cmyk(r,g,b);
+  const hsl=r2hsl(r,g,b);
+  const hsv=r2hsv(r,g,b);
+  const ral=closestRAL(r,g,b);
+  const pt=closestPantone(r,g,b);
+  const name=cname(r,g,b);
+  const dark=isDark(r,g,b);
+
+  document.getElementById('bigSwatch').style.background=hex;
+
+  const nh=hex.replace('#','');
+  const swiftCopy=`${(r/255).toFixed(3)}, ${(g/255).toFixed(3)}, ${(b/255).toFixed(3)}`;
+  const ralOk=ral&&ral.dist<30;
+  const ptOk=pt&&pt.dist<40;
+
+  res.innerHTML=`
+    <div class="name-card">
+      <div id="nameCardBar" style="position:absolute;left:0;top:0;bottom:0;width:3px;background:${hex};"></div>
+      <div id="nameSwatch" class="name-swatch" style="background:${hex};"></div>
+      <div class="name-info">
+        <div class="name-tag">Brand color name</div>
+        <div class="name-val">${name}</div>
+        <div class="name-meta">${hex} &nbsp;·&nbsp; L ${hsl.l}% &nbsp;·&nbsp; S ${hsl.s}%</div>
+      </div>
+      <button class="btn-sm" data-copy="${name}">Copy name</button>
+    </div>
+
+    <div class="grid">
+      ${makeCard('Hex', hex, nh)}
+      ${makeCard('RGB', `rgb(${r}, ${g}, ${b})`, `${r}, ${g}, ${b}`)}
+      ${makeCard('CMYK', `cmyk(${cmyk.c}%, ${cmyk.m}%, ${cmyk.y}%, ${cmyk.k}%)`, `${cmyk.c}, ${cmyk.m}, ${cmyk.y}, ${cmyk.k}`)}
+      ${makeCard('HSL', `hsl(${hsl.h}, ${hsl.s}%, ${hsl.l}%)`, `${hsl.h}, ${hsl.s}, ${hsl.l}`)}
+      ${makeCard('HSV / HSB', `hsv(${hsv.h}, ${hsv.s}%, ${hsv.v}%)`, `${hsv.h}, ${hsv.s}, ${hsv.v}`)}
+      ${makeCard('RAL'+(ralOk?'':' ~approx'), ral?`RAL ${ral.code}`:'—', ral?ral.code:'', ral?ral.name:'')}
+      ${makeCard('Pantone'+(ptOk?'':' ~approx'), pt?`Pantone ${pt.code}`:'—', pt?pt.code:'')}
+      ${makeCard('CSS variable', `--color: ${hex};`, nh)}
+      ${makeCard('Decimal', `${r}, ${g}, ${b}`, `${r}, ${g}, ${b}`)}
+      ${makeCard('Swift / iOS', `UIColor(red:${(r/255).toFixed(3)},<br>green:${(g/255).toFixed(3)},<br>blue:${(b/255).toFixed(3)}, alpha:1)`, swiftCopy)}
+    </div>
+
+    <div class="info-bar">
+      <div class="info-item">
+        <div class="info-sw" style="background:${hex};"></div>
+        <span>${dark?'Dark — use light text':'Light — use dark text'}</span>
+      </div>
+      <div class="vd"></div>
+      <div class="info-item">
+        <div class="cpill" style="background:${hex};color:${dark?'#fff':'#000'}">Aa</div>
+        <span>on color</span>
+      </div>
+      <div class="vd"></div>
+      <div class="info-item">
+        <span>${hsl.s<15?'Neutral / achromatic':hsl.l<20?'Very dark':hsl.l>80?'Very light / pastel':hsl.s>70?'Vivid / saturated':'Muted / tonal'}</span>
+      </div>
+    </div>
+
+    ${colorSystem(r,g,b,name)}
+  `;
+}
+
+document.getElementById('colorInput').addEventListener('keydown',e=>{if(e.key==='Enter')convert();});
+document.getElementById('colorInput').addEventListener('paste',e=>{setTimeout(convert,60);});
+document.getElementById('bigSwatch').style.background='#FFFFFF';
+fc('#FFFFFF');
+</script>
+</body>
+</html>
