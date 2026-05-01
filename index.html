@@ -534,7 +534,7 @@ footer { border-top:1px solid var(--border); padding:1.75rem 3rem; display:flex;
     <div class="input-inner">
       <div class="input-lbl">Paste color value</div>
       <input id="colorInput" autocomplete="off" spellcheck="false"
-        placeholder="#1D68FF  ·  rgb(29,104,255)  ·  cmyk(89,59,0,0)  ·  RAL 5015  ·  Pantone 286 C …" />
+        placeholder="#1D68FF  ·  rgb(29,104,255)  ·  cmyk(89,59,0,0)  ·  RAL 5015  ·  286 C  ·  Pantone 286 C …" />
     </div>
     <button class="input-clear" id="inputClear" onclick="clearInput()" title="Clear">&#x2715;</button>
   </div>
@@ -623,7 +623,7 @@ footer { border-top:1px solid var(--border); padding:1.75rem 3rem; display:flex;
   <div style="width:100%;text-align:center;margin-bottom:.85rem;">
     <span style="font-size:.6rem;color:var(--dim);letter-spacing:.1em;">Built by <a href="https://www.instagram.com/juraca.arts/" target="_blank" rel="noopener" style="color:var(--accent-text);text-decoration:none;border-bottom:1px solid currentColor;">JuRaCa</a></span>
   </div>
-  <span class="fnote">Grabucket · RAL &amp; Pantone show nearest library matches · CIE-L*ab, XYZ per CSS Color 4 — verify print swatches against physical samples.</span>
+  <span class="fnote">Grabucket · RAL &amp; Pantone hex values are community approximations, not spectrophotometer data — always verify against physical swatchbooks for print-critical work. CIE-L*ab &amp; XYZ per CSS Color 4 spec.</span>
   <div class="ftags">
     <span class="ftag">Hex</span><span class="ftag">RGB</span><span class="ftag">CMYK</span>
     <span class="ftag">HSL</span><span class="ftag">HSV</span><span class="ftag">RAL</span>
@@ -646,58 +646,122 @@ const RAL={
   "9001":["#FDF4E3","Cream"],"9002":["#E7EBDA","Grey white"],"9003":["#F4F4F4","Signal white"],"9004":["#282828","Signal black"],"9005":["#0A0A0A","Jet black"],"9006":["#A5A5A5","White aluminium"],"9007":["#8F8F8F","Grey aluminium"],"9010":["#FFFFFF","Pure white"],"9011":["#1C1C1C","Graphite black"],"9016":["#F6F6F6","Traffic white"],"9017":["#1E1E1E","Traffic black"],"9018":["#D7D7D7","Papyrus white"],"9022":["#9E9E9E","Pearl light grey"],"9023":["#828282","Pearl dark grey"]
 };
 const PANTONE={
-  "286 C":"#0032A0","287 C":"#003087","2728 C":"#1D4289",
-  "485 C":"#DA291C","186 C":"#C8102E","200 C":"#BA0C2F",
-  "355 C":"#009A44","368 C":"#72BB53","376 C":"#84BD00",
-  "116 C":"#FFCD00","123 C":"#FFC72C","130 C":"#F2A900",
-  "Orange 021 C":"#FE5000","021 C":"#FE5000",
-  "Process Black C":"#2B2B2C","Cool Gray 11 C":"#53565A","Cool Gray 5 C":"#B1B3B3",
-  "877 C":"#8A8D8F","Black C":"#2B2B2C","Reflex Blue C":"#001489",
-  "Warm Red C":"#F9423A","Green C":"#00A862","Purple C":"#9B26B6",
-  "Violet C":"#440099","Rhodamine Red C":"#E10098","Rubine Red C":"#CE0058",
-  "2727 C":"#307FE2","300 C":"#005EB8","301 C":"#004C97",
-  "320 C":"#009CA6","326 C":"#00B2A9","072 C":"#10069F",
-  "2945 C":"#006CB7","279 C":"#418FDE","549 C":"#7BA4DB",
-  "7461 C":"#009CDE","3005 C":"#0067A5",
-  "100 C":"#F6EB61","101 C":"#F7EA48","102 C":"#F9E526","103 C":"#C6AD0F","104 C":"#AD9B14","105 C":"#8C7B19",
-  "106 C":"#F8E220","107 C":"#F6DC00","108 C":"#F0D400","109 C":"#ECC900","110 C":"#C6A800","112 C":"#A18700",
-  "113 C":"#F9D849","114 C":"#F9D429","115 C":"#F7CC28","117 C":"#C6A200","118 C":"#A68900","119 C":"#8A7400",
-  "137 C":"#FAAD3D","138 C":"#E9960E","139 C":"#C08000","144 C":"#F58220","151 C":"#FF7900","152 C":"#E87722",
-  "165 C":"#FF6720","166 C":"#FA5B2C","167 C":"#DF4A23","168 C":"#9E3519",
-  "175 C":"#C47B5B","176 C":"#F4A2A2","177 C":"#F6745A","178 C":"#F4533C","179 C":"#F4412E","180 C":"#DF3922",
-  "181 C":"#AF3226","187 C":"#C11230","188 C":"#9D1939",
-  "192 C":"#F5607A","193 C":"#F05474","194 C":"#EE3A5D","195 C":"#D6244D","196 C":"#C41642",
-  "210 C":"#F4759B","211 C":"#F0527A","212 C":"#E8395C","213 C":"#DC1E62","214 C":"#C61E5E",
-  "Pink C":"#E56DB1","Red 032 C":"#EF3340","Bright Red C":"#F22F20",
-  "220 C":"#A51C53","221 C":"#C05785","222 C":"#AB4D79","253 C":"#AE3E96","254 C":"#9B3090","255 C":"#72246C",
-  "256 C":"#C5A5CD","257 C":"#B587BC","258 C":"#9063A6","259 C":"#703D8F","260 C":"#602F88",
-  "261 C":"#572881","262 C":"#4B2775","265 C":"#9572B5","267 C":"#5B368C","268 C":"#4A2B80","2685 C":"#33006F",
-  "2705 C":"#594FA8","2715 C":"#6D6CC9","2725 C":"#5A4EB5","2735 C":"#2C2490","2745 C":"#24218A",
-  "280 C":"#0A2D78","281 C":"#0C2770","282 C":"#0A1F5B",
-  "288 C":"#003083","289 C":"#002C5E","290 C":"#BFDBF5","291 C":"#9FD8EE","292 C":"#69B3E7","293 C":"#003DA5",
-  "294 C":"#003087","295 C":"#00205B","297 C":"#6FC6E2","298 C":"#41BADF","299 C":"#00A9E0",
-  "Process Blue C":"#0085CA","306 C":"#00B2E3","307 C":"#005F8C","308 C":"#004F71",
-  "312 C":"#00B0CA","314 C":"#00859B","315 C":"#006B78","317 C":"#A5DCEB","318 C":"#6BC9DF",
-  "319 C":"#00B4CC","321 C":"#00929B","322 C":"#007A82","324 C":"#A2D4D5","325 C":"#5FC0C5",
-  "327 C":"#009C95","328 C":"#00857D","329 C":"#006E6A","333 C":"#8FDAC9","334 C":"#00B59F",
-  "335 C":"#00907A","336 C":"#00725D","339 C":"#00A887","340 C":"#009070","341 C":"#007558",
-  "342 C":"#006048","343 C":"#004F3C","347 C":"#009B55","348 C":"#008549","349 C":"#007038",
-  "354 C":"#00A651","361 C":"#43B02A","362 C":"#44883B","363 C":"#3F7E44","364 C":"#3D6B36",
-  "369 C":"#64AD45","370 C":"#4E912C","371 C":"#44783D",
-  "375 C":"#97D700","377 C":"#6FA600","382 C":"#C4D600","383 C":"#ADBA00","384 C":"#8F9A00",
-  "390 C":"#C5CF00","393 C":"#E0DC00","394 C":"#D0CB00","398 C":"#C6A400",
-  "400 C":"#B9A99C","401 C":"#AE9C90","402 C":"#A59186","403 C":"#9B867A","404 C":"#907A6E","405 C":"#87706C",
-  "420 C":"#C8C2B8","421 C":"#BCB6AC","422 C":"#B2ACA2","423 C":"#A5A098","424 C":"#96908A","425 C":"#7E7974",
-  "426 C":"#3D3B3B","427 C":"#D5D0CB","428 C":"#CCCAC5","429 C":"#B8B5AF","430 C":"#A3A09B","431 C":"#8E8C87",
-  "432 C":"#797876","433 C":"#606060","434 C":"#D9C8C3","438 C":"#7B5B65","439 C":"#6B4C57",
-  "Cool Gray 1 C":"#D9D9D6","Cool Gray 2 C":"#D0D0CE","Cool Gray 3 C":"#C8C9C7","Cool Gray 4 C":"#BBBCBC",
-  "Cool Gray 6 C":"#A7A8AA","Cool Gray 7 C":"#97999B","Cool Gray 8 C":"#888B8D","Cool Gray 9 C":"#75787B","Cool Gray 10 C":"#63666A",
-  "Warm Gray 1 C":"#D9D0C7","Warm Gray 2 C":"#CFC5BA","Warm Gray 3 C":"#C5BAB0","Warm Gray 4 C":"#BAB0A8",
-  "Warm Gray 5 C":"#AFA59C","Warm Gray 6 C":"#A39792","Warm Gray 7 C":"#978B85","Warm Gray 8 C":"#8B7D78",
-  "Warm Gray 9 C":"#7D6F6A","Warm Gray 10 C":"#6E5F5A","Warm Gray 11 C":"#5F5044",
-  "484 C":"#AE2928","486 C":"#DE6049","487 C":"#EF8A75","488 C":"#F6A98F",
-  "490 C":"#7A2A33","491 C":"#903344","492 C":"#B5616A","493 C":"#DBADAB",
-  "499 C":"#A45355","500 C":"#E0A4A0","501 C":"#E8B8B2","502 C":"#EFC7BF"
+  "021 C":"#FE5000",  "072 C":"#10069F",  "100 C":"#F6EB61",  "101 C":"#F7EA48",  "102 C":"#F9E526",  "103 C":"#C6AD0F",
+  "104 C":"#AD9B14",  "105 C":"#8C7B19",  "106 C":"#F8E220",  "107 C":"#F6DC00",  "108 C":"#F0D400",  "109 C":"#ECC900",
+  "110 C":"#C6A800",  "111 C":"#B09600",  "112 C":"#A18700",  "113 C":"#F9D849",  "114 C":"#F9D429",  "115 C":"#F7CC28",
+  "116 C":"#FFCD00",  "117 C":"#C6A200",  "118 C":"#A68900",  "119 C":"#8A7400",  "120 C":"#F8E273",  "121 C":"#F8DD63",
+  "122 C":"#F7D743",  "123 C":"#FFC72C",  "124 C":"#E5A812",  "125 C":"#C28E08",  "126 C":"#A07506",  "127 C":"#F5D87A",
+  "128 C":"#F3CE5C",  "129 C":"#F0C238",  "130 C":"#F2A900",  "131 C":"#E89520",  "132 C":"#C97F08",  "133 C":"#A66B06",
+  "134 C":"#F7BC77",  "135 C":"#F5AE57",  "136 C":"#F2A138",  "137 C":"#FAAD3D",  "138 C":"#E9960E",  "139 C":"#C08000",
+  "140 C":"#9E6B00",  "141 C":"#F3B86C",  "142 C":"#F0AA4F",  "143 C":"#ED9C33",  "144 C":"#F58220",  "145 C":"#E07118",
+  "146 C":"#C96312",  "147 C":"#AA530D",  "148 C":"#FBCFA4",  "149 C":"#FBBC89",  "150 C":"#F9A96A",  "151 C":"#FF7900",
+  "152 C":"#E87722",  "153 C":"#D06A1A",  "154 C":"#B55B13",  "155 C":"#FAD5A8",  "156 C":"#F8C08A",  "157 C":"#F5A56B",
+  "158 C":"#F08046",  "159 C":"#D96A2E",  "160 C":"#C25C22",  "161 C":"#A84E1B",  "162 C":"#FAC9A9",  "163 C":"#F8B48A",
+  "164 C":"#F59B69",  "165 C":"#FF6720",  "166 C":"#FA5B2C",  "167 C":"#DF4A23",  "168 C":"#9E3519",  "169 C":"#F9C4A8",
+  "170 C":"#F7AC88",  "171 C":"#F48E62",  "172 C":"#F06B3C",  "173 C":"#D85A2A",  "174 C":"#BA4A1E",  "175 C":"#C47B5B",
+  "176 C":"#F4A2A2",  "177 C":"#F6745A",  "178 C":"#F4533C",  "179 C":"#F4412E",  "180 C":"#DF3922",  "181 C":"#AF3226",
+  "182 C":"#F9C2BF",  "183 C":"#F89E97",  "184 C":"#F57167",  "185 C":"#E8112D",  "186 C":"#C8102E",  "187 C":"#C11230",
+  "188 C":"#9D1939",  "189 C":"#F9B2AA",  "190 C":"#F78D83",  "191 C":"#F2614E",  "192 C":"#F5607A",  "193 C":"#F05474",
+  "194 C":"#EE3A5D",  "195 C":"#D6244D",  "196 C":"#C41642",  "197 C":"#F5B8C0",  "198 C":"#F28E99",  "199 C":"#EC5A6C",
+  "200 C":"#BA0C2F",  "201 C":"#BE1932",  "202 C":"#A11329",  "203 C":"#F4A5B0",  "204 C":"#F07F8D",  "205 C":"#E8556B",
+  "206 C":"#CE2448",  "207 C":"#AD1445",  "208 C":"#951442",  "209 C":"#80103C",  "210 C":"#F4759B",  "211 C":"#F0527A",
+  "212 C":"#E8395C",  "213 C":"#DC1E62",  "214 C":"#C61E5E",  "215 C":"#AC1457",  "216 C":"#961254",  "217 C":"#F5ADC5",
+  "218 C":"#EF7BAD",  "219 C":"#E54896",  "220 C":"#A51C53",  "221 C":"#C05785",  "222 C":"#AB4D79",  "223 C":"#EF87B0",
+  "224 C":"#E8669E",  "225 C":"#DC448C",  "226 C":"#D01475",  "227 C":"#B50F5F",  "228 C":"#9C0C52",  "229 C":"#831045",
+  "230 C":"#F5A3C7",  "231 C":"#EF82B8",  "232 C":"#E560A8",  "233 C":"#C73D95",  "234 C":"#AC2F84",  "235 C":"#923075",
+  "236 C":"#F5ADCC",  "237 C":"#F08DC0",  "238 C":"#E868AF",  "239 C":"#D94BA0",  "240 C":"#C03990",  "241 C":"#A62880",
+  "242 C":"#C87DB8",  "243 C":"#BD69AD",  "244 C":"#B255A2",  "245 C":"#9A3D90",  "246 C":"#84007C",  "247 C":"#B33E9B",
+  "248 C":"#A0328C",  "249 C":"#8C2778",  "250 C":"#E8C0DC",  "251 C":"#DE9FCC",  "252 C":"#CC76BC",  "253 C":"#AE3E96",
+  "254 C":"#9B3090",  "255 C":"#72246C",  "256 C":"#C5A5CD",  "257 C":"#B587BC",  "258 C":"#9063A6",  "259 C":"#703D8F",
+  "260 C":"#602F88",  "261 C":"#572881",  "262 C":"#4B2775",  "263 C":"#C8B4DC",  "264 C":"#B09CCC",  "265 C":"#9572B5",
+  "266 C":"#7750A4",  "267 C":"#5B368C",  "268 C":"#4A2B80",  "269 C":"#3D2070",  "270 C":"#B4B4DC",  "271 C":"#9D9CCE",
+  "272 C":"#8282C0",  "273 C":"#3F3F9E",  "274 C":"#2E2E84",  "275 C":"#241F72",  "276 C":"#1C1862",  "277 C":"#B0CCDF",
+  "278 C":"#88B0D0",  "279 C":"#418FDE",  "280 C":"#0A2D78",  "281 C":"#0C2770",  "282 C":"#0A1F5B",  "283 C":"#9DCBE8",
+  "284 C":"#6AAFE6",  "285 C":"#0079C2",  "286 C":"#0032A0",  "287 C":"#003087",  "288 C":"#003083",  "289 C":"#002C5E",
+  "290 C":"#BFDBF5",  "291 C":"#9FD8EE",  "292 C":"#69B3E7",  "293 C":"#003DA5",  "294 C":"#003087",  "295 C":"#00205B",
+  "296 C":"#001F5B",  "297 C":"#6FC6E2",  "298 C":"#41BADF",  "299 C":"#00A9E0",  "300 C":"#005EB8",  "301 C":"#004C97",
+  "302 C":"#00487A",  "303 C":"#003457",  "304 C":"#8DD4E8",  "305 C":"#5BC4E5",  "306 C":"#00B2E3",  "307 C":"#005F8C",
+  "308 C":"#004F71",  "309 C":"#00334B",  "310 C":"#55C3DA",  "311 C":"#27B5D0",  "312 C":"#00B0CA",  "313 C":"#00A5C6",
+  "314 C":"#00859B",  "315 C":"#006B78",  "316 C":"#004F5C",  "317 C":"#A5DCEB",  "318 C":"#6BC9DF",  "319 C":"#00B4CC",
+  "320 C":"#009CA6",  "321 C":"#00929B",  "322 C":"#007A82",  "323 C":"#00636C",  "324 C":"#A2D4D5",  "325 C":"#5FC0C5",
+  "326 C":"#00B2A9",  "327 C":"#009C95",  "328 C":"#00857D",  "329 C":"#006E6A",  "330 C":"#00564F",  "331 C":"#A5D6CF",
+  "332 C":"#7DC4BC",  "333 C":"#8FDAC9",  "334 C":"#00B59F",  "335 C":"#00907A",  "336 C":"#00725D",  "337 C":"#9AD4C2",
+  "338 C":"#5EBFAA",  "339 C":"#00A887",  "340 C":"#009070",  "341 C":"#007558",  "342 C":"#006048",  "343 C":"#004F3C",
+  "344 C":"#9ACDB4",  "345 C":"#72B99B",  "346 C":"#4DA882",  "347 C":"#009B55",  "348 C":"#008549",  "349 C":"#007038",
+  "350 C":"#005A2B",  "351 C":"#A8D8B4",  "352 C":"#80C89A",  "353 C":"#55B87E",  "354 C":"#00A651",  "355 C":"#009A44",
+  "356 C":"#007236",  "357 C":"#005B28",  "358 C":"#8EC896",  "359 C":"#68B878",  "360 C":"#44A85A",  "361 C":"#43B02A",
+  "362 C":"#44883B",  "363 C":"#3F7E44",  "364 C":"#3D6B36",  "365 C":"#9ED49E",  "366 C":"#7DC47E",  "367 C":"#5AB460",
+  "368 C":"#72BB53",  "369 C":"#64AD45",  "370 C":"#4E912C",  "371 C":"#44783D",  "372 C":"#BEDD9E",  "373 C":"#A8D280",
+  "374 C":"#8FC45C",  "375 C":"#97D700",  "376 C":"#84BD00",  "377 C":"#6FA600",  "378 C":"#5A8800",  "379 C":"#D0DC76",
+  "380 C":"#BDD44A",  "381 C":"#A8C818",  "382 C":"#C4D600",  "383 C":"#ADBA00",  "384 C":"#8F9A00",  "385 C":"#747D00",
+  "386 C":"#D2DC6C",  "387 C":"#BCCE38",  "388 C":"#A4BE00",  "389 C":"#8CAA00",  "390 C":"#C5CF00",  "391 C":"#A6AF00",
+  "392 C":"#8A9200",  "393 C":"#E0DC00",  "394 C":"#D0CB00",  "395 C":"#B8B400",  "396 C":"#A09900",  "397 C":"#C5BE00",
+  "398 C":"#C6A400",  "399 C":"#B4AB00",  "400 C":"#B9A99C",  "401 C":"#AE9C90",  "402 C":"#A59186",  "403 C":"#9B867A",
+  "404 C":"#907A6E",  "405 C":"#87706C",  "406 C":"#CAB9B2",  "407 C":"#BCA99F",  "408 C":"#AF9A92",  "409 C":"#A28B83",
+  "410 C":"#957C75",  "411 C":"#886D67",  "412 C":"#745850",  "413 C":"#C4B6AE",  "414 C":"#B5A59D",  "415 C":"#A8968E",
+  "416 C":"#99857C",  "417 C":"#8C766D",  "418 C":"#7E675E",  "419 C":"#443530",  "420 C":"#C8C2B8",  "421 C":"#BCB6AC",
+  "422 C":"#B2ACA2",  "423 C":"#A5A098",  "424 C":"#96908A",  "425 C":"#7E7974",  "426 C":"#3D3B3B",  "427 C":"#D5D0CB",
+  "428 C":"#CCCAC5",  "429 C":"#B8B5AF",  "430 C":"#A3A09B",  "431 C":"#8E8C87",  "432 C":"#797876",  "433 C":"#606060",
+  "434 C":"#D9C8C3",  "435 C":"#CCBAB5",  "436 C":"#C0ABA5",  "437 C":"#B09C95",  "438 C":"#7B5B65",  "439 C":"#6B4C57",
+  "440 C":"#5A3F4A",  "448 C":"#4A3728",  "449 C":"#543D28",  "450 C":"#5E4428",  "451 C":"#9E8A6A",  "452 C":"#B49E7E",
+  "453 C":"#C8B498",  "454 C":"#D8C8AE",  "455 C":"#8A7040",  "456 C":"#B09444",  "457 C":"#C8AA58",  "458 C":"#E0C87A",
+  "459 C":"#ECDEA0",  "460 C":"#E8D8A8",  "461 C":"#E4CEA0",  "462 C":"#A0663C",  "463 C":"#A06030",  "464 C":"#9E5C2A",
+  "465 C":"#DEB897",  "466 C":"#D4A880",  "467 C":"#CCA068",  "468 C":"#C09050",  "469 C":"#8B3A0A",  "470 C":"#C05015",
+  "471 C":"#D46020",  "472 C":"#E88050",  "473 C":"#F4A88A",  "474 C":"#F8C0A0",  "475 C":"#F9CDB0",  "476 C":"#5C3020",
+  "477 C":"#6A3420",  "478 C":"#7A3C24",  "479 C":"#B87852",  "480 C":"#C88C6A",  "481 C":"#D8A882",  "482 C":"#E8C8A8",
+  "483 C":"#9A4020",  "484 C":"#AE2928",  "485 C":"#DA291C",  "486 C":"#DE6049",  "487 C":"#EF8A75",  "488 C":"#F6A98F",
+  "489 C":"#FAC4AE",  "490 C":"#7A2A33",  "491 C":"#903344",  "492 C":"#B5616A",  "493 C":"#DBADAB",  "494 C":"#F0C8C4",
+  "495 C":"#F5D8D4",  "496 C":"#F8E4E0",  "497 C":"#6A2E34",  "498 C":"#7E3840",  "499 C":"#A45355",  "500 C":"#E0A4A0",
+  "501 C":"#E8B8B2",  "502 C":"#EFC7BF",  "503 C":"#F4D2CE",  "504 C":"#7A3040",  "505 C":"#8C3848",  "506 C":"#AA5060",
+  "507 C":"#D89898",  "508 C":"#E4B0AC",  "509 C":"#ECCCC8",  "510 C":"#F4E0DC",  "511 C":"#6E2460",  "512 C":"#88306C",
+  "513 C":"#A44080",  "514 C":"#C07099",  "515 C":"#D494B0",  "516 C":"#E4B4C8",  "517 C":"#EED0DC",  "518 C":"#604064",
+  "519 C":"#744878",  "520 C":"#8C5C8C",  "521 C":"#A878A4",  "522 C":"#C09CBC",  "523 C":"#D4B8CC",  "524 C":"#E4CED8",
+  "525 C":"#583470",  "526 C":"#6C4084",  "527 C":"#8454A0",  "528 C":"#A478BC",  "529 C":"#C0A0D0",  "530 C":"#D4BCE0",
+  "531 C":"#E4D4EC",  "532 C":"#3C3C6C",  "533 C":"#404872",  "534 C":"#4C5480",  "535 C":"#7C84A8",  "536 C":"#A0A8C4",
+  "537 C":"#C0C4D8",  "538 C":"#D8DCE8",  "539 C":"#00365E",  "540 C":"#003060",  "541 C":"#002856",  "542 C":"#5B8DB8",
+  "543 C":"#8CAEC8",  "544 C":"#B4CAD8",  "545 C":"#C8D8E4",  "546 C":"#00384C",  "547 C":"#003048",  "548 C":"#002840",
+  "549 C":"#7BA4DB",  "550 C":"#90B4C4",  "551 C":"#B4CCD4",  "552 C":"#CCE0E8",  "553 C":"#1A4C38",  "554 C":"#205440",
+  "555 C":"#2A5C48",  "556 C":"#6C9C88",  "557 C":"#98B8AC",  "558 C":"#BCD0C8",  "559 C":"#D4E4DC",  "560 C":"#284C3C",
+  "561 C":"#2E5840",  "562 C":"#3A6848",  "563 C":"#78A890",  "564 C":"#A4C4B4",  "565 C":"#C4D8CC",  "566 C":"#DCE8E0",
+  "567 C":"#304838",  "568 C":"#00786A",  "569 C":"#00706A",  "570 C":"#54A498",  "801 C":"#00B5E2",  "802 C":"#00E566",
+  "803 C":"#FFE900",  "804 C":"#FF8000",  "805 C":"#FF003C",  "806 C":"#FF007C",  "807 C":"#CC00CC",  "811 C":"#FE414D",
+  "812 C":"#FF3EB5",  "813 C":"#FF00CD",  "814 C":"#D040FF",  "871 C":"#A07830",  "872 C":"#A87C3C",  "873 C":"#B0883E",
+  "874 C":"#B89048",  "875 C":"#A87C38",  "876 C":"#C0934C",  "877 C":"#8A8D8F",  "2685 C":"#33006F",  "2705 C":"#594FA8",
+  "2715 C":"#6D6CC9",  "2725 C":"#5A4EB5",  "2727 C":"#307FE2",  "2728 C":"#1D4289",  "2735 C":"#2C2490",  "2745 C":"#24218A",
+  "2945 C":"#006CB7",  "3005 C":"#0067A5",  "7401 C":"#F0D79E",  "7402 C":"#EDD48C",  "7403 C":"#EACB78",  "7404 C":"#F7E200",
+  "7405 C":"#F2DC00",  "7406 C":"#EDD600",  "7407 C":"#C8941E",  "7408 C":"#F0A500",  "7409 C":"#EFA000",  "7410 C":"#F7A08C",
+  "7411 C":"#F59478",  "7412 C":"#F08060",  "7413 C":"#ED7050",  "7414 C":"#E86040",  "7415 C":"#E05030",  "7416 C":"#D84020",
+  "7417 C":"#CC3010",  "7418 C":"#D46874",  "7419 C":"#CC5868",  "7420 C":"#C04860",  "7421 C":"#6C2038",  "7422 C":"#F0C4CC",
+  "7423 C":"#EC4C78",  "7424 C":"#E43468",  "7425 C":"#B81C4C",  "7426 C":"#A01840",  "7427 C":"#8C1438",  "7428 C":"#704058",
+  "7429 C":"#8C6070",  "7430 C":"#C0909C",  "7431 C":"#D4A8B0",  "7432 C":"#C08898",  "7433 C":"#D4788A",  "7434 C":"#CC6480",
+  "7435 C":"#B44070",  "7436 C":"#E8B4C8",  "7437 C":"#B870A4",  "7438 C":"#E8A8C8",  "7439 C":"#D48CB8",  "7440 C":"#BC70A4",
+  "7441 C":"#D8B0D4",  "7442 C":"#C898C4",  "7443 C":"#D4B4D4",  "7444 C":"#B898C4",  "7445 C":"#A87EB8",  "7446 C":"#907CB0",
+  "7447 C":"#584880",  "7448 C":"#4C3464",  "7449 C":"#3C2850",  "7450 C":"#7884B4",  "7451 C":"#8898C8",  "7452 C":"#A0AACC",
+  "7453 C":"#B4C0DC",  "7454 C":"#A8BCCC",  "7455 C":"#4060A0",  "7456 C":"#7888A8",  "7457 C":"#B0CCE0",  "7458 C":"#4C7898",
+  "7459 C":"#3C6888",  "7460 C":"#1C7EB4",  "7461 C":"#009CDE",  "7462 C":"#0080B8",  "7463 C":"#1C4060",  "7464 C":"#00A8A8",
+  "7465 C":"#00A09C",  "7466 C":"#009898",  "7467 C":"#00B4C0",  "7468 C":"#4890A8",  "7469 C":"#2878A0",  "7470 C":"#186080",
+  "7471 C":"#90D0D8",  "7472 C":"#5CB8BC",  "7473 C":"#38A8A0",  "7474 C":"#288890",  "7475 C":"#487880",  "7476 C":"#285864",
+  "7477 C":"#3C5060",  "7478 C":"#74C8A4",  "7479 C":"#40B880",  "7480 C":"#00A060",  "7481 C":"#008C50",  "7482 C":"#007840",
+  "7483 C":"#3C5840",  "7484 C":"#005848",  "7485 C":"#C8E0B8",  "7486 C":"#A8D898",  "7487 C":"#78C868",  "7488 C":"#58BC48",
+  "7489 C":"#70AC58",  "7490 C":"#90B06C",  "7491 C":"#B0C080",  "7492 C":"#C8D098",  "7493 C":"#C8C898",  "7494 C":"#A8B898",
+  "7495 C":"#98A86C",  "7496 C":"#88980C",  "7497 C":"#989068",  "7498 C":"#686040",  "7499 C":"#F8F0D0",  "7500 C":"#F0E4BC",
+  "7501 C":"#E8D8A0",  "7502 C":"#DCC87C",  "7503 C":"#C8A870",  "7504 C":"#B89060",  "7505 C":"#A07848",  "7506 C":"#F4E0C0",
+  "7507 C":"#F4C898",  "7508 C":"#E8B070",  "7509 C":"#D89848",  "7510 C":"#C88030",  "7511 C":"#B46818",  "7512 C":"#A05808",
+  "7513 C":"#F0C8A0",  "7514 C":"#E8B080",  "7515 C":"#D89068",  "7516 C":"#B86838",  "7517 C":"#F0B898",  "7518 C":"#D09080",
+  "7519 C":"#B87868",  "7520 C":"#E8B4A0",  "7521 C":"#C89070",  "7522 C":"#B06848",  "7523 C":"#C88880",  "7524 C":"#C07868",
+  "7525 C":"#B06050",  "7526 C":"#A05040",  "7527 C":"#D4CCC0",  "7528 C":"#C8C0B4",  "7529 C":"#BEB4A8",  "7530 C":"#B0A89C",
+  "7531 C":"#9C9488",  "7532 C":"#887C70",  "7533 C":"#504840",  "7534 C":"#D8D0C8",  "7535 C":"#C8C0B8",  "7536 C":"#B0A898",
+  "7537 C":"#B8C0B8",  "7538 C":"#A8B0A8",  "7539 C":"#BCCCC8",  "7540 C":"#5C6464",  "7541 C":"#E0E8E8",  "7542 C":"#B4C8CC",
+  "7543 C":"#A0B4B8",  "7544 C":"#7898A0",  "7545 C":"#506870",  "7546 C":"#384848",  "7547 C":"#202828",  "8003 C":"#A08040",
+  "8021 C":"#C08840",  "8062 C":"#90A060",  "8100 C":"#A84040",  "8201 C":"#408860",  "8281 C":"#407880",  "Black C":"#2B2B2C",
+  "Black 2 C":"#363435",  "Black 3 C":"#3D3C38",  "Black 4 C":"#4B4345",  "Black 5 C":"#4C4445",  "Black 6 C":"#4C4C4E",  "Black 7 C":"#60605E",
+  "Blue 072 C":"#10069F",  "Blue 2728 C":"#2235D4",  "Bright Red C":"#F22F20",  "Cool Gray 1 C":"#D9D9D6",  "Cool Gray 10 C":"#63666A",  "Cool Gray 11 C":"#53565A",
+  "Cool Gray 2 C":"#D0D0CE",  "Cool Gray 3 C":"#C8C9C7",  "Cool Gray 4 C":"#BBBCBC",  "Cool Gray 5 C":"#B1B3B3",  "Cool Gray 6 C":"#A7A8AA",  "Cool Gray 7 C":"#97999B",
+  "Cool Gray 8 C":"#888B8D",  "Cool Gray 9 C":"#75787B",  "Green C":"#00A862",  "Neutral Black C":"#2D2926",  "Orange 021 C":"#FE5000",  "Pink C":"#E56DB1",
+  "Process Black C":"#2B2B2C",  "Process Blue C":"#0085CA",  "Purple C":"#9B26B6",  "Red 032 C":"#EF3340",  "Reflex Blue C":"#001489",  "Rhodamine Red C":"#E10098",
+  "Rubine Red C":"#CE0058",  "Violet C":"#440099",  "Warm Gray 1 C":"#D9D0C7",  "Warm Gray 10 C":"#6E5F5A",  "Warm Gray 11 C":"#5F5044",  "Warm Gray 2 C":"#CFC5BA",
+  "Warm Gray 3 C":"#C5BAB0",  "Warm Gray 4 C":"#BAB0A8",  "Warm Gray 5 C":"#AFA59C",  "Warm Gray 6 C":"#A39792",  "Warm Gray 7 C":"#978B85",  "Warm Gray 8 C":"#8B7D78",
+  "Warm Gray 9 C":"#7D6F6A",  "Warm Red C":"#F9423A",  "Yellow C":"#FEDD00",  "Yellow 012 C":"#FFD700"
 };
 /* ─── Brand name engine ─── */
 /*
@@ -859,7 +923,9 @@ function distDot(dist){
 function makeMatchPanel(type, items, activeN){
   const id = type==='ral'?'matchRal':'matchPt';
   const label = type==='ral'?'RAL — nearest matches':'Pantone — nearest matches';
-  const note = 'Verify against physical swatches for print work';
+  const note = type==='ral'
+    ? 'Community hex approximations · RAL Classic coated only · verify against physical RAL swatches'
+    : 'Community hex approximations (~694 PMS Coated) · not all Pantone colors exist · always verify with physical swatchbook';
   const btnHtml = [3,6,9].map(n=>
     `<button class="match-n-btn${n===activeN?' on':''}" data-n="${n}" onclick="setMatchN('${type}',${n})">${n}</button>`
   ).join('');
@@ -970,7 +1036,11 @@ function parseInput(raw){
   m=raw.match(/hsva?\(\s*(\d+\.?\d*)\s*,\s*(\d+\.?\d*)%?\s*,\s*(\d+\.?\d*)%?/i);if(m){const{r,g,b}=hsv2r(+m[1],+m[2],+m[3]);return{r,g,b};}
   const rk=raw.replace(/^ral\s*/i,'').trim();if(RAL[rk])return h2r(RAL[rk][0]);
   const rm=raw.match(/RAL\s*(\d{4})/i);if(rm&&RAL[rm[1]])return h2r(RAL[rm[1]][0]);
-  const pk=raw.replace(/^pantone\s*/i,'').trim();if(PANTONE[pk])return h2r(PANTONE[pk]);
+  const pk=raw.replace(/^pantone\s*/i,'').trim();
+  if(PANTONE[pk])return h2r(PANTONE[pk]);
+  if(PANTONE[pk+' C'])return h2r(PANTONE[pk+' C']);
+  if(PANTONE[pk.replace(/ C$/i,'').trim()])return h2r(PANTONE[pk.replace(/ C$/i,'').trim()]);
+  for(const[k,v]of Object.entries(PANTONE)){if(k.toLowerCase()===pk.toLowerCase())return h2r(v);}
   for(const[k,v]of Object.entries(PANTONE)){if(raw.toLowerCase().includes(k.toLowerCase()))return h2r(v);}
   return null;
 }
@@ -1480,7 +1550,27 @@ function wHandleAt(x,y){
   const{r,g,b}=hsv2r(Math.round(wH),Math.round(wS*100),Math.round(wV*100));
   drawWheel(wH,wS,wV);
   const hex=r2h(r,g,b);
-  document.getElementById('colorInput').value=hex;
+  /* update input live but skip convert() — we commit on drag end */
+  const inp=document.getElementById('colorInput');
+  if(inp) inp.value=hex;
+  /* live accent update without history */
+  document.documentElement.style.setProperty('--accent',hex);
+  const _rgb=h2r(hex);
+  if(_rgb){
+    document.documentElement.style.setProperty('--on-accent',isDark(_rgb.r,_rgb.g,_rgb.b)?'#ffffff':'#000000');
+    const _lum=0.2126*(_rgb.r/255)**2.2+0.7152*(_rgb.g/255)**2.2+0.0722*(_rgb.b/255)**2.2;
+    document.documentElement.style.setProperty('--accent-text',_lum<0.03?'#888888':hex);
+  }
+  const bs=document.getElementById('bigSwatch');
+  if(bs) bs.style.background=hex;
+}
+
+function wCommit(){
+  /* called once on drag end — runs full convert() which records history */
+  const{r,g,b}=hsv2r(Math.round(wH),Math.round(wS*100),Math.round(wV*100));
+  const hex=r2h(r,g,b);
+  const inp=document.getElementById('colorInput');
+  if(inp) inp.value=hex;
   convert();
 }
 
@@ -1489,10 +1579,10 @@ function wInitEvents(){
   if(!c||c._wi) return; c._wi=true;
   c.addEventListener('mousedown',e=>{const{x,y}=wCoords(e,c);wDrag=wZone(x,y);if(wDrag)wHandleAt(x,y);});
   c.addEventListener('mousemove',e=>{if(!wDrag)return;const{x,y}=wCoords(e,c);wHandleAt(x,y);});
-  document.addEventListener('mouseup',()=>{wDrag=null;});
+  document.addEventListener('mouseup',()=>{if(wDrag)wCommit();wDrag=null;});
   c.addEventListener('touchstart',e=>{e.preventDefault();const{x,y}=wCoords(e,c);wDrag=wZone(x,y);if(wDrag)wHandleAt(x,y);},{passive:false});
   c.addEventListener('touchmove',e=>{if(!wDrag)return;e.preventDefault();const{x,y}=wCoords(e,c);wHandleAt(x,y);},{passive:false});
-  c.addEventListener('touchend',()=>{wDrag=null;});
+  c.addEventListener('touchend',()=>{if(wDrag)wCommit();wDrag=null;});
 }
 
 function toggleWheel(){
