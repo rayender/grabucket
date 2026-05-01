@@ -1,0 +1,32 @@
+{
+  "name": "Grabucket",
+  "short_name": "Grabucket",
+  "description": "Universal color converter — Hex, RGB, CMYK, HSL, HSV, RAL, Pantone, CIE-Lab, oklch, WCAG & more",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#141414",
+  "theme_color": "#1C98D5",
+  "categories": ["design", "utilities"],
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Convert a color",
+      "url": "/",
+      "description": "Open Grabucket color converter"
+    }
+  ]
+}

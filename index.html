@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7309228644823889"
-     crossorigin="anonymous"></script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Grabucket — Color Converter</title>
@@ -10,6 +8,11 @@
 
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+/* ─── Dynamic contrast ─── */
+:root {
+  --on-accent: #ffffff;
+  --accent-text: #1C98D5;
+}
 :root {
   --bg: #0e0e0f; --surface: #161618; --surface2: #1e1e21;
   --border: rgba(255,255,255,0.07); --border-h: rgba(255,255,255,0.15);
@@ -28,13 +31,14 @@ body::before {
 header { display:flex; align-items:center; justify-content:space-between; padding:1.75rem 3rem; border-bottom:1px solid var(--border); }
 .logo { display:flex; align-items:center; gap:10px; }
 .logo-icon { width:32px; height:32px; flex-shrink:0; display:flex; align-items:center; justify-content:center; background:none; }
+.logo-icon path { fill: var(--accent); transition: fill .4s ease; }
 .logo-name { font-family:var(--sans); font-size:1.15rem; font-weight:700; font-style:normal; color:var(--text); letter-spacing:-.01em; }
 .logo-badge { font-size:.6rem; letter-spacing:.14em; text-transform:uppercase; color:var(--dim); border:1px solid var(--border); padding:3px 8px; border-radius:2px; }
 .hero { padding:4.5rem 3rem 2.5rem; max-width:1160px; margin:0 auto; }
 .eyebrow { font-size:.6rem; letter-spacing:.22em; text-transform:uppercase; color:var(--dim); display:flex; align-items:center; gap:10px; margin-bottom:1.25rem; }
 .eyebrow::before { content:''; width:20px; height:1px; background:var(--dim); }
 h1 { font-family:var(--sans); font-size:clamp(2.2rem,5.5vw,4.4rem); font-weight:700; line-height:1.08; letter-spacing:-.025em; color:var(--text); margin-bottom:.75rem; max-width:680px; }
-h1 em { font-style:normal; color:var(--accent); }
+h1 em { font-style:normal; color:var(--accent-text); }
 .hero-sub { font-size:.78rem; color:var(--muted); letter-spacing:.04em; margin-bottom:2.5rem; }
 .converter { max-width:1160px; margin:0 auto; padding:0 3rem 5rem; }
 .input-zone { background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:1.5rem 1.75rem; margin-bottom:1.5rem; display:flex; align-items:center; gap:1rem; transition:border-color .2s; }
@@ -44,9 +48,6 @@ h1 em { font-style:normal; color:var(--accent); }
 .input-lbl { font-size:.58rem; letter-spacing:.18em; text-transform:uppercase; color:var(--dim); margin-bottom:5px; }
 #colorInput { background:transparent; border:none; outline:none; font-family:var(--mono); font-size:1rem; color:var(--text); width:100%; caret-color:var(--accent); }
 #colorInput::placeholder { color:var(--dim); font-size:.85rem; }
-.btn-go { background:var(--accent); color:#ffffff; border:none; font-family:var(--sans); font-size:.72rem; font-weight:600; letter-spacing:.06em; text-transform:uppercase; padding:0 1.4rem; height:42px; border-radius:6px; cursor:pointer; flex-shrink:0; transition:opacity .2s,transform .1s; }
-.btn-go:hover { opacity:.82; }
-.btn-go:active { transform:scale(.97); }
 .examples { display:flex; gap:7px; flex-wrap:wrap; align-items:center; margin-bottom:2.5rem; }
 .ex-lbl { font-size:.58rem; letter-spacing:.18em; text-transform:uppercase; color:var(--dim); margin-right:2px; }
 .pill { font-family:var(--sans); font-size:.68rem; font-weight:400; padding:4px 11px; border-radius:20px; border:1px solid var(--border); color:var(--muted); cursor:pointer; background:transparent; transition:border-color .15s,color .15s,background .15s; }
@@ -58,7 +59,7 @@ h1 em { font-style:normal; color:var(--accent); }
 .name-swatch { width:42px; height:42px; border-radius:7px; flex-shrink:0; border:1px solid rgba(255,255,255,.08); transition:background .35s; }
 .name-info { flex:1; }
 .name-tag { font-size:.58rem; letter-spacing:.2em; text-transform:uppercase; color:var(--dim); margin-bottom:5px; }
-.name-val { font-family:var(--sans); font-size:1.4rem; font-weight:600; font-style:normal; color:var(--accent); letter-spacing:-.02em; line-height:1; }
+.name-val { font-family:var(--sans); font-size:1.4rem; font-weight:600; font-style:normal; color:var(--accent-text); letter-spacing:-.02em; line-height:1; }
 .name-meta { font-size:.68rem; color:var(--dim); margin-top:5px; letter-spacing:.06em; }
 .btn-sm { background:transparent; border:1px solid var(--border); border-radius:6px; color:var(--muted); font-family:var(--sans); font-size:.68rem; font-weight:500; padding:7px 13px; cursor:pointer; letter-spacing:.02em; flex-shrink:0; transition:border-color .15s,color .15s; }
 .btn-sm:hover { border-color:var(--border-h); color:var(--text); }
@@ -74,6 +75,10 @@ h1 em { font-style:normal; color:var(--accent); }
 .card:hover .card-btn { opacity:1; }
 .card-btn:hover { border-color:var(--border-h); color:var(--text); }
 .card-btn.ok { color:#78d489; border-color:rgba(120,212,137,.3); }
+.contrast-pair { display:flex; flex-direction:column; align-items:center; gap:4px; }
+.cpill-lbl { font-size:.5rem; color:var(--dim); letter-spacing:.06em; white-space:nowrap; }
+.rec-badge { font-size:.68rem; font-weight:600; padding:4px 10px; border-radius:6px; letter-spacing:.02em; }
+.rec-sub { font-size:.56rem; color:var(--dim); margin-left:5px; }
 .info-bar { display:flex; gap:1.75rem; align-items:center; padding:1.1rem 1.4rem; background:var(--surface); border:1px solid var(--border); border-radius:12px; margin-bottom:2.5rem; flex-wrap:wrap; }
 .info-item { display:flex; align-items:center; gap:9px; font-size:.7rem; color:var(--muted); }
 .info-sw { width:24px; height:24px; border-radius:4px; flex-shrink:0; border:1px solid rgba(255,255,255,.07); }
@@ -156,11 +161,275 @@ footer { border-top:1px solid var(--border); padding:1.75rem 3rem; display:flex;
 @media(max-width:768px){
   header,.hero,.converter{padding-left:1.25rem;padding-right:1.25rem;}
   h1{font-size:2rem;} .hero{padding-top:2.5rem;}
-  .input-zone{flex-wrap:wrap;} .btn-go{width:100%;}
+  .input-zone{flex-wrap:wrap;}
   .pal-grid{grid-template-columns:1fr;}
   footer{flex-direction:column;align-items:flex-start;}
 }
-/* Accessibility section */
+
+
+/* ─── Color of the Day banner ─── */
+.cotd-banner {
+  display:block; width:100%; cursor:pointer;
+  padding:2.4rem 3rem 2rem;
+  position:relative; transition:filter .2s;
+  border-bottom:1px solid rgba(0,0,0,.08);
+}
+.cotd-banner:hover { filter:brightness(.95); }
+.cotd-tag {
+  font-size:.52rem; letter-spacing:.22em; text-transform:uppercase;
+  font-weight:600; opacity:.55; margin-bottom:.9rem; display:block;
+}
+.cotd-name {
+  font-family:var(--sans); font-size:clamp(1.8rem,5vw,2.8rem);
+  font-weight:700; letter-spacing:-.03em; line-height:1.05;
+  margin-bottom:.75rem;
+}
+.cotd-meta {
+  display:flex; align-items:center; gap:.85rem;
+}
+.cotd-meta-lbl {
+  font-size:.58rem; letter-spacing:.2em; text-transform:uppercase;
+  font-weight:600; opacity:.45;
+}
+.cotd-hex-val {
+  font-family:var(--mono); font-size:1rem; font-weight:500;
+  letter-spacing:.05em; opacity:.8;
+}
+.cotd-toggle {
+  position:absolute; top:1rem; right:1.2rem;
+  background:rgba(0,0,0,.12); border:none; border-radius:50%;
+  width:28px; height:28px; display:flex; align-items:center; justify-content:center;
+  cursor:pointer; opacity:.55; transition:opacity .15s, transform .25s;
+  line-height:1; flex-shrink:0;
+}
+.cotd-toggle:hover { opacity:1; }
+.cotd-toggle svg { transition:transform .25s; }
+.cotd-banner.minimized .cotd-toggle svg { transform:rotate(180deg); }
+/* Minimized state — slim pill along the top */
+.cotd-banner.minimized {
+  padding:.55rem 3rem .55rem 1.4rem;
+  display:flex; align-items:center; gap:.75rem;
+}
+.cotd-banner.minimized .cotd-tag,
+.cotd-banner.minimized .cotd-meta { display:none; }
+.cotd-banner.minimized .cotd-name {
+  font-size:.72rem; font-weight:600; letter-spacing:-.005em;
+  margin:0; opacity:.85;
+}
+.cotd-mini-chip {
+  width:14px; height:14px; border-radius:3px;
+  border:1px solid rgba(255,255,255,.2); flex-shrink:0; display:none;
+}
+.cotd-banner.minimized .cotd-mini-chip { display:block; }
+.cotd-mini-lbl {
+  font-size:.52rem; letter-spacing:.15em; text-transform:uppercase;
+  opacity:.5; display:none;
+}
+.cotd-banner.minimized .cotd-mini-lbl { display:block; }
+/* Clear button in input */
+.input-clear {
+  background:transparent; border:none; color:var(--dim);
+  font-size:1rem; cursor:pointer; padding:0 4px;
+  line-height:1; display:none; flex-shrink:0;
+  transition:color .15s; border-radius:4px;
+}
+.input-clear:hover { color:var(--text); }
+.input-clear.vis { display:block; }
+@media(max-width:768px){
+  .cotd-banner:not(.minimized){ padding:1.75rem 1.25rem 1.5rem; }
+  .cotd-name { font-size:1.8rem; }
+  .cotd-toggle{ top:.75rem; right:.75rem; }
+  .cotd-banner.minimized { padding:.55rem 2.5rem .55rem 1.1rem; }
+}
+
+/* ─── Color history ─── */
+.history-row { display:flex; align-items:center; gap:7px; flex-wrap:wrap; margin-bottom:1rem; }
+.history-lbl { font-size:.55rem; letter-spacing:.15em; text-transform:uppercase; color:var(--dim); flex-shrink:0; }
+.history-chip { width:22px; height:22px; border-radius:5px; border:1px solid rgba(255,255,255,.08); cursor:pointer; flex-shrink:0; transition:transform .15s, box-shadow .15s; }
+.history-chip:hover { transform:scale(1.22); box-shadow:0 0 0 2px var(--border-h); }
+
+/* ─── Share button ─── */
+.btn-share { display:inline-flex; align-items:center; gap:5px; font-family:var(--sans); font-size:.64rem; font-weight:500; color:var(--muted); background:transparent; border:1px solid var(--border); border-radius:20px; padding:5px 12px; cursor:pointer; transition:border-color .18s,color .18s; letter-spacing:.03em; }
+.btn-share:hover { border-color:var(--border-h); color:var(--text); }
+.btn-share.copied { border-color:rgba(120,212,137,.4); color:#78d489; }
+
+/* ─── What's New modal ─── */
+.wn-overlay {
+  position:fixed; inset:0; background:rgba(0,0,0,.65); z-index:1000;
+  display:flex; align-items:center; justify-content:center;
+  padding:1rem; backdrop-filter:blur(4px);
+  opacity:0; pointer-events:none; transition:opacity .25s;
+}
+.wn-overlay.vis { opacity:1; pointer-events:all; }
+.wn-modal {
+  background:var(--surface); border:1px solid var(--border);
+  border-radius:16px; width:100%; max-width:520px;
+  max-height:88vh; display:flex; flex-direction:column;
+  box-shadow:0 24px 60px rgba(0,0,0,.5);
+  transform:translateY(18px); transition:transform .28s;
+  overflow:hidden;
+}
+.wn-overlay.vis .wn-modal { transform:translateY(0); }
+.wn-header {
+  display:flex; align-items:flex-start; gap:1rem;
+  padding:1.5rem 1.5rem 1.1rem; border-bottom:1px solid var(--border);
+  flex-shrink:0;
+}
+.wn-badge {
+  background:var(--accent); color:var(--on-accent);
+  font-size:.52rem; font-weight:700; letter-spacing:.14em;
+  text-transform:uppercase; padding:3px 9px; border-radius:20px;
+  flex-shrink:0; margin-top:3px;
+}
+.wn-title { font-size:1.1rem; font-weight:700; color:var(--text); letter-spacing:-.02em; }
+.wn-subtitle { font-size:.68rem; color:var(--muted); margin-top:3px; }
+.wn-close {
+  margin-left:auto; background:transparent; border:none;
+  color:var(--dim); font-size:1.2rem; cursor:pointer; padding:2px 6px;
+  border-radius:6px; line-height:1; transition:color .15s; flex-shrink:0;
+}
+.wn-close:hover { color:var(--text); }
+.wn-body { overflow-y:auto; padding:1.25rem 1.5rem; flex:1; }
+.wn-section { margin-bottom:1.25rem; }
+.wn-section:last-child { margin-bottom:0; }
+.wn-section-lbl {
+  font-size:.52rem; letter-spacing:.18em; text-transform:uppercase;
+  color:var(--dim); margin-bottom:.6rem; display:block;
+}
+.wn-items { display:flex; flex-direction:column; gap:.45rem; }
+.wn-item {
+  display:flex; align-items:flex-start; gap:.75rem;
+  background:var(--surface2); border:1px solid var(--border);
+  border-radius:9px; padding:.7rem .9rem;
+}
+.wn-icon {
+  font-size:1rem; flex-shrink:0; width:22px;
+  text-align:center; margin-top:1px;
+}
+.wn-item-body {}
+.wn-item-name { font-size:.75rem; font-weight:600; color:var(--text); }
+.wn-item-desc { font-size:.62rem; color:var(--muted); margin-top:2px; line-height:1.5; }
+.wn-footer {
+  padding:1rem 1.5rem; border-top:1px solid var(--border);
+  display:flex; align-items:center; gap:.75rem; flex-shrink:0;
+  flex-wrap:wrap;
+}
+.wn-cta {
+  flex:1; background:var(--accent); color:var(--on-accent);
+  border:none; border-radius:8px; padding:.65rem 1.2rem;
+  font-family:var(--sans); font-size:.75rem; font-weight:600;
+  cursor:pointer; transition:opacity .15s; letter-spacing:.01em;
+}
+.wn-cta:hover { opacity:.85; }
+.wn-skip {
+  font-size:.62rem; color:var(--dim); background:transparent;
+  border:none; cursor:pointer; padding:4px 8px;
+  font-family:var(--sans); transition:color .15s;
+}
+.wn-skip:hover { color:var(--muted); }
+/* ─── Match N toggle button active state ─── */
+.match-n-btn.on { background:var(--accent); border-color:var(--accent); color:var(--on-accent); }
+.fc-n-btn.on { background:var(--accent); border-color:var(--accent); color:var(--on-accent); }
+.wheel-opt-btn.on { background:var(--accent); border-color:var(--accent); color:var(--on-accent); }
+
+/* ─── Swatch pick ─── */
+.swatch-pick{cursor:pointer;position:relative;}
+.swatch-pick:hover{opacity:.85;}
+.swatch-pick::after{content:'Pick';position:absolute;bottom:-8px;left:50%;transform:translateX(-50%);font-size:.48rem;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);white-space:nowrap;opacity:0;transition:opacity .15s;}
+.swatch-pick:hover::after{opacity:1;}
+
+/* ─── Dynamic logo ─── */
+.logo-icon path { fill: var(--accent); transition: fill .4s ease; }
+
+/* ─── Wheel top button ─── */
+.wheel-top-btn {
+  display:flex; align-items:center; gap:7px; width:100%;
+  background:var(--surface); border:1px solid var(--border); border-radius:10px;
+  color:var(--muted); font-family:var(--sans); font-size:.72rem; font-weight:500;
+  padding:.75rem 1.2rem; cursor:pointer; margin-bottom:.6rem;
+  transition:border-color .18s, color .18s, background .18s;
+  letter-spacing:.02em;
+}
+.wheel-top-btn:hover { border-color:var(--border-h); color:var(--text); background:var(--surface2); }
+.wheel-top-btn.open { border-color:var(--accent); color:var(--accent-text); background:var(--surface2); }
+.wheel-top-btn svg { flex-shrink:0; }
+.wheel-top-hint { margin-left:auto; font-size:.56rem; letter-spacing:.12em; text-transform:uppercase; color:var(--dim); transition:color .18s; }
+.wheel-top-btn.open .wheel-top-hint { color:var(--accent-text); }
+/* ─── Wheel toggle button (legacy, keep for .open class ref) ─── */
+.btn-wheel { display:inline-flex; align-items:center; gap:5px; font-family:var(--sans); font-size:.64rem; font-weight:500; color:var(--muted); background:transparent; border:1px solid var(--border); border-radius:20px; padding:5px 12px; cursor:pointer; transition:border-color .18s,color .18s,background .18s; letter-spacing:.03em; }
+.btn-wheel:hover { border-color:var(--border-h); color:var(--text); }
+.btn-wheel.open { border-color:var(--accent); color:var(--accent-text); background:rgba(28,152,213,.07); }
+.btn-wheel svg { width:13px; height:13px; flex-shrink:0; transition:transform .25s; }
+.btn-wheel.open svg { transform:rotate(90deg); }
+
+/* ─── Wheel panel ─── */
+.wheel-panel { display:none; background:var(--surface); border:1px solid var(--border); border-radius:12px; overflow:hidden; margin-bottom:1.5rem; }
+.wheel-panel.open { display:flex; flex-wrap:wrap; }
+.wheel-canvas-area { padding:1.5rem; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+#colorWheel { display:block; cursor:crosshair; border-radius:50%; }
+.wheel-side { flex:1; min-width:190px; padding:1.5rem 1.5rem 1.5rem 0; display:flex; flex-direction:column; gap:1.1rem; }
+.wheel-side-lbl { font-size:.55rem; letter-spacing:.18em; text-transform:uppercase; color:var(--dim); margin-bottom:.55rem; }
+.wheel-opt-row { display:flex; gap:6px; flex-wrap:wrap; }
+.wheel-opt-btn { background:transparent; border:1px solid var(--border); border-radius:20px; color:var(--muted); font-family:var(--sans); font-size:.62rem; font-weight:500; padding:4px 11px; cursor:pointer; transition:border-color .15s,color .15s,background .15s; }
+.wheel-opt-btn:hover { border-color:var(--border-h); color:var(--text); }
+
+/* ─── Alpha slider ─── */
+.alpha-row { display:flex; align-items:center; gap:9px; }
+.alpha-track { position:relative; flex:1; height:10px; border-radius:5px; }
+.alpha-track-bg { position:absolute; inset:0; border-radius:5px; background:repeating-conic-gradient(#555 0% 25%, #333 0% 50%) 0 0 / 10px 10px; }
+.alpha-track-fg { position:absolute; inset:0; border-radius:5px; }
+.alpha-slider { position:absolute; inset:0; width:100%; opacity:0; cursor:pointer; margin:0; }
+.alpha-val { font-family:var(--mono); font-size:.65rem; color:var(--muted); min-width:30px; text-align:right; }
+
+/* ─── Wheel current color ─── */
+.wheel-curr { background:var(--surface2); border:1px solid var(--border); border-radius:8px; padding:.85rem 1rem; }
+.wheel-curr-swatch { width:36px; height:36px; border-radius:7px; border:1px solid rgba(255,255,255,.07); margin-bottom:.5rem; transition:background .2s; }
+.wheel-curr-hex { font-family:var(--mono); font-size:.75rem; color:var(--text); font-weight:500; }
+.wheel-curr-sub { font-size:.58rem; color:var(--dim); margin-top:3px; letter-spacing:.04em; }
+.wheel-curr-alpha { font-size:.58rem; color:var(--accent-text); margin-top:2px; display:none; }
+.wheel-curr-alpha.vis { display:block; }
+@media(max-width:640px){ .wheel-panel.open{flex-direction:column;} .wheel-side{padding:0 1.25rem 1.25rem;} }
+
+/* ─── Save + Palette buttons ─── */
+.btn-save { display:inline-flex; align-items:center; gap:5px; font-family:var(--sans); font-size:.64rem; font-weight:500; color:var(--muted); background:transparent; border:1px solid var(--border); border-radius:20px; padding:5px 12px; cursor:pointer; transition:border-color .18s,color .18s,background .18s,transform .12s; letter-spacing:.03em; }
+.btn-save:hover { border-color:var(--accent); color:var(--accent-text); transform:scale(1.05); }
+.btn-save.saved { border-color:var(--accent); color:var(--accent-text); background:rgba(28,152,213,.07); }
+.btn-save.saved svg { fill:var(--accent); }
+.btn-palette { display:inline-flex; align-items:center; gap:5px; font-family:var(--sans); font-size:.64rem; font-weight:500; color:var(--muted); background:transparent; border:1px solid var(--border); border-radius:20px; padding:5px 12px; cursor:pointer; transition:border-color .18s,color .18s,background .18s; letter-spacing:.03em; }
+.btn-palette:hover { border-color:var(--border-h); color:var(--text); }
+.btn-palette.open { border-color:var(--accent); color:var(--accent-text); background:rgba(28,152,213,.07); }
+
+/* ─── Palette collector panel ─── */
+.palette-panel { display:none; background:var(--surface); border:1px solid var(--border); border-radius:12px; overflow:hidden; margin-bottom:1.5rem; }
+.palette-panel.open { display:block; }
+.palette-head { display:flex; align-items:center; gap:.7rem; padding:.9rem 1.3rem; border-bottom:1px solid var(--border); flex-wrap:wrap; }
+.palette-head-title { font-size:.57rem; letter-spacing:.17em; text-transform:uppercase; color:var(--dim); flex:1; min-width:80px; }
+.palette-count { font-family:var(--mono); font-size:.65rem; color:var(--muted); background:var(--surface2); padding:2px 8px; border-radius:10px; }
+.palette-actions { display:flex; gap:6px; flex-wrap:wrap; }
+.pal-btn { font-family:var(--sans); font-size:.6rem; font-weight:500; padding:4px 11px; border-radius:20px; cursor:pointer; border:1px solid var(--border); background:transparent; color:var(--muted); transition:.15s; letter-spacing:.03em; }
+.pal-btn:hover { color:var(--text); border-color:var(--border-h); }
+.pal-btn.danger:hover { color:#e07070; border-color:rgba(224,112,112,.4); background:rgba(224,112,112,.06); }
+.palette-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(88px,1fr)); gap:1px; background:var(--border); }
+.pal-swatch { position:relative; background:var(--surface2); cursor:pointer; display:flex; flex-direction:column; align-items:center; padding:.85rem .5rem .6rem; gap:5px; transition:background .15s; }
+.pal-swatch:hover { background:var(--surface); }
+.pal-swatch:hover .pal-rm { opacity:1; }
+.pal-color { width:44px; height:44px; border-radius:8px; border:1px solid rgba(255,255,255,.06); flex-shrink:0; transition:transform .15s; }
+.pal-swatch:hover .pal-color { transform:scale(1.08); }
+.pal-hex { font-family:var(--mono); font-size:.6rem; color:var(--muted); text-align:center; letter-spacing:.03em; }
+.pal-name { font-size:.55rem; color:var(--dim); text-align:center; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:84px; }
+.pal-rm { position:absolute; top:5px; right:6px; background:rgba(224,112,112,.13); border:none; border-radius:50%; width:18px; height:18px; color:#e07070; font-size:.65rem; cursor:pointer; opacity:0; transition:opacity .15s; display:flex; align-items:center; justify-content:center; line-height:1; }
+.pal-rm:hover { background:rgba(224,112,112,.25); }
+.pal-empty { padding:2.5rem; text-align:center; color:var(--dim); font-size:.75rem; grid-column:1/-1; }
+.pal-empty span { display:block; font-size:1.4rem; margin-bottom:.5rem; opacity:.4; }
+.pal-confirm { display:none; align-items:center; gap:.6rem; padding:.7rem 1.3rem; background:rgba(224,112,112,.06); border-top:1px solid rgba(224,112,112,.15); flex-wrap:wrap; }
+.pal-confirm.vis { display:flex; }
+.pal-confirm-txt { font-size:.68rem; color:#e07070; flex:1; min-width:120px; }
+.pal-confirm-yes { font-family:var(--sans); font-size:.62rem; font-weight:600; padding:4px 14px; border-radius:20px; cursor:pointer; border:1px solid rgba(224,112,112,.4); background:rgba(224,112,112,.1); color:#e07070; transition:.15s; }
+.pal-confirm-yes:hover { background:rgba(224,112,112,.2); }
+.pal-confirm-no { font-family:var(--sans); font-size:.62rem; padding:4px 12px; border-radius:20px; cursor:pointer; border:1px solid var(--border); background:transparent; color:var(--muted); transition:.15s; }
+.pal-confirm-no:hover { color:var(--text); border-color:var(--border-h); }
+
+/* ─── Accessibility panel ─── */
 .a11y-section{background:var(--surface);border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:1.25rem;}
 .a11y-section-head{padding:.85rem 1.4rem;font-size:.56rem;letter-spacing:.18em;text-transform:uppercase;color:var(--dim);border-bottom:1px solid var(--border);}
 .a11y-rows{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);}
@@ -174,50 +443,43 @@ footer { border-top:1px solid var(--border); padding:1.75rem 3rem; display:flex;
 .a11y-badge{font-size:.53rem;letter-spacing:.07em;text-transform:uppercase;padding:2px 6px;border-radius:3px;font-weight:600;}
 .a11y-pass{background:rgba(120,212,137,.1);color:#78d489;border:1px solid rgba(120,212,137,.2);}
 .a11y-fail{background:rgba(224,112,112,.08);color:#e07070;border:1px solid rgba(224,112,112,.18);}
-/* Swatch pick */
-.swatch-pick{cursor:pointer;position:relative;}
-.swatch-pick:hover{opacity:.85;}
-.swatch-pick::after{content:'Pick';position:absolute;bottom:-8px;left:50%;transform:translateX(-50%);font-size:.48rem;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);white-space:nowrap;opacity:0;transition:opacity .15s;}
-.swatch-pick:hover::after{opacity:1;}
 @media(max-width:768px){.a11y-rows{grid-template-columns:1fr;}}
-/* Dynamic logo */
-.logo-icon path { fill: var(--accent); transition: fill .4s ease; }
-/* Wheel toggle button */
-.btn-wheel { display:inline-flex; align-items:center; gap:5px; font-family:var(--sans); font-size:.64rem; font-weight:500; color:var(--muted); background:transparent; border:1px solid var(--border); border-radius:20px; padding:5px 12px; cursor:pointer; transition:border-color .18s,color .18s,background .18s; letter-spacing:.03em; }
-.btn-wheel:hover { border-color:var(--border-h); color:var(--text); }
-.btn-wheel.open { border-color:var(--accent); color:var(--accent); background:rgba(28,152,213,.07); }
-.btn-wheel svg { width:13px; height:13px; flex-shrink:0; transition:transform .25s; }
-.btn-wheel.open svg { transform:rotate(90deg); }
-/* Wheel panel */
-.wheel-panel { display:none; background:var(--surface); border:1px solid var(--border); border-radius:12px; overflow:hidden; margin-bottom:1.5rem; }
-.wheel-panel.open { display:flex; flex-wrap:wrap; }
-.wheel-canvas-area { padding:1.5rem; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
-#colorWheel { display:block; cursor:crosshair; border-radius:50%; }
-.wheel-side { flex:1; min-width:190px; padding:1.5rem 1.5rem 1.5rem 0; display:flex; flex-direction:column; gap:1.1rem; }
-.wheel-side-lbl { font-size:.55rem; letter-spacing:.18em; text-transform:uppercase; color:var(--dim); margin-bottom:.55rem; }
-.wheel-opt-row { display:flex; gap:6px; flex-wrap:wrap; }
-.wheel-opt-btn { background:transparent; border:1px solid var(--border); border-radius:20px; color:var(--muted); font-family:var(--sans); font-size:.62rem; font-weight:500; padding:4px 11px; cursor:pointer; transition:border-color .15s,color .15s,background .15s; }
-.wheel-opt-btn:hover { border-color:var(--border-h); color:var(--text); }
-.wheel-opt-btn.on { background:var(--accent); border-color:var(--accent); color:#fff; }
-/* Alpha slider */
-.alpha-row { display:flex; align-items:center; gap:9px; }
-.alpha-track { position:relative; flex:1; height:10px; border-radius:5px; }
-.alpha-track-bg { position:absolute; inset:0; border-radius:5px; background:repeating-conic-gradient(#555 0% 25%, #333 0% 50%) 0 0 / 10px 10px; }
-.alpha-track-fg { position:absolute; inset:0; border-radius:5px; }
-.alpha-slider { position:absolute; inset:0; width:100%; opacity:0; cursor:pointer; margin:0; }
-.alpha-val { font-family:var(--mono); font-size:.65rem; color:var(--muted); min-width:30px; text-align:right; }
-/* Wheel current color display */
-.wheel-curr { background:var(--surface2); border:1px solid var(--border); border-radius:8px; padding:.85rem 1rem; }
-.wheel-curr-swatch { width:36px; height:36px; border-radius:7px; border:1px solid rgba(255,255,255,.07); margin-bottom:.5rem; transition:background .2s; }
-.wheel-curr-hex { font-family:var(--mono); font-size:.75rem; color:var(--text); font-weight:500; }
-.wheel-curr-sub { font-size:.58rem; color:var(--dim); margin-top:3px; letter-spacing:.04em; }
-.wheel-curr-alpha { font-size:.58rem; color:var(--accent); margin-top:2px; display:none; }
-.wheel-curr-alpha.vis { display:block; }
-@media(max-width:640px) {
-  .wheel-panel.open { flex-direction:column; }
-  .wheel-side { padding:0 1.25rem 1.25rem; }
-}
+
+/* ─── Match panels (RAL / Pantone nearest N) ─── */
+.match-panel { background:var(--surface); border:1px solid var(--border); border-radius:12px; overflow:hidden; margin-bottom:1.25rem; }
+.match-panel-head { display:flex; align-items:center; gap:.75rem; padding:.85rem 1.3rem; border-bottom:1px solid var(--border); flex-wrap:wrap; }
+.match-panel-title { font-size:.56rem; letter-spacing:.18em; text-transform:uppercase; color:var(--dim); flex:1; min-width:60px; }
+.match-note { font-size:.58rem; color:var(--dim); font-style:italic; }
+.match-n-btns { display:flex; gap:3px; }
+.match-n-btn { background:transparent; border:1px solid var(--border); border-radius:4px; color:var(--muted); font-family:var(--mono); font-size:.62rem; font-weight:600; padding:3px 9px; cursor:pointer; transition:.15s; }
+.match-n-btn:hover { border-color:var(--border-h); color:var(--text); }
+.match-items { display:grid; grid-template-columns:repeat(auto-fill, minmax(200px,1fr)); gap:1px; background:var(--border); }
+.match-item { background:var(--surface2); display:flex; align-items:center; gap:.85rem; padding:.9rem 1.1rem; cursor:pointer; transition:background .15s; position:relative; }
+.match-item:hover { background:var(--surface); }
+.match-item.hidden { display:none; }
+.match-swatch { width:42px; height:42px; border-radius:7px; flex-shrink:0; border:1px solid rgba(255,255,255,.07); transition:transform .15s; }
+.match-item:hover .match-swatch { transform:scale(1.07); }
+.match-body { flex:1; min-width:0; }
+.match-code { font-family:var(--mono); font-size:.75rem; font-weight:600; color:var(--text); margin-bottom:3px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.match-name { font-size:.58rem; color:var(--muted); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:160px; }
+.match-hex  { font-family:var(--mono); font-size:.57rem; color:var(--dim); margin-top:2px; }
+.match-rank { position:absolute; top:7px; right:9px; font-family:var(--mono); font-size:.52rem; color:var(--dim); background:var(--surface); border:1px solid var(--border); border-radius:3px; padding:1px 5px; }
+.match-dist { display:inline-block; width:7px; height:7px; border-radius:50%; margin-left:5px; vertical-align:middle; flex-shrink:0; }
+@media(max-width:600px){ .match-items{ grid-template-columns:1fr; } }
+
+/* ─── Active toggle states ─── */
+.match-n-btn.on { background:var(--accent); border-color:var(--accent); color:var(--on-accent); }
+.wheel-opt-btn.on { background:var(--accent); border-color:var(--accent); color:var(--on-accent); }
+
 </style>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7309228644823889" crossorigin="anonymous"></script>
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" id="themeColor" content="#1C98D5">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Grabucket">
+  <link rel="apple-touch-icon" href="/icon.svg">
 </head>
 <body>
 
@@ -225,14 +487,30 @@ footer { border-top:1px solid var(--border); padding:1.75rem 3rem; display:flex;
   <div class="logo">
     <div class="logo-icon" id="logoDot">
       <svg width="32" height="32" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:block;background:transparent;overflow:visible">
-        <path d="M46.9066 48.3164C52.2506 47.1018 56.8032 48.4786 59.014 50.9326C59.5662 51.5656 59.8568 52.1613 60.0081 52.8271C60.4536 54.7876 59.3919 56.4484 57.3949 56.9023C55.8602 57.2511 54.5605 56.9248 53.3089 55.8672C51.6689 54.4699 50.2332 54.0566 48.347 54.4854C45.0188 55.2421 43.6806 58.4254 44.7611 63.1787C45.8668 68.043 48.765 70.4381 52.2044 69.6562C54.7562 69.0762 56.2446 67.2399 55.9788 65.0439L55.932 64.666L54.3968 65.0146C52.6401 65.4139 51.2833 64.7495 50.9007 63.0664C50.5183 61.3834 51.4362 60.2023 53.2113 59.7988L58.3704 58.626C60.8667 58.0586 62.6269 59.2146 63.224 61.8408C64.666 68.1849 61.3746 74.0686 53.4232 75.876C44.9543 77.8009 38.8121 73.9647 36.7982 65.1055C34.8096 56.3569 38.6778 50.1869 46.9066 48.3164Z"/>
-        <path fill-rule="evenodd" clip-rule="evenodd" d="M58.4398 8C60.7704 8.00008 62.6909 9.74593 62.9701 12.001C72.5504 15.2259 79.4505 24.2817 79.4505 34.9492V35.5078C82.2728 37.6395 82.9268 41.1837 82.3099 44.0225L73.9994 82.25C73.8916 82.7456 73.6752 83.594 73.1273 84.4424C71.2601 87.3333 65.5649 92.501 49.7611 92.501C33.9573 92.5009 28.2621 87.3333 26.3949 84.4424C25.847 83.594 25.6305 82.7455 25.5228 82.25L17.2132 44.0225C16.6694 41.5203 17.113 38.4705 19.1585 36.3223V34.9492C19.1585 23.929 26.5226 14.6296 36.598 11.7012C37.0028 9.59294 38.857 8 41.0833 8H58.4398ZM49.7611 36.7764C35.0066 36.7761 27.6333 39.6099 24.5638 41.2822C24.4843 41.3256 24.4267 41.3779 24.3734 41.5234C24.307 41.705 24.2591 42.035 24.3538 42.4707L32.6497 80.6348C33.3037 81.4696 36.9203 85.1924 49.7611 85.1924C62.5992 85.1924 66.2164 81.4706 66.8714 80.6348L75.1683 42.4707C75.263 42.0351 75.2151 41.706 75.1488 41.5244C75.0954 41.3786 75.038 41.3256 74.9583 41.2822C73.7882 40.6448 71.9927 39.8395 69.4017 39.0859V51.3926C69.4015 52.6535 68.3794 53.6755 67.1185 53.6758C65.8573 53.6758 64.8346 52.6537 64.8343 51.3926V45.9072C64.4523 46.1948 63.9791 46.3681 63.4642 46.3682C62.2029 46.3682 61.18 45.3453 61.18 44.084V37.4414C60.3107 37.3308 59.3979 37.2299 58.4398 37.1436V40.4297C58.4398 41.691 57.4169 42.7139 56.1556 42.7139C54.8944 42.7138 53.8724 41.6909 53.8724 40.4297V36.8535C52.5704 36.8032 51.2008 36.7764 49.7611 36.7764ZM37.4037 15.2744C29.2543 17.7411 23.2443 25.1309 22.8353 33.9844C27.6209 31.8007 35.9652 29.4685 49.7611 29.4688C62.6968 29.469 70.8392 31.5203 75.7494 33.5762C75.1949 25.1682 69.5863 18.1422 61.932 15.5088C61.0941 16.5026 59.8414 17.1347 58.4398 17.1348H41.0833C39.574 17.1348 38.2353 16.4029 37.4037 15.2744Z"/>
+        <path d="M46.9066 48.3164C52.2506 47.1018 56.8032 48.4786 59.014 50.9326C59.5662 51.5656 59.8568 52.1613 60.0081 52.8271C60.4536 54.7876 59.3919 56.4484 57.3949 56.9023C55.8602 57.2511 54.5605 56.9248 53.3089 55.8672C51.6689 54.4699 50.2332 54.0566 48.347 54.4854C45.0188 55.2421 43.6806 58.4254 44.7611 63.1787C45.8668 68.043 48.765 70.4381 52.2044 69.6562C54.7562 69.0762 56.2446 67.2399 55.9788 65.0439L55.932 64.666L54.3968 65.0146C52.6401 65.4139 51.2833 64.7495 50.9007 63.0664C50.5183 61.3834 51.4362 60.2023 53.2113 59.7988L58.3704 58.626C60.8667 58.0586 62.6269 59.2146 63.224 61.8408C64.666 68.1849 61.3746 74.0686 53.4232 75.876C44.9543 77.8009 38.8121 73.9647 36.7982 65.1055C34.8096 56.3569 38.6778 50.1869 46.9066 48.3164Z" fill="#1C98D5"/>
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M58.4398 8C60.7704 8.00008 62.6909 9.74593 62.9701 12.001C72.5504 15.2259 79.4505 24.2817 79.4505 34.9492V35.5078C82.2728 37.6395 82.9268 41.1837 82.3099 44.0225L73.9994 82.25C73.8916 82.7456 73.6752 83.594 73.1273 84.4424C71.2601 87.3333 65.5649 92.501 49.7611 92.501C33.9573 92.5009 28.2621 87.3333 26.3949 84.4424C25.847 83.594 25.6305 82.7455 25.5228 82.25L17.2132 44.0225C16.6694 41.5203 17.113 38.4705 19.1585 36.3223V34.9492C19.1585 23.929 26.5226 14.6296 36.598 11.7012C37.0028 9.59294 38.857 8 41.0833 8H58.4398ZM49.7611 36.7764C35.0066 36.7761 27.6333 39.6099 24.5638 41.2822C24.4843 41.3256 24.4267 41.3779 24.3734 41.5234C24.307 41.705 24.2591 42.035 24.3538 42.4707L32.6497 80.6348C33.3037 81.4696 36.9203 85.1924 49.7611 85.1924C62.5992 85.1924 66.2164 81.4706 66.8714 80.6348L75.1683 42.4707C75.263 42.0351 75.2151 41.706 75.1488 41.5244C75.0954 41.3786 75.038 41.3256 74.9583 41.2822C73.7882 40.6448 71.9927 39.8395 69.4017 39.0859V51.3926C69.4015 52.6535 68.3794 53.6755 67.1185 53.6758C65.8573 53.6758 64.8346 52.6537 64.8343 51.3926V45.9072C64.4523 46.1948 63.9791 46.3681 63.4642 46.3682C62.2029 46.3682 61.18 45.3453 61.18 44.084V37.4414C60.3107 37.3308 59.3979 37.2299 58.4398 37.1436V40.4297C58.4398 41.691 57.4169 42.7139 56.1556 42.7139C54.8944 42.7138 53.8724 41.6909 53.8724 40.4297V36.8535C52.5704 36.8032 51.2008 36.7764 49.7611 36.7764ZM37.4037 15.2744C29.2543 17.7411 23.2443 25.1309 22.8353 33.9844C27.6209 31.8007 35.9652 29.4685 49.7611 29.4688C62.6968 29.469 70.8392 31.5203 75.7494 33.5762C75.1949 25.1682 69.5863 18.1422 61.932 15.5088C61.0941 16.5026 59.8414 17.1347 58.4398 17.1348H41.0833C39.574 17.1348 38.2353 16.4029 37.4037 15.2744Z" fill="#1C98D5"/>
       </svg>
     </div>
     <span class="logo-name">Grabucket</span>
   </div>
   <span class="logo-badge">Color Converter</span>
 </header>
+
+<div class="cotd-banner" id="cotdBanner" onclick="cotdLoad()" style="display:none;">
+  <span class="cotd-tag" id="cotdTag">Color of the Day</span>
+  <div class="cotd-name" id="cotdName"></div>
+  <div class="cotd-meta">
+    <span class="cotd-meta-lbl">HEX</span>
+    <span class="cotd-hex-val" id="cotdHex"></span>
+  </div>
+  <div class="cotd-mini-chip" id="cotdMiniChip"></div>
+  <span class="cotd-mini-lbl">Color of the Day</span>
+  <button class="cotd-toggle" onclick="event.stopPropagation();cotdToggleMin()" title="Minimize">
+    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="2,8 6,4 10,8"/>
+    </svg>
+  </button>
+</div>
 
 <section class="hero">
   <p class="eyebrow">Universal color format converter</p>
@@ -241,6 +519,15 @@ footer { border-top:1px solid var(--border); padding:1.75rem 3rem; display:flex;
 </section>
 
 <main class="converter">
+  <div class="history-row" id="historyRow" style="display:none;">
+    <span class="history-lbl">Recent</span>
+    <div id="historyChips" style="display:flex;gap:7px;flex-wrap:wrap;"></div>
+  </div>
+  <button class="wheel-top-btn" id="btnWheel" onclick="toggleWheel()">
+    <svg width="15" height="15" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="7" cy="7" r="6" stroke="currentColor" stroke-width="1.3"/><circle cx="7" cy="7" r="2" stroke="currentColor" stroke-width="1.3"/><line x1="7" y1="1" x2="7" y2="4.2" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/><line x1="7" y1="9.8" x2="7" y2="13" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/><line x1="1" y1="7" x2="4.2" y2="7" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/><line x1="9.8" y1="7" x2="13" y2="7" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+    Color Wheel
+    <span class="wheel-top-hint" id="wheelTopHint">open</span>
+  </button>
   <div class="input-zone">
     <div class="big-swatch swatch-pick" id="bigSwatch" onclick="document.getElementById('colorPicker').click()" title="Click to open color picker"></div>
     <input type="color" id="colorPicker" style="position:absolute;opacity:0;width:0;height:0;pointer-events:none;" value="#ffffff">
@@ -249,7 +536,7 @@ footer { border-top:1px solid var(--border); padding:1.75rem 3rem; display:flex;
       <input id="colorInput" autocomplete="off" spellcheck="false"
         placeholder="#1D68FF  ·  rgb(29,104,255)  ·  cmyk(89,59,0,0)  ·  RAL 5015  ·  Pantone 286 C …" />
     </div>
-    <button class="btn-go" onclick="convert()">Convert →</button>
+    <button class="input-clear" id="inputClear" onclick="clearInput()" title="Clear">&#x2715;</button>
   </div>
   <div class="examples">
     <span class="ex-lbl">Try</span>
@@ -261,11 +548,40 @@ footer { border-top:1px solid var(--border); padding:1.75rem 3rem; display:flex;
     <button class="pill" onclick="fc('hsl(220, 100%, 55%)')">hsl(220,100%,55%)</button>
     <button class="pill" onclick="fc('Pantone Warm Red C')">Warm Red C</button>
   </div>
-  <div style="display:flex;align-items:center;gap:8px;margin-bottom:1rem;">
-    <button class="btn-wheel" id="btnWheel" onclick="toggleWheel()">
-      <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="7" cy="7" r="6" stroke="currentColor" stroke-width="1.4"/><circle cx="7" cy="7" r="2" stroke="currentColor" stroke-width="1.4"/><line x1="7" y1="1" x2="7" y2="4.2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><line x1="7" y1="9.8" x2="7" y2="13" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><line x1="1" y1="7" x2="4.2" y2="7" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><line x1="9.8" y1="7" x2="13" y2="7" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
-      Color Wheel
+
+  <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:1rem;">
+
+    <button class="btn-save" id="btnSave" onclick="saveToPalette()" title="Save to palette">
+      <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 1l1.3 2.6 2.9.4-2.1 2 .5 2.9L6 7.6 3.4 8.9l.5-2.9-2.1-2 2.9-.4z"/></svg>
+      Grab Color
     </button>
+    <button class="btn-palette" id="btnPalette" onclick="togglePalette()">
+      <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="1" width="4" height="4" rx="1"/><rect x="7" y="1" width="4" height="4" rx="1"/><rect x="1" y="7" width="4" height="4" rx="1"/><rect x="7" y="7" width="4" height="4" rx="1"/></svg>
+      My Bucket <span id="palCountBadge" style="font-family:var(--mono);font-size:.55rem;opacity:.6;"></span>
+    </button>
+    <button class="btn-share" id="btnShare" onclick="shareColor()">
+      <svg width="11" height="11" viewBox="0 0 11 11" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="9" cy="2" r="1.2"/><circle cx="2" cy="5.5" r="1.2"/><circle cx="9" cy="9" r="1.2"/><line x1="3.1" y1="4.8" x2="7.9" y2="2.7"/><line x1="3.1" y1="6.2" x2="7.9" y2="8.3"/></svg>
+      Share
+    </button>
+  </div>
+
+  <div class="palette-panel" id="palettePanel">
+    <div class="palette-head">
+      <span class="palette-head-title">My Bucket</span>
+      <span class="palette-count" id="palCount">0 colors</span>
+      <div class="palette-actions">
+        <button class="pal-btn" onclick="exportPaletteCSS()">↓ CSS vars</button>
+        <button class="pal-btn" onclick="exportPaletteJSON()">↓ JSON</button>
+        <button class="pal-btn" onclick="copyPaletteASText()">⎘ Copy list</button>
+        <button class="pal-btn danger" onclick="clearPalette()">Clear all</button>
+      </div>
+    </div>
+    <div class="palette-grid" id="paletteGrid"></div>
+    <div class="pal-confirm" id="palConfirm">
+      <span class="pal-confirm-txt">Remove all saved colors?</span>
+      <button class="pal-confirm-yes" onclick="clearPaletteConfirmed()">Yes, clear all</button>
+      <button class="pal-confirm-no" onclick="clearPaletteCancel()">Cancel</button>
+    </div>
   </div>
 
   <div class="wheel-panel" id="wheelPanel">
@@ -304,15 +620,19 @@ footer { border-top:1px solid var(--border); padding:1.75rem 3rem; display:flex;
 </main>
 
 <footer>
-  <span class="fnote">Grabucket · RAL &amp; Pantone show closest library match — verify against physical swatches for print work.</span>
+  <div style="width:100%;text-align:center;margin-bottom:.85rem;">
+    <span style="font-size:.6rem;color:var(--dim);letter-spacing:.1em;">Built by <a href="https://www.instagram.com/juraca.arts/" target="_blank" rel="noopener" style="color:var(--accent-text);text-decoration:none;border-bottom:1px solid currentColor;">JuRaCa</a></span>
+  </div>
+  <span class="fnote">Grabucket · RAL &amp; Pantone show nearest library matches · CIE-L*ab, XYZ per CSS Color 4 — verify print swatches against physical samples.</span>
   <div class="ftags">
     <span class="ftag">Hex</span><span class="ftag">RGB</span><span class="ftag">CMYK</span>
     <span class="ftag">HSL</span><span class="ftag">HSV</span><span class="ftag">RAL</span>
-    <span class="ftag">Pantone</span><span class="ftag">Swift</span><span class="ftag">oklch</span><span class="ftag">oklab</span>
+    <span class="ftag">Pantone</span><span class="ftag">Swift</span><span class="ftag">oklch</span><span class="ftag">oklab</span><span class="ftag">CIE-Lab</span><span class="ftag">XYZ</span><span class="ftag">ARGB</span>
   </div>
 </footer>
 
 <script>
+
 /* ─── Data ─── */
 const RAL={
   "1000":["#BEBD7F","Green beige"],"1001":["#C2B078","Beige"],"1002":["#C6A664","Sand yellow"],"1003":["#E5BE01","Signal yellow"],"1004":["#CDA434","Golden yellow"],"1005":["#A98307","Honey yellow"],"1006":["#E4A010","Maize yellow"],"1007":["#DC9D00","Daffodil yellow"],"1011":["#8A6642","Brown beige"],"1012":["#C7B446","Lemon yellow"],"1013":["#EAE6CA","Oyster white"],"1014":["#E1CC4F","Ivory"],"1015":["#E6D690","Light ivory"],"1016":["#EDFF21","Sulfur yellow"],"1017":["#F5D033","Saffron yellow"],"1018":["#F8F32B","Zinc yellow"],"1019":["#9E9764","Grey beige"],"1020":["#999950","Olive yellow"],"1021":["#F3DA0B","Rape yellow"],"1023":["#FAD201","Traffic yellow"],"1024":["#AEA04B","Ochre yellow"],"1026":["#FFFF00","Luminous yellow"],"1027":["#9D9101","Curry"],"1028":["#F4A900","Melon yellow"],"1032":["#D6AE01","Broom yellow"],"1033":["#F3A505","Dahlia yellow"],"1034":["#EFA94A","Pastel yellow"],"1035":["#6A5D4D","Pearl beige"],"1036":["#705335","Pearl gold"],"1037":["#F39F18","Sun yellow"],
@@ -345,7 +665,7 @@ const PANTONE={
   "137 C":"#FAAD3D","138 C":"#E9960E","139 C":"#C08000","144 C":"#F58220","151 C":"#FF7900","152 C":"#E87722",
   "165 C":"#FF6720","166 C":"#FA5B2C","167 C":"#DF4A23","168 C":"#9E3519",
   "175 C":"#C47B5B","176 C":"#F4A2A2","177 C":"#F6745A","178 C":"#F4533C","179 C":"#F4412E","180 C":"#DF3922",
-  "181 C":"#AF3226","186 C":"#C8102E","187 C":"#C11230","188 C":"#9D1939",
+  "181 C":"#AF3226","187 C":"#C11230","188 C":"#9D1939",
   "192 C":"#F5607A","193 C":"#F05474","194 C":"#EE3A5D","195 C":"#D6244D","196 C":"#C41642",
   "210 C":"#F4759B","211 C":"#F0527A","212 C":"#E8395C","213 C":"#DC1E62","214 C":"#C61E5E",
   "Pink C":"#E56DB1","Red 032 C":"#EF3340","Bright Red C":"#F22F20",
@@ -353,7 +673,7 @@ const PANTONE={
   "256 C":"#C5A5CD","257 C":"#B587BC","258 C":"#9063A6","259 C":"#703D8F","260 C":"#602F88",
   "261 C":"#572881","262 C":"#4B2775","265 C":"#9572B5","267 C":"#5B368C","268 C":"#4A2B80","2685 C":"#33006F",
   "2705 C":"#594FA8","2715 C":"#6D6CC9","2725 C":"#5A4EB5","2735 C":"#2C2490","2745 C":"#24218A",
-  "072 C":"#10069F","280 C":"#0A2D78","281 C":"#0C2770","282 C":"#0A1F5B",
+  "280 C":"#0A2D78","281 C":"#0C2770","282 C":"#0A1F5B",
   "288 C":"#003083","289 C":"#002C5E","290 C":"#BFDBF5","291 C":"#9FD8EE","292 C":"#69B3E7","293 C":"#003DA5",
   "294 C":"#003087","295 C":"#00205B","297 C":"#6FC6E2","298 C":"#41BADF","299 C":"#00A9E0",
   "Process Blue C":"#0085CA","306 C":"#00B2E3","307 C":"#005F8C","308 C":"#004F71",
@@ -363,8 +683,8 @@ const PANTONE={
   "335 C":"#00907A","336 C":"#00725D","339 C":"#00A887","340 C":"#009070","341 C":"#007558",
   "342 C":"#006048","343 C":"#004F3C","347 C":"#009B55","348 C":"#008549","349 C":"#007038",
   "354 C":"#00A651","361 C":"#43B02A","362 C":"#44883B","363 C":"#3F7E44","364 C":"#3D6B36",
-  "368 C":"#72BB53","369 C":"#64AD45","370 C":"#4E912C","371 C":"#44783D",
-  "375 C":"#97D700","376 C":"#84BD00","377 C":"#6FA600","382 C":"#C4D600","383 C":"#ADBA00","384 C":"#8F9A00",
+  "369 C":"#64AD45","370 C":"#4E912C","371 C":"#44783D",
+  "375 C":"#97D700","377 C":"#6FA600","382 C":"#C4D600","383 C":"#ADBA00","384 C":"#8F9A00",
   "390 C":"#C5CF00","393 C":"#E0DC00","394 C":"#D0CB00","398 C":"#C6A400",
   "400 C":"#B9A99C","401 C":"#AE9C90","402 C":"#A59186","403 C":"#9B867A","404 C":"#907A6E","405 C":"#87706C",
   "420 C":"#C8C2B8","421 C":"#BCB6AC","422 C":"#B2ACA2","423 C":"#A5A098","424 C":"#96908A","425 C":"#7E7974",
@@ -496,8 +816,80 @@ function hsl2r(h,s,l){s/=100;l/=100;const a=s*Math.min(l,1-l);const f=(n,k=(n+h/
 function hsv2r(h,s,v){s/=100;v/=100;const f=(n,k=(n+h/60)%6)=>v-v*s*Math.max(Math.min(k,4-k,1),0);return{r:Math.round(f(5)*255),g:Math.round(f(3)*255),b:Math.round(f(1)*255)};}
 function cdist(r1,g1,b1,r2,g2,b2){return Math.sqrt((r1-r2)**2+(g1-g2)**2+(b1-b2)**2);}
 function isDark(r,g,b){return(.299*r+.587*g+.114*b)<128;}
-function closestRAL(r,g,b){let b2=null,bd=Infinity;for(const[k,v]of Object.entries(RAL)){const rgb=h2r(v[0]);if(!rgb)continue;const d=cdist(r,g,b,rgb.r,rgb.g,rgb.b);if(d<bd){bd=d;b2={code:k,name:v[1],hex:v[0],dist:d};}}return b2;}
-function closestPantone(r,g,b){let b2=null,bd=Infinity;for(const[k,v]of Object.entries(PANTONE)){const rgb=h2r(v);if(!rgb)continue;const d=cdist(r,g,b,rgb.r,rgb.g,rgb.b);if(d<bd){bd=d;b2={code:k,hex:v,dist:d};}}return b2;}
+function topRAL(r,g,b,n){
+  const all=[];
+  for(const[k,v]of Object.entries(RAL)){const rgb=h2r(v[0]);if(!rgb)continue;all.push({code:k,name:v[1],hex:v[0],dist:cdist(r,g,b,rgb.r,rgb.g,rgb.b)});}
+  all.sort((a,b)=>a.dist-b.dist);
+  return all.slice(0,n||9);
+}
+function topPantone(r,g,b,n){
+  const all=[];
+  for(const[k,v]of Object.entries(PANTONE)){const rgb=h2r(v);if(!rgb)continue;all.push({code:k,hex:v,dist:cdist(r,g,b,rgb.r,rgb.g,rgb.b)});}
+  all.sort((a,b)=>a.dist-b.dist);
+  return all.slice(0,n||9);
+}
+/* keep single-result shims for parseInput */
+function closestRAL(r,g,b){const t=topRAL(r,g,b,1);return t.length?t[0]:null;}
+function closestPantone(r,g,b){const t=topPantone(r,g,b,1);return t.length?t[0]:null;}
+
+/* N-toggle state */
+let _ralN=3, _ptN=3;
+function setMatchN(type,n){
+  if(type==='ral') _ralN=n; else _ptN=n;
+  const panelId = type==='ral'?'matchRal':'matchPt';
+  const panel = document.getElementById(panelId);
+  if(!panel) return;
+  /* update button active states */
+  panel.querySelectorAll('.match-n-btn').forEach(b=>{
+    b.classList.toggle('on', +b.dataset.n===n);
+  });
+  /* show/hide items */
+  panel.querySelectorAll('.match-item').forEach(item=>{
+    const rank = +item.dataset.rank;
+    item.classList.toggle('hidden', rank>n);
+  });
+}
+
+function distDot(dist){
+  /* green <15, yellow <35, orange <60, red ≥60 */
+  const col = dist<15?'#78d489':dist<35?'#F9D849':dist<60?'#FF7900':'#e07070';
+  return '<span class="match-dist" style="background:'+col+'" title="ΔE≈'+Math.round(dist)+'"></span>';
+}
+
+function makeMatchPanel(type, items, activeN){
+  const id = type==='ral'?'matchRal':'matchPt';
+  const label = type==='ral'?'RAL — nearest matches':'Pantone — nearest matches';
+  const note = 'Verify against physical swatches for print work';
+  const btnHtml = [3,6,9].map(n=>
+    `<button class="match-n-btn${n===activeN?' on':''}" data-n="${n}" onclick="setMatchN('${type}',${n})">${n}</button>`
+  ).join('');
+  const itemsHtml = items.map((item,i)=>{
+    const rank = i+1;
+    const hidden = rank>activeN?' hidden':'';
+    const sub = type==='ral'
+      ? `<div class="match-name">${item.name}</div>`
+      : '';
+    const hexLine = `<div class="match-hex">${item.hex}</div>`;
+    const code = type==='ral' ? `RAL ${item.code}` : `Pantone ${item.code}`;
+    const loadVal = type==='ral' ? `RAL ${item.code}` : `Pantone ${item.code}`;
+    return `<div class="match-item${hidden}" data-rank="${rank}" onclick="fc('${loadVal.replace(/'/g,"\'")}')">
+      <div class="match-swatch" style="background:${item.hex};"></div>
+      <div class="match-body">
+        <div class="match-code">${code}${distDot(item.dist)}</div>
+        ${sub}${hexLine}
+      </div>
+      <div class="match-rank">#${rank}</div>
+    </div>`;
+  }).join('');
+  return `<div class="match-panel" id="${id}">
+    <div class="match-panel-head">
+      <span class="match-panel-title">${label}</span>
+      <span class="match-note">${note}</span>
+      <div class="match-n-btns">${btnHtml}</div>
+    </div>
+    <div class="match-items">${itemsHtml}</div>
+  </div>`;
+}
 
 function hRot(h,d){return((h+d)%360+360)%360;}
 /* ─── oklch / oklab ─── */
@@ -522,6 +914,47 @@ function r2oklch(r,g,b){
   let h=Math.atan2(lab.b,lab.a)*180/Math.PI;
   if(h<0)h+=360;
   return{l:lab.l,c:+c.toFixed(4),h:+h.toFixed(1)};
+}
+
+/* ─── CIE-L*ab + XYZ ─── */
+function r2xyz(r,g,b){
+  // sRGB → linear
+  function sl(c){c/=255;return c>0.04045?Math.pow((c+0.055)/1.055,2.4):c/12.92;}
+  const rl=sl(r),gl=sl(g),bl=sl(b);
+  // linear → XYZ (D65)
+  const x=(rl*0.4124564+gl*0.3575761+bl*0.1804375)/0.95047;
+  const y=(rl*0.2126729+gl*0.7151522+bl*0.0721750)/1.00000;
+  const z=(rl*0.0193339+gl*0.1191920+bl*0.9503041)/1.08883;
+  function f(t){return t>0.008856?Math.pow(t,1/3):7.787*t+16/116;}
+  const L=+(116*f(y)-16).toFixed(2);
+  const A=+(500*(f(x)-f(y))).toFixed(2);
+  const B=+(200*(f(y)-f(z))).toFixed(2);
+  const xAbs=+((rl*0.4124564+gl*0.3575761+bl*0.1804375)*100).toFixed(2);
+  const yAbs=+((rl*0.2126729+gl*0.7151522+bl*0.0721750)*100).toFixed(2);
+  const zAbs=+((rl*0.0193339+gl*0.1191920+bl*0.9503041)*100).toFixed(2);
+  return{L,A,B,X:xAbs,Y:yAbs,Z:zAbs};
+}
+
+/* ─── XYZ / CIE-L*ab (D65) ─── */
+function r2xyz(r,g,b){
+  // sRGB → linear → XYZ D65
+  function lc(c){c/=255;return c<=0.04045?c/12.92:Math.pow((c+0.055)/1.055,2.4);}
+  const rl=lc(r),gl=lc(g),bl=lc(b);
+  return{
+    x:+(rl*0.4124564+gl*0.3575761+bl*0.1804375).toFixed(4),
+    y:+(rl*0.2126729+gl*0.7151522+bl*0.0721750).toFixed(4),
+    z:+(rl*0.0193339+gl*0.1191920+bl*0.9503041).toFixed(4)
+  };
+}
+function r2cielab(r,g,b){
+  const{x,y,z}=r2xyz(r,g,b);
+  // D65 reference white
+  const rx=x/0.95047, ry=y/1.00000, rz=z/1.08883;
+  function f(t){return t>0.008856?Math.cbrt(t):(7.787*t+16/116);}
+  const L=+(116*f(ry)-16).toFixed(2);
+  const A=+(500*(f(rx)-f(ry))).toFixed(2);
+  const B=+(200*(f(ry)-f(rz))).toFixed(2);
+  return{L,A,B};
 }
 /* ─── WCAG ─── */
 function wcagLum(r,g,b){const v=[r,g,b].map(c=>{c/=255;return c<=0.03928?c/12.92:Math.pow((c+0.055)/1.055,2.4);});return 0.2126*v[0]+0.7152*v[1]+0.0722*v[2];}
@@ -892,13 +1325,6 @@ function colorSystem(r,g,b,name){
     </div>`;
 }
 
-/* ─── Update UI ─── */
-function setSwatches(hex){
-  document.getElementById('bigSwatch').style.background=hex;
-  document.getElementById('nameCardBar').style.background=hex;
-  document.getElementById('nameSwatch').style.background=hex;
-}
-
 /* ─── Event delegation for copy ─── */
 document.addEventListener('click', e=>{
   /* Combo hex chip — copy just that one hex */
@@ -948,7 +1374,7 @@ function wDims(){
 
 function drawWheel(h,s,v){
   const canvas=document.getElementById('colorWheel');
-  if(!canvas) return;
+  if(!canvas||typeof canvas.getContext!=='function') return;
   const ctx=canvas.getContext('2d');
   const {cx,cy,outerR,innerR,sqH}=wDims();
   ctx.clearRect(0,0,W_SIZE,W_SIZE);
@@ -1074,6 +1500,8 @@ function toggleWheel(){
   const isOpen=p.classList.contains('open');
   p.classList.toggle('open',!isOpen);
   b.classList.toggle('open',!isOpen);
+  const _hint=document.getElementById('wheelTopHint');
+  if(_hint) _hint.textContent=isOpen?'open':'close';
   if(!isOpen){wInitEvents();drawWheel(wH,wS,wV);}
 }
 
@@ -1097,6 +1525,336 @@ function wUpdateAlpha(val){
   document.getElementById('alphaVal').textContent=val+'%';
   drawWheel(wH,wS,wV);
 }
+
+/* ─── Palette Collector ─── */
+const MAX_PAL = 32;
+let palette = JSON.parse(localStorage.getItem('grabucket_palette') || '[]');
+
+function palSave(){ localStorage.setItem('grabucket_palette', JSON.stringify(palette)); }
+
+function renderPalette(){
+  const grid = document.getElementById('paletteGrid');
+  const count = document.getElementById('palCount');
+  const badge = document.getElementById('palCountBadge');
+  if(!grid) return;
+  // Always hide confirm row when re-rendering
+  const confirmRow = document.getElementById('palConfirm');
+  if(confirmRow) confirmRow.classList.remove('vis');
+  const n = palette.length;
+  count.textContent = n === 0 ? '0 colors' : n + (n===1?' color':' colors');
+  badge.textContent = n > 0 ? `(${n})` : '';
+  if(n === 0){
+    grid.innerHTML = '<div class="pal-empty"><span>★</span>No colors yet — search a color and hit Grab</div>';
+    return;
+  }
+  grid.innerHTML = palette.map((p,i)=>`
+    <div class="pal-swatch" onclick="fc('${p.hex}')" title="Load ${p.hex}">
+      <div class="pal-color" style="background:${p.hex};"></div>
+      <div class="pal-hex">${p.hex}</div>
+      <div class="pal-name">${p.name||''}</div>
+      <button class="pal-rm" onclick="event.stopPropagation();removePaletteColor(${i})" title="Remove">×</button>
+    </div>`).join('');
+
+  /* sync Save button state */
+  const curHex = (document.getElementById('colorInput').value||'').trim().toUpperCase();
+  const alreadySaved = palette.some(p=>p.hex===curHex);
+  document.getElementById('btnSave').classList.toggle('saved', alreadySaved);
+}
+
+function saveToPalette(){
+  const hex = (document.getElementById('colorInput').value||'').trim().toUpperCase();
+  if(!hex.startsWith('#') || hex.length !== 7) return;
+  if(palette.some(p=>p.hex===hex)) return; // already saved
+  const nameEl = document.querySelector('#results .name-val');
+  const name = nameEl ? nameEl.textContent.trim() : '';
+  if(palette.length >= MAX_PAL){ palette.shift(); } // cap at 32
+  palette.push({hex, name, ts: Date.now()});
+  palSave();
+  renderPalette();
+  /* open palette panel if closed */
+  if(!document.getElementById('palettePanel').classList.contains('open')) togglePalette();
+}
+
+function removePaletteColor(i){
+  palette.splice(i,1);
+  palSave();
+  renderPalette();
+}
+
+function clearPalette(){
+  if(palette.length===0) return;
+  const c=document.getElementById('palConfirm');
+  if(c) c.classList.add('vis');
+}
+function clearPaletteConfirmed(){
+  palette=[];
+  palSave();
+  renderPalette();
+  const c=document.getElementById('palConfirm');
+  if(c) c.classList.remove('vis');
+}
+function clearPaletteCancel(){
+  const c=document.getElementById('palConfirm');
+  if(c) c.classList.remove('vis');
+}
+
+function togglePalette(){
+  const p=document.getElementById('palettePanel'), b=document.getElementById('btnPalette');
+  const isOpen=p.classList.contains('open');
+  p.classList.toggle('open',!isOpen);
+  b.classList.toggle('open',!isOpen);
+  if(!isOpen) renderPalette();
+}
+
+function exportPaletteCSS(){
+  if(!palette.length) return alert('No colors to export.');
+  const lines = [':root {', ...palette.map((p,i)=>`  --color-${String(i+1).padStart(2,'0')}: ${p.hex}; /* ${p.name||p.hex} */`), '}'].join('\n');
+  const blob = new Blob([lines],{type:'text/css'});
+  const a = document.createElement('a');
+  const burl = URL.createObjectURL(blob);
+  a.href = burl; a.download = 'grabucket-palette.css';
+  document.body.appendChild(a); a.click();
+  setTimeout(()=>{ document.body.removeChild(a); URL.revokeObjectURL(burl); }, 100);
+}
+
+function exportPaletteJSON(){
+  if(!palette.length) return alert('No colors to export.');
+  const data = palette.map((p,i)=>({index:i+1, hex:p.hex, name:p.name||'', saved:new Date(p.ts).toISOString()}));
+  const blob = new Blob([JSON.stringify(data, null, 2)],{type:'application/json'});
+  const a = document.createElement('a');
+  const burl = URL.createObjectURL(blob);
+  a.href = burl; a.download = 'grabucket-palette.json';
+  document.body.appendChild(a); a.click();
+  setTimeout(()=>{ document.body.removeChild(a); URL.revokeObjectURL(burl); }, 100);
+}
+
+function copyPaletteASText(){
+  if(!palette.length) return alert('No colors to copy.');
+  const text = palette.map((p,i)=>`${i+1}. ${p.hex}  ${p.name||''}`).join('\n');
+  navigator.clipboard.writeText(text).then(()=>{
+    const btns = document.querySelectorAll('.pal-btn');
+    const copyBtn = [...btns].find(b=>b.textContent.includes('Copy'));
+    if(copyBtn){ const orig=copyBtn.textContent; copyBtn.textContent='✓ Copied!'; setTimeout(()=>copyBtn.textContent=orig, 1400); }
+  }).catch(()=>{
+    const btns = document.querySelectorAll('.pal-btn');
+    const copyBtn = [...btns].find(b=>b.textContent.includes('Copy'));
+    if(copyBtn){ const orig=copyBtn.textContent; copyBtn.textContent='Failed'; setTimeout(()=>copyBtn.textContent=orig, 1400); }
+  });
+}
+
+/* ─── Service Worker registration ─── */
+if('serviceWorker' in navigator){
+  window.addEventListener('load',()=>{
+    navigator.serviceWorker.register('/sw.js').catch(()=>{});
+  });
+}
+
+
+
+/* ─── Curated Color of the Day palette (365 entries, cycles by day) ─── */
+const COTD_PALETTE = [
+  ['#E63946','Alizarin Crimson'],['#F4A261','Sandy Amber'],['#2A9D8F','Persian Teal'],
+  ['#E9C46A','Saffron Gold'],['#264653','Charcoal Blue'],['#FF6B6B','Coral Punch'],
+  ['#4ECDC4','Caribbean Mint'],['#45B7D1','Horizon Blue'],['#96CEB4','Sage Foam'],
+  ['#FFEAA7','Butter Cream'],['#DDA0DD','Plum Blossom'],['#98D8C8','Seafoam Mist'],
+  ['#F7DC6F','Maize'],['#BB8FCE','Wisteria'],['#85C1E9','Sky Haze'],
+  ['#F0B27A','Peach Dusk'],['#82E0AA','Mint Leaf'],['#F1948A','Rose Petal'],
+  ['#AED6F1','Powder Blue'],['#A9DFBF','Celadon'],['#FAD7A0','Apricot Glow'],
+  ['#D7BDE2','Lavender Mist'],['#A3E4D7','Sea Glass'],['#FDEBD0','Linen'],
+  ['#E8DAEF','Lilac Frost'],['#D5E8D4','Pistachio'],['#DAE8FC','Ice Blue'],
+  ['#FF9F43','Tangerine'],['#10AC84','Jade'],['#5F27CD','Ultraviolet'],
+  ['#EE5A24','Vermilion'],['#C23616','Burnt Sienna'],['#0652DD','Royal Cobalt'],
+  ['#1289A7','Cerulean'],['#C4E538','Lime Punch'],['#FDA7DF','Flamingo Pink'],
+  ['#D980FA','Orchid'],['#9980FA','Periwinkle'],['#FFC312','Golden Hour'],
+  ['#F79F1F','Amber Glow'],['#A3CB38','Leaf Green'],['#1289A7','Teal Depth'],
+  ['#ED4C67','Strawberry'],['#B53471','Raspberry'],['#833471','Grape'],
+  ['#6F1E51','Aubergine'],['#00D2D3','Aqua'],['#FF9F43','Butterscotch'],
+  ['#54A0FF','Bluebell'],['#5F27CD','Deep Violet'],['#FF6B81','Bubblegum'],
+  ['#48DBFB','Arctic'],['#FFEAA7','Lemon Drop'],['#00B894','Mint'],
+  ['#E17055','Terracotta'],['#74B9FF','Cornflower'],['#A29BFE','Lavender Blue'],
+  ['#FD79A8','Flamingo'],['#6C5CE7','Indigo'],['#55EFC4','Spearmint'],
+  ['#81ECEC','Pale Aqua'],['#FDCB6E','Marigold'],['#E84393','Hot Magenta'],
+  ['#2ECC71','Emerald'],['#27AE60','Malachite'],['#1ABC9C','Turquoise'],
+  ['#16A085','Pine'],['#3498DB','Dodger Blue'],['#2980B9','Steel Blue'],
+  ['#9B59B6','Amethyst'],['#8E44AD','Purple'],['#F39C12','Ochre'],
+  ['#E67E22','Pumpkin'],['#D35400','Rust'],['#E74C3C','Crimson'],
+  ['#C0392B','Carmine'],['#ECF0F1','Porcelain'],['#BDC3C7','Silver'],
+  ['#95A5A6','Pewter'],['#7F8C8D','Slate'],['#566573','Iron'],
+  ['#F9CA24','Sunflower'],['#6AB04C','Avocado'],['#EB4D4B','Red Berries'],
+  ['#7ED6DF','Crystal Blue'],['#E056FD','Electric Violet'],['#22A6B3','Ocean'],
+  ['#BE2EDD','Fuchsia'],['#4834D4','Lapis'],['#686DE0','Cornflower Blue'],
+  ['#30336B','Midnight'],['#130F40','Void'],['#F8EFBA','Cream'],
+  ['#F9F3E3','Ivory'],['#FC427B','Punch'],['#B33771','Mulberry'],
+  ['#3B3B98','Sapphire'],['#182C61','Navy'],['#FD7272','Salmon'],
+  ['#9AECDB','Aquamarine'],['#58B19F','Verdigris'],['#2C3A47','Onyx Blue'],
+  ['#B8E994','Honeydew'],['#78E08F','Spring'],['#079992','Viridian'],
+  ['#BDC3C7','Pearl'],['#F8C291','Peach'],['#6A89CC','Denim'],
+  ['#82589F','Violet'],['#D6A2E8','Heather'],['#FF5E57','Tomato'],
+  ['#FFC200','Canary'],['#05C46B','Nephrite'],['#0FBCF9','Sky Blue'],
+  ['#485460','Graphite'],['#D2B48C','Tan'],['#8B4513','Saddle Brown'],
+  ['#A0522D','Sienna'],['#CD853F','Peru'],['#DEB887','Burlywood'],
+  ['#F5DEB3','Wheat'],['#FFF8DC','Cornsilk'],['#FFFACD','Lemon Chiffon'],
+  ['#E6E6FA','Ghost Lavender'],['#FFF0F5','Lavender Blush'],['#FFE4E1','Misty Rose'],
+  ['#FF7F50','Coral'],['#FF4500','Orange Red'],['#FF6347','Tomato Vine'],
+  ['#FF8C00','Dark Orange'],['#FFA500','Orange'],['#FFD700','Gold'],
+  ['#ADFF2F','Green Yellow'],['#7FFF00','Chartreuse'],['#00FF7F','Spring Green'],
+  ['#00FA9A','Medium Spring'],['#40E0D0','Turquoise Wave'],['#48D1CC','Medium Turquoise'],
+  ['#00CED1','Dark Turquoise'],['#20B2AA','Light Sea'],['#5F9EA0','Cadet Blue'],
+  ['#4682B4','Steel Blue Alt'],['#6495ED','Cornflower Alt'],['#00BFFF','Deep Sky'],
+  ['#1E90FF','Dodger'],['#7B68EE','Medium Slate'],['#9370DB','Medium Purple'],
+  ['#BA55D3','Medium Orchid'],['#FF69B4','Hot Pink'],['#FF1493','Deep Pink'],
+  ['#C71585','Medium Violet'],['#DB7093','Pale Violet'],['#DC143C','Crimson Red'],
+  ['#B22222','Firebrick'],['#800000','Maroon'],['#8B0000','Dark Red'],
+  ['#CD5C5C','Indian Red'],['#BC8F8F','Rosy Brown'],['#F08080','Light Coral'],
+  ['#E9967A','Dark Salmon'],['#FA8072','Salmon Pink'],['#FFA07A','Light Salmon'],
+  ['#FF8040','Pumpkin Spice'],['#CC5500','Burnt Orange'],['#8B4000','Brown Sugar'],
+  ['#7B3F00','Chocolate Alt'],['#C68642','Copper Skin'],['#DAA520','Goldenrod'],
+  ['#B8860B','Dark Goldenrod'],['#9B7653','Warm Taupe'],['#C4A882','Sand Dune'],
+  ['#A08060','Khaki Warm'],['#8C7B75','Warm Gray'],['#708090','Slate Gray'],
+  ['#778899','Light Slate'],['#B0C4DE','Light Steel'],['#B0E0E6','Powder Blue'],
+  ['#ADD8E6','Light Blue'],['#87CEEB','Sky Blue Alt'],['#87CEFA','Light Sky'],
+  ['#6699CC','Air Blue'],['#4169E1','Royal Blue'],['#0047AB','Cobalt'],
+  ['#002FA7','International Klein'],['#003153','Prussian Blue'],['#1B3A4B','Abyss'],
+  ['#006400','Dark Forest'],['#228B22','Forest Green'],['#32CD32','Lime Green'],
+  ['#90EE90','Light Green'],['#98FB98','Pale Green'],['#8FBC8F','Dark Sea'],
+  ['#3CB371','Medium Sea'],['#2E8B57','Sea Green'],['#006400','Dark Green'],
+  ['#556B2F','Olive Drab'],['#808000','Olive'],['#6B8E23','Olive Green'],
+  ['#BDB76B','Dark Khaki'],['#F0E68C','Khaki'],['#EEE8AA','Pale Goldenrod'],
+];
+
+function cotdGet() {
+  const dayIndex = Math.floor(Date.now() / 86400000); // days since epoch
+  return COTD_PALETTE[dayIndex % COTD_PALETTE.length];
+}
+
+function cotdInit() {
+  const todayKey = 'grabucket_cotd_' + Math.floor(Date.now() / 86400000);
+  const dismissed = localStorage.getItem(todayKey) === 'dismissed';
+  if (dismissed) return;
+  const [hex, name] = cotdGet();
+  const banner = document.getElementById('cotdBanner');
+  if (!banner) return;
+  // Set background to the color
+  banner.style.background = hex;
+  // Adaptive text color: use parsed RGB to decide dark/light
+  const rgb = h2r(hex);
+  const textColor = (rgb && isDark(rgb.r, rgb.g, rgb.b)) ? 'rgba(255,255,255,0.9)' : 'rgba(15,15,20,0.85)';
+  const dimColor  = (rgb && isDark(rgb.r, rgb.g, rgb.b)) ? 'rgba(255,255,255,0.9)' : 'rgba(15,15,20,0.85)';
+  banner.style.color = textColor;
+  document.getElementById('cotdName').textContent = name;
+  document.getElementById('cotdHex').textContent = hex;
+  const miniChip = document.getElementById('cotdMiniChip');
+  if (miniChip) miniChip.style.background = hex;
+  // Restore minimized state
+  const wasMin = localStorage.getItem('grabucket_cotd_min') === '1';
+  if (wasMin) banner.classList.add('minimized');
+  banner.style.display = wasMin ? 'flex' : 'block';
+}
+
+function cotdLoad() {
+  const [hex] = cotdGet();
+  fc(hex);
+}
+
+function cotdToggleMin() {
+  const banner = document.getElementById('cotdBanner');
+  if (!banner) return;
+  const isMin = banner.classList.contains('minimized');
+  banner.classList.toggle('minimized', !isMin);
+  localStorage.setItem('grabucket_cotd_min', isMin ? '0' : '1');
+}
+
+/* ─── Color history ─── */
+const HIST_KEY = 'grabucket_history';
+const HIST_MAX = 8;
+
+function historyLoad() { try { return JSON.parse(localStorage.getItem(HIST_KEY) || '[]'); } catch(e) { return []; } }
+function historySave(list) { try { localStorage.setItem(HIST_KEY, JSON.stringify(list)); } catch(e) {} }
+
+function historyAdd(hex) {
+  let list = historyLoad().filter(h => h !== hex);
+  list.unshift(hex);
+  if (list.length > HIST_MAX) list = list.slice(0, HIST_MAX);
+  historySave(list);
+  historyRender(list);
+}
+
+function historyRender(list) {
+  const row = document.getElementById('historyRow');
+  const chips = document.getElementById('historyChips');
+  if (!row || !chips) return;
+  if (!list) list = historyLoad();
+  if (list.length === 0) { row.style.display = 'none'; return; }
+  row.style.display = 'flex';
+  chips.innerHTML = list.map(hex =>
+    `<div class="history-chip" style="background:${hex}" title="${hex}" onclick="fc('${hex}')"></div>`
+  ).join('');
+}
+
+/* ─── Share color ─── */
+function shareColor() {
+  const hex = (document.getElementById('colorInput').value || '').replace('#','').trim();
+  if (!hex) return;
+  const url = `${location.origin}${location.pathname}?color=${hex}`;
+  const btn = document.getElementById('btnShare');
+  navigator.clipboard.writeText(url).then(() => {
+    if (btn) { btn.classList.add('copied'); btn.querySelector('svg').style.display='none'; btn.childNodes[btn.childNodes.length-1].textContent=' Copied!'; setTimeout(() => { btn.classList.remove('copied'); btn.querySelector('svg').style.display=''; btn.childNodes[btn.childNodes.length-1].textContent='Share'; }, 1800); }
+  }).catch(() => {
+    if (btn) { const t = btn.childNodes[btn.childNodes.length-1]; t.textContent=' Copy failed'; setTimeout(() => { t.textContent='Share'; }, 1500); }
+  });
+}
+
+/* ─── URL state (?color=HEX) ─── */
+function urlColorLoad() {
+  const p = new URLSearchParams(location.search);
+  const c = p.get('color');
+  if (c && /^[0-9A-Fa-f]{6}$/.test(c)) return '#' + c.toUpperCase();
+  return null;
+}
+
+/* ─── Clear input button ─── */
+function clearInput() {
+  const inp = document.getElementById('colorInput');
+  if (inp) { inp.value = ''; if(inp.focus) inp.focus(); }
+  const res = document.getElementById('results');
+  if (res) res.innerHTML = '';
+  const clr = document.getElementById('inputClear');
+  if (clr) clr.classList.remove('vis');
+}
+
+function syncClearBtn() {
+  const inp = document.getElementById('colorInput');
+  const btn = document.getElementById('inputClear');
+  if (!inp || !btn) return;
+  btn.classList.toggle('vis', inp.value.trim().length > 0);
+}
+
+/* ─── What's New modal ─── */
+const WN_KEY = 'grabucket_wn_v2'; // bump version string to re-show on future updates
+
+function wnOpen() {
+  const el = document.getElementById('wnOverlay');
+  if (el) { el.style.display='flex'; requestAnimationFrame(()=>el.classList.add('vis')); }
+}
+
+function wnClose() {
+  const el = document.getElementById('wnOverlay');
+  if (!el) return;
+  el.classList.remove('vis');
+  setTimeout(() => { el.style.display='none'; }, 260);
+  localStorage.setItem(WN_KEY, '1');
+}
+
+function wnClickOutside(e) {
+  if (e.target === document.getElementById('wnOverlay')) wnClose();
+}
+
+function wnInit() {
+  if (!localStorage.getItem(WN_KEY)) {
+    // Small delay so page renders first
+    setTimeout(wnOpen, 600);
+  }
+}
 /* ─── Main ─── */
 function fc(v){document.getElementById('colorInput').value=v;convert();}
 
@@ -1116,8 +1874,10 @@ function convert(){
   const cmyk=r2cmyk(r,g,b);
   const hsl=r2hsl(r,g,b);
   const hsv=r2hsv(r,g,b);
-  const ral=closestRAL(r,g,b);
-  const pt=closestPantone(r,g,b);
+  const ralMatches=topRAL(r,g,b,9);
+  const ptMatches=topPantone(r,g,b,9);
+  const ral=ralMatches[0]||null;
+  const pt=ptMatches[0]||null;
   const name=cname(r,g,b);
   const dark=isDark(r,g,b);
 
@@ -1125,21 +1885,40 @@ function convert(){
 
   const nh=hex.replace('#','');
   const swiftCopy=`${(r/255).toFixed(3)}, ${(g/255).toFixed(3)}, ${(b/255).toFixed(3)}`;
-  const ralOk=ral&&ral.dist<30;
-  const ptOk=pt&&pt.dist<40;
   const oklchD=r2oklch(r,g,b);
+  const xyzD=r2xyz(r,g,b);
+  const labD=r2cielab(r,g,b);
   const oklabD=r2oklab(r,g,b);
   const oklchStr=`oklch(${oklchD.l} ${oklchD.c} ${oklchD.h})`;
   const oklabStr=`oklab(${oklabD.l} ${oklabD.a} ${oklabD.b})`;
   const oklchCopy=`${oklchD.l} ${oklchD.c} ${oklchD.h}`;
   const oklabCopy=`${oklabD.l} ${oklabD.a} ${oklabD.b}`;
+  const labStr=`CIE-L*ab: L=${labD.L} a ${labD.A} b ${labD.B}`;
+  const labCopy=`${labD.L}, ${labD.A}, ${labD.B}`;
+  const xyzStr=`XYZ: X ${xyzD.x} Y ${xyzD.y} Z ${xyzD.z}`;
+  const xyzCopy=`${xyzD.x}, ${xyzD.y}, ${xyzD.z}`;
+  const argbHex='#FF'+nh;
 
   /* Dynamic accent & wheel sync */
   document.documentElement.style.setProperty('--accent', hex);
+  const _onAccent = isDark(r,g,b) ? '#ffffff' : '#000000';
+  document.documentElement.style.setProperty('--on-accent', _onAccent);
+  /* --accent-text: accent used as text on dark bg; lighten dark colors for readability */
+  const _wLum = 0.2126*(r/255)**2.2 + 0.7152*(g/255)**2.2 + 0.0722*(b/255)**2.2;
+  const _accentText = _wLum < 0.03 ? '#888888' : hex;
+  document.documentElement.style.setProperty('--accent-text', _accentText);
+  localStorage.setItem('grabucket_last_color', hex);
+  historyAdd(hex);
+  const _tcm=document.getElementById('themeColor'); if(_tcm) _tcm.content=hex;
+  document.getElementById('colorPicker').value=hex;
   const _alpFg = document.getElementById('alphaFg');
   if(_alpFg) _alpFg.style.background = `linear-gradient(to right,transparent,${hex})`;
   wH=hsv.h; wS=hsv.s/100; wV=hsv.v/100;
   if(document.getElementById('wheelPanel')?.classList.contains('open')) drawWheel(wH,wS,wV);
+
+  /* Sync save button state */
+  const _alreadySaved = palette.some(p => p.hex === hex);
+  document.getElementById('btnSave').classList.toggle('saved', _alreadySaved);
 
   res.innerHTML=`
     <div class="name-card">
@@ -1159,24 +1938,30 @@ function convert(){
       ${makeCard('CMYK', `cmyk(${cmyk.c}%, ${cmyk.m}%, ${cmyk.y}%, ${cmyk.k}%)`, `${cmyk.c}, ${cmyk.m}, ${cmyk.y}, ${cmyk.k}`)}
       ${makeCard('HSL', `hsl(${hsl.h}, ${hsl.s}%, ${hsl.l}%)`, `${hsl.h}, ${hsl.s}, ${hsl.l}`)}
       ${makeCard('HSV / HSB', `hsv(${hsv.h}, ${hsv.s}%, ${hsv.v}%)`, `${hsv.h}, ${hsv.s}, ${hsv.v}`)}
-      ${makeCard('RAL'+(ralOk?'':' ~approx'), ral?`RAL ${ral.code}`:'—', ral?ral.code:'', ral?ral.name:'')}
-      ${makeCard('Pantone'+(ptOk?'':' ~approx'), pt?`Pantone ${pt.code}`:'—', pt?pt.code:'')}
       ${makeCard('CSS variable', `--color: ${hex};`, nh)}
       ${makeCard('Decimal', `${r}, ${g}, ${b}`, `${r}, ${g}, ${b}`)}
       ${makeCard('Swift / iOS', `UIColor(red:${(r/255).toFixed(3)},<br>green:${(g/255).toFixed(3)},<br>blue:${(b/255).toFixed(3)}, alpha:1)`, swiftCopy)}
       ${makeCard('oklch (CSS4)', oklchStr, oklchCopy)}
       ${makeCard('oklab (CSS4)', oklabStr, oklabCopy)}
-    </div>
+      ${makeCard('CIE-L*ab', `L ${labD.L} a ${labD.A} b ${labD.B}`, `${labD.L}, ${labD.A}, ${labD.B}`)}
+      ${makeCard('XYZ (D65)', `X ${xyzD.x} Y ${xyzD.y} Z ${xyzD.z}`, `${xyzD.x}, ${xyzD.y}, ${xyzD.z}`)}
+      ${makeCard('ARGB (Android)', argbHex, argbHex.replace('#',''))}    </div>
 
     <div class="info-bar">
       <div class="info-item">
-        <div class="info-sw" style="background:${hex};"></div>
-        <span>${dark?'Dark — use light text':'Light — use dark text'}</span>
+        <div class="contrast-pair">
+          <div class="cpill" style="background:${hex};color:#ffffff">Aa</div>
+          <div class="cpill-lbl">white on color</div>
+        </div>
+        <div class="contrast-pair">
+          <div class="cpill" style="background:${hex};color:#000000">Aa</div>
+          <div class="cpill-lbl">black on color</div>
+        </div>
       </div>
       <div class="vd"></div>
       <div class="info-item">
-        <div class="cpill" style="background:${hex};color:${dark?'#fff':'#000'}">Aa</div>
-        <span>on color</span>
+        <span class="rec-badge" style="background:${hex};color:${dark?'#ffffff':'#000000'}">✓ ${dark?'Light text':'Dark text'}</span>
+        <span class="rec-sub">recommended</span>
       </div>
       <div class="vd"></div>
       <div class="info-item">
@@ -1184,21 +1969,157 @@ function convert(){
       </div>
     </div>
 
+    ${makeMatchPanel('ral', ralMatches, _ralN)}
+    ${makeMatchPanel('pt', ptMatches, _ptN)}
     ${makeA11ySection(r,g,b,hex)}
     ${colorSystem(r,g,b,name)}
   `;
 }
 
 document.getElementById('colorInput').addEventListener('keydown',e=>{if(e.key==='Enter')convert();});
-document.getElementById('colorInput').addEventListener('paste',e=>{setTimeout(convert,60);});
+document.getElementById('colorInput').addEventListener('paste',e=>{setTimeout(()=>{convert();syncClearBtn();},60);});
+let _debT=null;
+document.getElementById('colorInput').addEventListener('input',e=>{
+  clearTimeout(_debT);
+  _debT=setTimeout(convert,280);
+  syncClearBtn();
+});
 document.getElementById('colorPicker').addEventListener('input',e=>{
   const v=e.target.value.toUpperCase();
   document.getElementById('colorInput').value=v;
   convert();
 });
 
-document.getElementById('bigSwatch').style.background='#FFFFFF';
-fc('#FFFFFF');
+(function(){
+  const urlColor = urlColorLoad();
+  const last = localStorage.getItem('grabucket_last_color');
+  const [cotdHex] = cotdGet();
+  const init = urlColor || (last && /^#[0-9A-Fa-f]{6}$/.test(last) ? last : cotdHex);
+  document.getElementById('bigSwatch').style.background = init;
+  fc(init);
+  renderPalette();
+  historyRender();
+  cotdInit();
+  syncClearBtn();
+  wnInit();
+})();
+
 </script>
+
+<div class="wn-overlay" id="wnOverlay" onclick="wnClickOutside(event)">
+  <div class="wn-modal">
+    <div class="wn-header">
+      <div>
+        <div style="display:flex;align-items:center;gap:.6rem;margin-bottom:.35rem;">
+          <span class="wn-badge">What's New</span>
+        </div>
+        <div class="wn-title">Grabucket just got bigger 🎨</div>
+        <div class="wn-subtitle">Here's everything new in this update</div>
+      </div>
+      <button class="wn-close" onclick="wnClose()" title="Close">×</button>
+    </div>
+    <div class="wn-body">
+
+      <div class="wn-section">
+        <span class="wn-section-lbl">Engagement</span>
+        <div class="wn-items">
+          <div class="wn-item">
+            <span class="wn-icon">🎨</span>
+            <div class="wn-item-body">
+              <div class="wn-item-name">Color of the Day</div>
+              <div class="wn-item-desc">A fresh curated color greets you every day — click the banner to load it. Minimizes to a slim strip.</div>
+            </div>
+          </div>
+          <div class="wn-item">
+            <span class="wn-icon">🕐</span>
+            <div class="wn-item-body">
+              <div class="wn-item-name">Color History</div>
+              <div class="wn-item-desc">Your last 8 searched colors appear as clickable chips above the input.</div>
+            </div>
+          </div>
+          <div class="wn-item">
+            <span class="wn-icon">🔗</span>
+            <div class="wn-item-body">
+              <div class="wn-item-name">Share & URL State</div>
+              <div class="wn-item-desc">Hit Share to copy a link like grabucket.com/?color=FF5722 — anyone who opens it loads that color instantly.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="wn-section">
+        <span class="wn-section-lbl">Color Formats</span>
+        <div class="wn-items">
+          <div class="wn-item">
+            <span class="wn-icon">🔬</span>
+            <div class="wn-item-body">
+              <div class="wn-item-name">CIE-L*ab, XYZ D65 & ARGB</div>
+              <div class="wn-item-desc">Three new format cards: CIE-Lab (professional print standard), XYZ D65 (ICC profiles), and ARGB (Android/Java hex).</div>
+            </div>
+          </div>
+          <div class="wn-item">
+            <span class="wn-icon">✨</span>
+            <div class="wn-item-body">
+              <div class="wn-item-name">oklch & oklab</div>
+              <div class="wn-item-desc">The modern CSS Color 4 formats now used by Figma, Safari, and Chrome DevTools.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="wn-section">
+        <span class="wn-section-lbl">Match Libraries</span>
+        <div class="wn-items">
+          <div class="wn-item">
+            <span class="wn-icon">🎯</span>
+            <div class="wn-item-body">
+              <div class="wn-item-name">RAL & Pantone — Top 3, 6, or 9</div>
+              <div class="wn-item-desc">See more than one match. Toggle between 3, 6, and 9 nearest colors with swatch previews and distance indicators.</div>
+            </div>
+          </div>
+          <div class="wn-item">
+            <span class="wn-icon">♿</span>
+            <div class="wn-item-body">
+              <div class="wn-item-name">WCAG Accessibility Panel</div>
+              <div class="wn-item-desc">Instant AA/AAA contrast ratios for white-on-color, black-on-color, and both reversed.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="wn-section">
+        <span class="wn-section-lbl">UI Improvements</span>
+        <div class="wn-items">
+          <div class="wn-item">
+            <span class="wn-icon">⚡</span>
+            <div class="wn-item-body">
+              <div class="wn-item-name">Live conversion — no Convert button</div>
+              <div class="wn-item-desc">Results update as you type. The Convert button is gone.</div>
+            </div>
+          </div>
+          <div class="wn-item">
+            <span class="wn-icon">🪣</span>
+            <div class="wn-item-body">
+              <div class="wn-item-name">My Bucket — save your colors</div>
+              <div class="wn-item-desc">Grab any color into your personal bucket. Export as CSS variables, JSON, or copy as a text list.</div>
+            </div>
+          </div>
+          <div class="wn-item">
+            <span class="wn-icon">📱</span>
+            <div class="wn-item-body">
+              <div class="wn-item-name">Install as an app (PWA)</div>
+              <div class="wn-item-desc">Add Grabucket to your home screen. Works offline, remembers your last color on every visit.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="wn-footer">
+      <button class="wn-cta" onclick="wnClose()">Got it — let's go →</button>
+      <button class="wn-skip" onclick="wnClose()">Don't show again</button>
+    </div>
+  </div>
+</div>
 </body>
 </html>
