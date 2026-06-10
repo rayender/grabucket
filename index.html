@@ -327,6 +327,165 @@ footer { border-top:1px solid var(--border); padding:1.75rem 3rem; display:flex;
   font-family:var(--sans); transition:color .15s;
 }
 .wn-skip:hover { color:var(--muted); }
+
+/* ─── Nav tabs (Game / Mood Board) ─── */
+.v2-tab-bar { display:flex; gap:6px; padding:.75rem 0 0; margin-bottom:1.25rem; border-bottom:1px solid var(--border); }
+.v2-tab { background:transparent; border:none; font-family:var(--sans); font-size:.7rem; font-weight:500;
+  color:var(--muted); cursor:pointer; padding:.5rem .9rem .65rem; border-bottom:2px solid transparent;
+  margin-bottom:-1px; transition:color .15s,border-color .15s; letter-spacing:.02em; }
+.v2-tab:hover { color:var(--text); }
+.v2-tab.on { color:var(--accent-text); border-bottom-color:var(--accent); font-weight:600; }
+
+/* ─── Daily Challenge ─── */
+.challenge-modal { position:fixed; inset:0; background:rgba(0,0,0,.7); z-index:900;
+  display:flex; align-items:center; justify-content:center; padding:1rem;
+  backdrop-filter:blur(6px); opacity:0; pointer-events:none; transition:opacity .25s; }
+.challenge-modal.vis { opacity:1; pointer-events:all; }
+.challenge-box { background:var(--surface); border:1px solid var(--border); border-radius:16px;
+  width:100%; max-width:480px; max-height:92vh; overflow-y:auto;
+  box-shadow:0 24px 60px rgba(0,0,0,.55);
+  transform:translateY(16px); transition:transform .28s; }
+.challenge-modal.vis .challenge-box { transform:translateY(0); }
+.ch-header { padding:1.4rem 1.5rem 1rem; border-bottom:1px solid var(--border);
+  display:flex; align-items:center; gap:.75rem; flex-wrap:wrap; }
+.ch-title { font-size:1rem; font-weight:700; color:var(--text); flex:1; letter-spacing:-.02em; }
+.ch-streak { display:flex; align-items:center; gap:5px; background:var(--surface2);
+  border:1px solid var(--border); border-radius:20px; padding:3px 10px;
+  font-size:.62rem; color:var(--muted); }
+.ch-streak-fire { font-size:.85rem; }
+.ch-close { background:transparent; border:none; color:var(--dim); font-size:1.1rem;
+  cursor:pointer; padding:3px 7px; border-radius:6px; transition:color .15s; }
+.ch-close:hover { color:var(--text); }
+.ch-body { padding:1.5rem; }
+.ch-target-lbl { font-size:.52rem; letter-spacing:.2em; text-transform:uppercase;
+  color:var(--dim); margin-bottom:.65rem; }
+.ch-target-swatch { width:100%; height:110px; border-radius:12px;
+  border:1px solid rgba(255,255,255,.07); margin-bottom:1.25rem;
+  transition:background .3s; position:relative; overflow:hidden; }
+.ch-target-swatch::after { content:'Match this color'; position:absolute;
+  inset:0; display:flex; align-items:flex-end; justify-content:flex-start;
+  padding:.6rem .85rem; font-size:.55rem; letter-spacing:.15em;
+  text-transform:uppercase; opacity:.45; }
+.ch-attempt { display:flex; gap:.75rem; align-items:stretch; margin-bottom:1rem; }
+.ch-attempt-swatch { width:60px; border-radius:10px; border:1px solid var(--border);
+  flex-shrink:0; transition:background .2s; }
+.ch-attempt-input { flex:1; background:var(--surface2); border:1px solid var(--border);
+  border-radius:10px; padding:.65rem 1rem; font-family:var(--mono); font-size:.85rem;
+  color:var(--text); outline:none; transition:border-color .15s; }
+.ch-attempt-input:focus { border-color:var(--accent); }
+.ch-attempt-input::placeholder { color:var(--dim); }
+.ch-submit { background:var(--accent); color:var(--on-accent); border:none;
+  border-radius:10px; padding:.65rem 1.25rem; font-family:var(--sans); font-size:.72rem;
+  font-weight:600; cursor:pointer; transition:opacity .15s; white-space:nowrap; }
+.ch-submit:hover { opacity:.85; }
+.ch-score-bar { background:var(--surface2); border:1px solid var(--border);
+  border-radius:12px; overflow:hidden; margin-bottom:1rem; display:none; }
+.ch-score-bar.vis { display:block; }
+.ch-score-fill { height:8px; border-radius:0; transition:width .6s ease; }
+.ch-score-text { display:flex; justify-content:space-between; align-items:center;
+  padding:.6rem 1rem; }
+.ch-score-num { font-family:var(--mono); font-size:1.5rem; font-weight:700; color:var(--text); }
+.ch-score-lbl { font-size:.62rem; color:var(--muted); }
+.ch-delta { font-size:.65rem; color:var(--dim); margin-top:2px; }
+.ch-result-pair { display:grid; grid-template-columns:1fr 1fr; gap:.75rem; margin:1rem 0; }
+.ch-result-swatch { border-radius:10px; height:64px; border:1px solid rgba(255,255,255,.07); }
+.ch-result-lbl { font-size:.55rem; color:var(--dim); text-align:center;
+  letter-spacing:.1em; text-transform:uppercase; margin-top:.35rem; }
+.ch-share-btn { width:100%; background:var(--surface2); border:1px solid var(--border);
+  border-radius:10px; padding:.65rem; font-family:var(--sans); font-size:.72rem;
+  font-weight:500; color:var(--text); cursor:pointer; transition:.15s;
+  display:flex; align-items:center; justify-content:center; gap:.5rem; }
+.ch-share-btn:hover { border-color:var(--accent); color:var(--accent-text); }
+.ch-history { margin-top:1.25rem; }
+.ch-history-lbl { font-size:.52rem; letter-spacing:.18em; text-transform:uppercase;
+  color:var(--dim); margin-bottom:.5rem; }
+.ch-history-row { display:flex; gap:4px; flex-wrap:wrap; }
+.ch-hist-dot { width:18px; height:18px; border-radius:4px; position:relative; }
+.ch-hist-dot[title]:hover::after { content:attr(title); position:absolute;
+  bottom:120%; left:50%; transform:translateX(-50%); background:#000;
+  color:#fff; font-size:.55rem; padding:2px 6px; border-radius:4px;
+  white-space:nowrap; pointer-events:none; }
+.ch-already-done { text-align:center; padding:1.5rem 0; }
+.ch-done-score { font-size:2.5rem; font-weight:700; color:var(--text); }
+.ch-done-lbl { font-size:.65rem; color:var(--muted); margin-top:.3rem; }
+
+/* ─── Mood Board ─── */
+.moodboard-panel { background:var(--surface); border:1px solid var(--border);
+  border-radius:12px; overflow:hidden; margin-bottom:1.5rem; display:none; }
+.moodboard-panel.open { display:block; }
+.mb-head { display:flex; align-items:center; gap:.75rem; padding:.85rem 1.3rem;
+  border-bottom:1px solid var(--border); flex-wrap:wrap; }
+.mb-title { font-size:.56rem; letter-spacing:.18em; text-transform:uppercase;
+  color:var(--dim); flex:1; }
+.mb-actions { display:flex; gap:6px; flex-wrap:wrap; }
+.mb-btn { background:transparent; border:1px solid var(--border); border-radius:20px;
+  color:var(--muted); font-family:var(--sans); font-size:.62rem; font-weight:500;
+  padding:4px 12px; cursor:pointer; transition:.15s; }
+.mb-btn:hover { border-color:var(--border-h); color:var(--text); }
+.mb-btn.primary { background:var(--accent); border-color:var(--accent);
+  color:var(--on-accent); }
+.mb-btn.primary:hover { opacity:.85; }
+.mb-canvas-wrap { padding:1.25rem; }
+.mb-canvas { width:100%; min-height:200px; background:var(--surface2);
+  border:1px solid var(--border); border-radius:10px;
+  display:flex; flex-wrap:wrap; gap:0; overflow:hidden; position:relative; }
+.mb-canvas.drag-over { border-color:var(--accent); }
+.mb-tile { width:64px; height:64px; cursor:grab; flex-shrink:0;
+  position:relative; transition:transform .15s; }
+.mb-tile:hover { transform:scale(1.06); z-index:10; }
+.mb-tile:active { cursor:grabbing; }
+.mb-tile .mb-tile-rm { position:absolute; top:2px; right:2px; width:16px; height:16px;
+  background:rgba(0,0,0,.4); border:none; border-radius:50%; color:#fff;
+  font-size:.6rem; cursor:pointer; opacity:0; transition:opacity .15s;
+  display:flex; align-items:center; justify-content:center; line-height:1; }
+.mb-tile:hover .mb-tile-rm { opacity:1; }
+.mb-tile .mb-tile-hex { position:absolute; bottom:0; left:0; right:0;
+  font-family:var(--mono); font-size:.45rem; text-align:center;
+  padding:2px 0; background:rgba(0,0,0,.35); color:rgba(255,255,255,.8);
+  opacity:0; transition:opacity .15s; }
+.mb-tile:hover .mb-tile-hex { opacity:1; }
+.mb-empty { padding:2rem; text-align:center; color:var(--dim); font-size:.72rem;
+  width:100%; }
+.mb-empty span { display:block; font-size:1.8rem; margin-bottom:.5rem; opacity:.3; }
+.mb-size-row { display:flex; align-items:center; gap:.5rem; padding:0 1.25rem .75rem; }
+.mb-size-lbl { font-size:.57rem; color:var(--dim); white-space:nowrap; }
+.mb-size-input { width:60px; background:var(--surface2); border:1px solid var(--border);
+  border-radius:6px; padding:3px 8px; font-family:var(--mono); font-size:.65rem;
+  color:var(--text); text-align:center; }
+
+/* ─── Copic in match panel ─── */
+.copic-buy { font-size:.52rem; color:var(--accent-text); text-decoration:none; margin-left:7px; border-bottom:1px dotted currentColor; opacity:0; transition:opacity .15s; }
+.match-item:hover .copic-buy { opacity:1; }
+.copic-badge { font-size:.52rem; letter-spacing:.08em; background:rgba(40,140,100,.12);
+  color:#4CAF82; border:1px solid rgba(40,140,100,.2); border-radius:3px;
+  padding:1px 5px; margin-left:5px; font-weight:600; }
+
+/* ─── Btn game ─── */
+.btn-game { display:inline-flex; align-items:center; gap:5px; font-family:var(--sans);
+  font-size:.64rem; font-weight:500; color:var(--muted); background:transparent;
+  border:1px solid var(--border); border-radius:20px; padding:5px 12px;
+  cursor:pointer; transition:border-color .18s,color .18s,background .18s;
+  letter-spacing:.03em; }
+.btn-game:hover { border-color:var(--accent); color:var(--accent-text); }
+.btn-game .game-streak { font-family:var(--mono); font-size:.58rem;
+  background:var(--surface2); border-radius:10px; padding:1px 6px; margin-left:2px; }
+.btn-moodboard { display:inline-flex; align-items:center; gap:5px; font-family:var(--sans);
+  font-size:.64rem; font-weight:500; color:var(--muted); background:transparent;
+  border:1px solid var(--border); border-radius:20px; padding:5px 12px;
+  cursor:pointer; transition:border-color .18s,color .18s; letter-spacing:.03em; }
+.btn-moodboard:hover { border-color:var(--border-h); color:var(--text); }
+.btn-moodboard.open { border-color:var(--accent); color:var(--accent-text);
+  background:rgba(28,152,213,.07); }
+
+/* ─── Ko-fi support ─── */
+.kofi-btn { display:inline-flex; align-items:center; gap:7px;
+  background:var(--surface); border:1px solid var(--border); border-radius:24px;
+  padding:.55rem 1.1rem; font-family:var(--sans); font-size:.68rem; font-weight:600;
+  color:var(--text); text-decoration:none; transition:border-color .18s, transform .12s;
+  letter-spacing:.01em; }
+.kofi-btn:hover { border-color:#FF5E5B; transform:translateY(-1px); }
+.kofi-btn .kofi-cup { font-size:.9rem; }
+.kofi-wrap { width:100%; text-align:center; margin-bottom:1rem; }
 /* ─── Match N toggle button active state ─── */
 .match-n-btn.on { background:var(--accent); border-color:var(--accent); color:var(--on-accent); }
 .fc-n-btn.on { background:var(--accent); border-color:var(--accent); color:var(--on-accent); }
@@ -472,7 +631,6 @@ footer { border-top:1px solid var(--border); padding:1.75rem 3rem; display:flex;
 .wheel-opt-btn.on { background:var(--accent); border-color:var(--accent); color:var(--on-accent); }
 
 </style>
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7309228644823889" crossorigin="anonymous"></script>
   <link rel="manifest" href="/manifest.json">
   <meta name="theme-color" id="themeColor" content="#1C98D5">
   <meta name="mobile-web-app-capable" content="yes">
@@ -523,6 +681,26 @@ footer { border-top:1px solid var(--border); padding:1.75rem 3rem; display:flex;
     <span class="history-lbl">Recent</span>
     <div id="historyChips" style="display:flex;gap:7px;flex-wrap:wrap;"></div>
   </div>
+  <div class="moodboard-panel" id="moodboardPanel">
+    <div class="mb-head">
+      <span class="mb-title">Mood Board</span>
+      <div class="mb-actions">
+        <button class="mb-btn" onclick="mbAddCurrent()">+ Add current</button>
+        <button class="mb-btn" onclick="mbAddFromBucket()">+ From My Bucket</button>
+        <button class="mb-btn primary" onclick="mbExport()">↓ Export PNG</button>
+        <button class="mb-btn" onclick="mbClear()">Clear</button>
+      </div>
+    </div>
+    <div class="mb-size-row">
+      <span class="mb-size-lbl">Tile size</span>
+      <input class="mb-size-input" id="mbSizeInput" type="number" min="32" max="160" value="64" oninput="mbResize(this.value)">
+      <span class="mb-size-lbl">px</span>
+    </div>
+    <div class="mb-canvas-wrap">
+      <div class="mb-canvas" id="mbCanvas"></div>
+    </div>
+  </div>
+
   <button class="wheel-top-btn" id="btnWheel" onclick="toggleWheel()">
     <svg width="15" height="15" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="7" cy="7" r="6" stroke="currentColor" stroke-width="1.3"/><circle cx="7" cy="7" r="2" stroke="currentColor" stroke-width="1.3"/><line x1="7" y1="1" x2="7" y2="4.2" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/><line x1="7" y1="9.8" x2="7" y2="13" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/><line x1="1" y1="7" x2="4.2" y2="7" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/><line x1="9.8" y1="7" x2="13" y2="7" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
     Color Wheel
@@ -558,6 +736,13 @@ footer { border-top:1px solid var(--border); padding:1.75rem 3rem; display:flex;
     <button class="btn-palette" id="btnPalette" onclick="togglePalette()">
       <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="1" width="4" height="4" rx="1"/><rect x="7" y="1" width="4" height="4" rx="1"/><rect x="1" y="7" width="4" height="4" rx="1"/><rect x="7" y="7" width="4" height="4" rx="1"/></svg>
       My Bucket <span id="palCountBadge" style="font-family:var(--mono);font-size:.55rem;opacity:.6;"></span>
+    </button>
+    <button class="btn-game" id="btnGame" onclick="chOpen()">
+      🎮 Daily Challenge <span class="game-streak" id="gameStreakBadge"></span>
+    </button>
+    <button class="btn-moodboard" id="btnMoodboard" onclick="mbToggle()">
+      <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="1" y="1" width="4.5" height="4.5" rx=".8"/><rect x="6.5" y="1" width="4.5" height="4.5" rx=".8"/><rect x="1" y="6.5" width="4.5" height="4.5" rx=".8"/><rect x="6.5" y="6.5" width="4.5" height="4.5" rx=".8"/></svg>
+      Mood Board
     </button>
     <button class="btn-share" id="btnShare" onclick="shareColor()">
       <svg width="11" height="11" viewBox="0 0 11 11" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="9" cy="2" r="1.2"/><circle cx="2" cy="5.5" r="1.2"/><circle cx="9" cy="9" r="1.2"/><line x1="3.1" y1="4.8" x2="7.9" y2="2.7"/><line x1="3.1" y1="6.2" x2="7.9" y2="8.3"/></svg>
@@ -620,6 +805,11 @@ footer { border-top:1px solid var(--border); padding:1.75rem 3rem; display:flex;
 </main>
 
 <footer>
+  <div class="kofi-wrap">
+    <a class="kofi-btn" href="https://ko-fi.com/grabucket" target="_blank" rel="noopener">
+      <span class="kofi-cup">☕</span> Support Grabucket on Ko-fi
+    </a>
+  </div>
   <div style="width:100%;text-align:center;margin-bottom:.85rem;">
     <span style="font-size:.6rem;color:var(--dim);letter-spacing:.1em;">Built by <a href="https://www.instagram.com/juraca.arts/" target="_blank" rel="noopener" style="color:var(--accent-text);text-decoration:none;border-bottom:1px solid currentColor;">JuRaCa</a></span>
   </div>
@@ -897,9 +1087,9 @@ function closestRAL(r,g,b){const t=topRAL(r,g,b,1);return t.length?t[0]:null;}
 function closestPantone(r,g,b){const t=topPantone(r,g,b,1);return t.length?t[0]:null;}
 
 /* N-toggle state */
-let _ralN=3, _ptN=3;
+let _ralN=3, _ptN=3, _copicN=3;
 function setMatchN(type,n){
-  if(type==='ral') _ralN=n; else _ptN=n;
+  if(type==='ral') _ralN=n; else if(type==='pt') _ptN=n; else _copicN=n;
   const panelId = type==='ral'?'matchRal':'matchPt';
   const panel = document.getElementById(panelId);
   if(!panel) return;
@@ -921,11 +1111,12 @@ function distDot(dist){
 }
 
 function makeMatchPanel(type, items, activeN){
-  const id = type==='ral'?'matchRal':'matchPt';
-  const label = type==='ral'?'RAL — nearest matches':'Pantone — nearest matches';
+  const id = type==='ral'?'matchRal':type==='pt'?'matchPt':'matchCopic';
+  const label = type==='ral'?'RAL — nearest matches':type==='pt'?'Pantone — nearest matches':'Copic — nearest markers';
   const note = type==='ral'
     ? 'Community hex approximations · RAL Classic coated only · verify against physical RAL swatches'
-    : 'Community hex approximations (~694 PMS Coated) · not all Pantone colors exist · always verify with physical swatchbook';
+    : type==='pt' ? 'Community hex approximations (~694 PMS Coated) · not all Pantone colors exist · always verify with physical swatchbook'
+    : 'Copic marker hex approximations · 358 markers · screen values only, verify with physical markers';
   const btnHtml = [3,6,9].map(n=>
     `<button class="match-n-btn${n===activeN?' on':''}" data-n="${n}" onclick="setMatchN('${type}',${n})">${n}</button>`
   ).join('');
@@ -934,10 +1125,11 @@ function makeMatchPanel(type, items, activeN){
     const hidden = rank>activeN?' hidden':'';
     const sub = type==='ral'
       ? `<div class="match-name">${item.name}</div>`
+      : type==='copic' ? `<div class="match-name"><span class="copic-badge">${item.code}</span><a class="copic-buy" href="${copicBuyUrl(item.code)}" target="_blank" rel="noopener sponsored" onclick="event.stopPropagation()">Buy ↗</a></div>`
       : '';
     const hexLine = `<div class="match-hex">${item.hex}</div>`;
-    const code = type==='ral' ? `RAL ${item.code}` : `Pantone ${item.code}`;
-    const loadVal = type==='ral' ? `RAL ${item.code}` : `Pantone ${item.code}`;
+    const code = type==='ral' ? `RAL ${item.code}` : type==='pt' ? `Pantone ${item.code}` : `Copic ${item.code}`;
+    const loadVal = type==='ral' ? `RAL ${item.code}` : type==='pt' ? `Pantone ${item.code}` : item.hex;
     return `<div class="match-item${hidden}" data-rank="${rank}" onclick="fc('${loadVal.replace(/'/g,"\'")}')">
       <div class="match-swatch" style="background:${item.hex};"></div>
       <div class="match-body">
@@ -983,25 +1175,7 @@ function r2oklch(r,g,b){
 }
 
 /* ─── CIE-L*ab + XYZ ─── */
-function r2xyz(r,g,b){
-  // sRGB → linear
-  function sl(c){c/=255;return c>0.04045?Math.pow((c+0.055)/1.055,2.4):c/12.92;}
-  const rl=sl(r),gl=sl(g),bl=sl(b);
-  // linear → XYZ (D65)
-  const x=(rl*0.4124564+gl*0.3575761+bl*0.1804375)/0.95047;
-  const y=(rl*0.2126729+gl*0.7151522+bl*0.0721750)/1.00000;
-  const z=(rl*0.0193339+gl*0.1191920+bl*0.9503041)/1.08883;
-  function f(t){return t>0.008856?Math.pow(t,1/3):7.787*t+16/116;}
-  const L=+(116*f(y)-16).toFixed(2);
-  const A=+(500*(f(x)-f(y))).toFixed(2);
-  const B=+(200*(f(y)-f(z))).toFixed(2);
-  const xAbs=+((rl*0.4124564+gl*0.3575761+bl*0.1804375)*100).toFixed(2);
-  const yAbs=+((rl*0.2126729+gl*0.7151522+bl*0.0721750)*100).toFixed(2);
-  const zAbs=+((rl*0.0193339+gl*0.1191920+bl*0.9503041)*100).toFixed(2);
-  return{L,A,B,X:xAbs,Y:yAbs,Z:zAbs};
-}
 
-/* ─── XYZ / CIE-L*ab (D65) ─── */
 function r2xyz(r,g,b){
   // sRGB → linear → XYZ D65
   function lc(c){c/=255;return c<=0.04045?c/12.92:Math.pow((c+0.055)/1.055,2.4);}
@@ -1945,6 +2119,430 @@ function wnInit() {
     setTimeout(wnOpen, 600);
   }
 }
+
+/* ─── Copic Marker Dataset (358 colors) ─── */
+const COPIC = {
+  /* Yellows */
+  "Y00":"#FEFCE1","Y02":"#FEFAD1","Y04":"#FEF3A6","Y06":"#FEEA64",
+  "Y08":"#FDD900","Y11":"#FEF6C4","Y13":"#FEE691","Y15":"#FDD748",
+  "Y17":"#FBCB00","Y18":"#F5B700","Y19":"#F0A500","Y21":"#FEF5D5",
+  "Y23":"#FEE8A6","Y26":"#FCD97A","Y28":"#F4C100","Y32":"#FEECC9",
+  "Y35":"#FDDE99","Y38":"#F9C660",
+  /* Yellow-Greens */
+  "YG00":"#F4FAD5","YG01":"#EDFAB1","YG03":"#D5F0A2","YG05":"#B6E585",
+  "YG06":"#97D85F","YG07":"#7AC93E","YG09":"#5CB527","YG11":"#E8F7A0",
+  "YG13":"#C8EC78","YG17":"#8ECF42","YG21":"#F2FBCE","YG23":"#D9F4A2",
+  "YG25":"#B6E876","YG41":"#E6F5A4","YG45":"#C0E87A","YG61":"#DBEEA0",
+  "YG63":"#C0E07A","YG67":"#8DC842","YG91":"#DAEEA8","YG93":"#BDE38A",
+  "YG95":"#94D45E","YG97":"#5FB23A","YG99":"#3A8F22",
+  /* Greens */
+  "G00":"#EDFAEA","G02":"#D0F5D5","G03":"#B0EEBC","G05":"#7FE0A0",
+  "G07":"#4FCC7F","G09":"#2CB864","G12":"#D5F5DC","G14":"#A8ECBC",
+  "G16":"#72DA98","G17":"#4FC87A","G19":"#28A85E","G20":"#EBF8EE",
+  "G21":"#C5F0D5","G24":"#8ADDB0","G28":"#3BB87A","G29":"#1E9A5A",
+  "G40":"#E8F8EC","G43":"#A8E8C0","G46":"#60C890","G82":"#C8EAD8",
+  "G85":"#9CD8B8","G94":"#B8E8D0","G99":"#1A7848",
+  /* Blue-Greens */
+  "BG00":"#E5F8F5","BG01":"#C5F0EC","BG02":"#A0E5E2","BG05":"#68CDD0",
+  "BG07":"#3AB8C0","BG09":"#1AA0AC","BG10":"#D5F5F8","BG11":"#AAEBF0",
+  "BG13":"#72DAEC","BG15":"#3AC8E0","BG18":"#00AABF","BG23":"#B5E8F0",
+  "BG25":"#7FD8EC","BG32":"#C0ECF8","BG34":"#8AD8F0","BG45":"#5ABCE0",
+  "BG49":"#0090B0","BG53":"#B8E5F5","BG57":"#5DBAD8","BG70":"#C5EEF8",
+  "BG72":"#96DDEF","BG75":"#5BC6E8","BG78":"#28AACF","BG90":"#CCF0F5",
+  "BG93":"#9CE0EE","BG96":"#5ABCE0","BG99":"#006888",
+  /* Blues */
+  "B00":"#DFF0FD","B01":"#C8E8FC","B02":"#AADAFB","B04":"#80C4F9",
+  "B05":"#5AAEF5","B06":"#3694EF","B12":"#C5E5FF","B14":"#95CCF8",
+  "B16":"#60B0F4","B18":"#2C90EC","B21":"#C0DCFF","B23":"#8AC0F8",
+  "B24":"#60A8F6","B26":"#3088EF","B28":"#0068D8","B29":"#0050C0",
+  "B32":"#C8E0FF","B34":"#95C5FF","B37":"#5095E8","B39":"#1060C8",
+  "B41":"#D5E8FF","B45":"#8FBEFF","B52":"#C0D0F8","B60":"#B8CAFF",
+  "B63":"#8AABFF","B66":"#5080F5","B69":"#2050D8","B79":"#1840B0",
+  "B91":"#D5E0F8","B93":"#AABFF0","B95":"#7A9AE8","B97":"#4A72D0",
+  "B99":"#1A3EA8","B0000":"#EEF6FF","B000":"#E0EFFF",
+  /* Blue-Violets */
+  "BV00":"#EDE8F8","BV01":"#D8D0F5","BV02":"#C0B8F0","BV04":"#9A90E8",
+  "BV08":"#6860D0","BV11":"#E5E0FF","BV13":"#C8C0FF","BV16":"#9A8CF5",
+  "BV17":"#7A6AEE","BV20":"#EAE5FF","BV23":"#C5B8FF","BV25":"#A090F5",
+  "BV29":"#4035A8","BV31":"#D8D0FF","BV34":"#A898F8",
+  /* Violets */
+  "V00":"#F5E8F8","V01":"#EED5F5","V04":"#D9A8EE","V06":"#C880E8",
+  "V09":"#A040C8","V12":"#EEDAF5","V15":"#D8A8EE","V17":"#BE78E0",
+  "V20":"#F5EAF8","V22":"#E8C5F5","V25":"#CC90E8","V28":"#9045B8",
+  "V91":"#F0E0F8","V93":"#DEC0F0","V95":"#C898E8","V99":"#5A1880",
+  /* Red-Violets */
+  "RV00":"#FEE8F0","RV02":"#FDD5E8","RV04":"#FBB8D8","RV06":"#F895C5",
+  "RV09":"#E84095","RV10":"#FEECF3","RV11":"#FDDAE8","RV13":"#FBB8D5",
+  "RV14":"#FA9DC5","RV17":"#F065A5","RV19":"#D82878","RV21":"#FEE8F2",
+  "RV23":"#FCCAE2","RV25":"#FAA8D0","RV29":"#E0308A","RV32":"#FEE0EC",
+  "RV34":"#FDC0DA","RV42":"#FDD5E5","RV52":"#FDC8E0","RV55":"#F898C5",
+  "RV63":"#FDC8D8","RV66":"#F890B8","RV69":"#D82068","RV91":"#FEEDF2",
+  "RV93":"#FDD5E8","RV95":"#FCB8D8","RV99":"#B81060",
+  /* Reds */
+  "R00":"#FEF0EC","R01":"#FEE0D8","R02":"#FDD0C0","R05":"#F9A090",
+  "R08":"#F56858","R11":"#FEECE8","R12":"#FDDAD0","R14":"#FCC0B0",
+  "R17":"#F88070","R20":"#FEEEEC","R21":"#FDDAD5","R22":"#FCCBC0",
+  "R24":"#FAAB98","R27":"#F07868","R29":"#E84848","R30":"#FEEDE8",
+  "R32":"#FDD5C8","R35":"#FAAB95","R37":"#F37858","R39":"#E84030",
+  "R43":"#FDDDD0","R46":"#FAC0A8","R56":"#F89888","R59":"#E85040",
+  "R81":"#FEE0D8","R83":"#FDCAC0","R85":"#FCB0A5","R89":"#EE5858",
+  /* Yellow-Reds */
+  "YR00":"#FEF6EC","YR01":"#FEECD5","YR02":"#FEE0BE","YR04":"#FDC890",
+  "YR07":"#F8A060","YR09":"#F07830","YR12":"#FEE8D0","YR14":"#FED5B0",
+  "YR15":"#FEC898","YR16":"#FDBA7E","YR18":"#F89050","YR20":"#FEF0E0",
+  "YR21":"#FEE4C8","YR23":"#FED0A8","YR24":"#FEC488","YR27":"#F8A060",
+  "YR30":"#FEF2E5","YR31":"#FEE6D0","YR61":"#FEE2D0","YR65":"#FDC89A",
+  "YR68":"#F8A06A",
+  /* Earth/Neutral */
+  "E00":"#FFF2E8","E01":"#FEE8D8","E02":"#FDE0CA","E04":"#FCCBA8",
+  "E07":"#E8976A","E08":"#D07840","E09":"#BC6030","E11":"#FEEEE0",
+  "E13":"#FEDCC0","E15":"#FEC898","E17":"#F0A86A","E18":"#D88850",
+  "E19":"#C07038","E21":"#FEF0E5","E23":"#FEDDCC","E25":"#FEC8A8",
+  "E27":"#E8A078","E29":"#C87848","E31":"#FEF3E8","E33":"#FEE3CC",
+  "E34":"#FDD8B8","E35":"#FCC89A","E37":"#EDAA78","E40":"#FEF5EC",
+  "E41":"#FEEEDD","E42":"#FDDECE","E43":"#FDD0B8","E44":"#F8BC98",
+  "E47":"#E8A878","E49":"#C08050","E50":"#FEF8F0","E51":"#FEF0E5",
+  "E53":"#FEE2CC","E55":"#FDCEB0","E57":"#E8A878","E59":"#C08050",
+  "E70":"#F8EEDC","E71":"#F0E0C8","E74":"#D8B890","E77":"#BF9060",
+  "E79":"#9A7040","E81":"#F5E8D5","E84":"#D8C098","E87":"#B89870",
+  "E89":"#8A6840","E93":"#F0D8B8","E95":"#D8B888","E97":"#B88C58",
+  "E99":"#785030",
+  /* Warm/Cool Grays */
+  "W1":"#F5F0EB","W2":"#EDE5DE","W3":"#E5D8CE","W4":"#D8C8BC",
+  "W5":"#C8B5A8","W6":"#B8A098","W7":"#A88C80","W8":"#987870",
+  "W9":"#806058","W10":"#6A4C46",
+  "C1":"#F2F2F0","C2":"#E8E8E5","C3":"#DDDDD8","C4":"#D0D0CA",
+  "C5":"#C2C2BB","C6":"#B3B3AC","C7":"#A2A2A0","C8":"#909090",
+  "C9":"#787878","C10":"#5A5A5A",
+  "N1":"#F5F3F0","N2":"#ECEAE6","N3":"#E0DDD8","N4":"#D0CCC6",
+  "N5":"#BFBBB4","N6":"#AEAAA4","N7":"#9C9892","N8":"#898580",
+  "N9":"#74706C","N10":"#5C5855",
+  "T1":"#F0F0EC","T2":"#E5E4E0","T3":"#D8D7D2","T4":"#C8C8C3",
+  "T5":"#B5B5B0","T6":"#A2A2A0","T7":"#8E8E8C","T8":"#787876",
+  "T9":"#606060","T10":"#484848",
+  /* Fluorescents */
+  "FY1":"#FFFB00","FYG1":"#CEFF00","FG1":"#00FF78","FB2":"#00F0FF",
+  "FV2":"#E060FF","FR1":"#FF2040","0":"#FFFFFF",
+};
+
+/* ─── Copic affiliate config ───
+   When Amazon Associates (or Jackson's Art) approval comes through,
+   set COPIC_AFF_TAG to your tag (e.g. 'grabucket-20') and links
+   automatically become affiliate links. Empty = plain search links. */
+const COPIC_AFF_TAG = '';
+function copicBuyUrl(code){
+  const q = encodeURIComponent('Copic ' + code + ' marker');
+  const tag = COPIC_AFF_TAG ? '&tag=' + COPIC_AFF_TAG : '';
+  return 'https://www.amazon.com/s?k=' + q + tag;
+}
+
+function topCopic(r,g,b,n){
+  const all=[];
+  for(const[k,v]of Object.entries(COPIC)){
+    const rgb=h2r(v);if(!rgb)continue;
+    all.push({code:k,hex:v,dist:cdist(r,g,b,rgb.r,rgb.g,rgb.b)});
+  }
+  all.sort((a,b)=>a.dist-b.dist);
+  return all.slice(0,n||9);
+}
+
+/* ─── Daily Color Challenge ─── */
+const CH_KEY      = 'grabucket_ch_';   // + YYYYMMDD
+const CH_HIST_KEY = 'grabucket_ch_hist';
+const CH_STREAK_KEY = 'grabucket_ch_streak';
+
+function chTodayKey(){
+  const d=new Date(); 
+  return CH_KEY+d.getFullYear()+String(d.getMonth()+1).padStart(2,'0')+String(d.getDate()).padStart(2,'0');
+}
+
+function chGetTargetColor(){
+  /* Uses COTD palette — same deterministic approach */
+  const dayIndex=Math.floor(Date.now()/86400000);
+  return COTD_PALETTE[dayIndex % COTD_PALETTE.length];
+}
+
+function chScoreFromDist(dist){
+  /* dist 0 = perfect 100, dist 441 (max possible) = 0 */
+  return Math.max(0, Math.round(100 - (dist/4.41)));
+}
+
+function chScoreColor(score){
+  if(score>=90) return '#78d489';
+  if(score>=70) return '#F9D849';
+  if(score>=50) return '#FF7900';
+  return '#e07070';
+}
+
+function chEmoji(score){
+  if(score>=95) return '🎨🔥💯';
+  if(score>=85) return '🎨🔥';
+  if(score>=70) return '🎨✨';
+  if(score>=50) return '🎨';
+  return '🎨😅';
+}
+
+function chOpen(){
+  const modal=document.getElementById('challengeModal');
+  if(!modal) return;
+  modal.style.display='flex';
+  requestAnimationFrame(()=>modal.classList.add('vis'));
+
+  const [targetHex, targetName]=chGetTargetColor();
+  const sw=document.getElementById('chTargetSwatch');
+  if(sw){ sw.style.background=targetHex; }
+  const rgb=h2r(targetHex);
+  if(sw&&rgb) sw.style.setProperty('color', isDark(rgb.r,rgb.g,rgb.b)?'rgba(255,255,255,.45)':'rgba(0,0,0,.35)');
+
+  /* Check if already played today */
+  const saved=localStorage.getItem(chTodayKey());
+  if(saved){
+    const data=JSON.parse(saved);
+    document.getElementById('chPlayArea').style.display='none';
+    document.getElementById('chDoneArea').style.display='block';
+    document.getElementById('chDoneScore').textContent=data.score;
+    document.getElementById('chDoneScore').style.color=chScoreColor(data.score);
+    const dt=document.getElementById('chDoneTarget');
+    const da=document.getElementById('chDoneAttempt');
+    if(dt) dt.style.background=targetHex;
+    if(da) da.style.background=data.attempt;
+  } else {
+    document.getElementById('chPlayArea').style.display='block';
+    document.getElementById('chDoneArea').style.display='none';
+    document.getElementById('chScoreBar').classList.remove('vis');
+    document.getElementById('chResultPair').style.display='none';
+    document.getElementById('chShareBtn').style.display='none';
+    document.getElementById('chAttemptInput').value='';
+    document.getElementById('chAttemptSwatch').style.background='#888';
+  }
+  chRenderStreak();
+  chRenderHistory();
+
+}
+
+function chPreview(){
+  const v=document.getElementById('chAttemptInput').value.trim();
+  const rgb=parseInput(v);
+  const sw=document.getElementById('chAttemptSwatch');
+  if(sw&&rgb) sw.style.background=r2h(rgb.r,rgb.g,rgb.b);
+}
+
+function chClose(){
+  const modal=document.getElementById('challengeModal');
+  if(!modal) return;
+  modal.classList.remove('vis');
+  setTimeout(()=>{ modal.style.display='none'; },260);
+}
+
+function chClickOutside(e){
+  if(e.target===document.getElementById('challengeModal')) chClose();
+}
+
+function chSubmit(){
+  const raw=document.getElementById('chAttemptInput').value.trim();
+  const attempt=parseInput(raw);
+  if(!attempt){ 
+    document.getElementById('chAttemptInput').style.borderColor='#e07070';
+    setTimeout(()=>document.getElementById('chAttemptInput').style.borderColor='',1000);
+    return;
+  }
+  const [targetHex]=chGetTargetColor();
+  const trgb=h2r(targetHex);
+  const dist=Math.sqrt((attempt.r-trgb.r)**2+(attempt.g-trgb.g)**2+(attempt.b-trgb.b)**2);
+  const score=chScoreFromDist(dist);
+  const attemptHex=r2h(attempt.r,attempt.g,attempt.b);
+  const scoreColor=chScoreColor(score);
+
+  /* Show score bar */
+  const bar=document.getElementById('chScoreBar');
+  bar.classList.add('vis');
+  setTimeout(()=>{
+    const fill=document.getElementById('chScoreFill');
+    if(fill){ fill.style.width=score+'%'; fill.style.background=scoreColor; }
+  },50);
+  document.getElementById('chScoreNum').textContent=score;
+  document.getElementById('chScoreNum').style.color=scoreColor;
+  document.getElementById('chDelta').textContent=`ΔE ≈ ${dist.toFixed(1)} · ${raw}`;
+
+  /* Show result swatches */
+  const rp=document.getElementById('chResultPair');
+  if(rp){ rp.style.display='grid'; }
+  const tr=document.getElementById('chTargetResult');
+  const ar=document.getElementById('chAttemptResult');
+  if(tr) tr.style.background=targetHex;
+  if(ar) ar.style.background=attemptHex;
+  document.getElementById('chShareBtn').style.display='flex';
+
+  /* Save result */
+  localStorage.setItem(chTodayKey(), JSON.stringify({score, attempt:attemptHex, dist:dist.toFixed(1)}));
+
+  /* Update streak */
+  chUpdateStreak();
+
+  /* Save to history */
+  const hist=JSON.parse(localStorage.getItem(CH_HIST_KEY)||'[]');
+  hist.unshift({date:chTodayKey().replace(CH_KEY,''), score, hex:targetHex, attempt:attemptHex});
+  if(hist.length>30) hist.length=30;
+  localStorage.setItem(CH_HIST_KEY,JSON.stringify(hist));
+
+  chRenderHistory();
+  chRenderStreak();
+}
+
+function chUpdateStreak(){
+  const streak=JSON.parse(localStorage.getItem(CH_STREAK_KEY)||'{"count":0,"last":""}');
+  const today=chTodayKey().replace(CH_KEY,'');
+  const d=new Date(); d.setDate(d.getDate()-1);
+  const yesterday=d.getFullYear()+String(d.getMonth()+1).padStart(2,'0')+String(d.getDate()).padStart(2,'0');
+  if(streak.last===today) return;
+  streak.count = (streak.last===yesterday) ? streak.count+1 : 1;
+  streak.last=today;
+  localStorage.setItem(CH_STREAK_KEY,JSON.stringify(streak));
+}
+
+function chRenderStreak(){
+  const streak=JSON.parse(localStorage.getItem(CH_STREAK_KEY)||'{"count":0}');
+  const el=document.getElementById('chStreakCount');
+  if(el) el.textContent=streak.count||0;
+  const badge=document.getElementById('gameStreakBadge');
+  if(badge) badge.textContent=streak.count>0?'🔥'+streak.count:'';
+}
+
+function chRenderHistory(){
+  const hist=JSON.parse(localStorage.getItem(CH_HIST_KEY)||'[]');
+  const el=document.getElementById('chHistory');
+  if(!el) return;
+  if(!hist.length){ el.innerHTML=''; return; }
+  const dots=hist.slice(0,20).map(h=>{
+    const col=chScoreColor(h.score);
+    return `<div class="ch-hist-dot" style="background:${h.hex};border:2px solid ${col}" title="${h.date}: ${h.score}/100"></div>`;
+  }).join('');
+  el.innerHTML=`<div class="ch-history-lbl">Past results</div><div class="ch-history-row">${dots}</div>`;
+}
+
+function chShare(){
+  const saved=localStorage.getItem(chTodayKey());
+  if(!saved) return;
+  const data=JSON.parse(saved);
+  const [,name]=chGetTargetColor();
+  const score=data.score;
+  const bars=Math.round(score/10);
+  const visual='█'.repeat(bars)+'░'.repeat(10-bars);
+  const text=`🎨 Grabucket Daily Challenge\n${name} — ${chEmoji(score)}\n${visual} ${score}/100\n\nhttps://grabucket.com`;
+  navigator.clipboard.writeText(text).then(()=>{
+    const btns=document.querySelectorAll('.ch-share-btn');
+    btns.forEach(b=>{ const o=b.textContent; b.textContent='✓ Copied!'; setTimeout(()=>b.textContent=o,1800); });
+  });
+}
+
+/* ─── Mood Board ─── */
+const MB_KEY='grabucket_moodboard';
+let mbTiles=[];
+let mbTileSize=64;
+
+function mbLoad(){ try{ mbTiles=JSON.parse(localStorage.getItem(MB_KEY)||'[]'); }catch(e){ mbTiles=[]; } }
+function mbSave(){ try{ localStorage.setItem(MB_KEY,JSON.stringify(mbTiles)); }catch(e){} }
+
+function mbToggle(){
+  const p=document.getElementById('moodboardPanel');
+  const b=document.getElementById('btnMoodboard');
+  if(!p) return;
+  const open=p.classList.contains('open');
+  p.classList.toggle('open',!open);
+  b.classList.toggle('open',!open);
+  if(!open){ mbLoad(); mbRender(); }
+}
+
+function mbAddCurrent(){
+  const hex=(document.getElementById('colorInput').value||'').trim().toUpperCase();
+  if(!/^#[0-9A-Fa-f]{6}$/.test(hex)) return;
+  mbLoad();
+  mbTiles.push({hex, id:Date.now()});
+  mbSave(); mbRender();
+  if(!document.getElementById('moodboardPanel').classList.contains('open')) mbToggle();
+}
+
+function mbAddFromBucket(){
+  const added=[];
+  palette.forEach(p=>{
+    if(!mbTiles.find(t=>t.hex===p.hex)){
+      mbTiles.push({hex:p.hex,id:Date.now()+Math.random()});
+      added.push(p.hex);
+    }
+  });
+  if(!added.length) return;
+  mbSave(); mbRender();
+}
+
+function mbRemove(id){
+  mbLoad();
+  mbTiles=mbTiles.filter(t=>t.id!=id);
+  mbSave(); mbRender();
+}
+
+function mbClear(){
+  mbTiles=[];
+  mbSave(); mbRender();
+}
+
+function mbResize(v){
+  mbTileSize=Math.max(32,Math.min(160,+v||64));
+  mbRender();
+}
+
+function mbRender(){
+  const canvas=document.getElementById('mbCanvas');
+  if(!canvas) return;
+  if(!mbTiles.length){
+    canvas.innerHTML='<div class="mb-empty"><span>🖼</span>Add colors from your current search or from My Bucket</div>';
+    return;
+  }
+  canvas.innerHTML=mbTiles.map(t=>`
+    <div class="mb-tile" style="width:${mbTileSize}px;height:${mbTileSize}px;background:${t.hex};" draggable="true"
+      ondragstart="mbDragStart(event,${t.id})" ondragover="event.preventDefault()"
+      ondrop="mbDrop(event,${t.id})">
+      <button class="mb-tile-rm" onclick="mbRemove(${t.id})">×</button>
+      <div class="mb-tile-hex">${t.hex}</div>
+    </div>`).join('');
+}
+
+let mbDragId=null;
+function mbDragStart(e,id){ mbDragId=id; e.dataTransfer.effectAllowed='move'; }
+function mbDrop(e,targetId){
+  if(mbDragId===targetId) return;
+  const fi=mbTiles.findIndex(t=>t.id==mbDragId);
+  const ti=mbTiles.findIndex(t=>t.id==targetId);
+  if(fi<0||ti<0) return;
+  const [moved]=mbTiles.splice(fi,1);
+  mbTiles.splice(ti,0,moved);
+  mbSave(); mbRender();
+}
+
+function mbExport(){
+  if(!mbTiles.length) return;
+  const cols=Math.ceil(Math.sqrt(mbTiles.length));
+  const rows=Math.ceil(mbTiles.length/cols);
+  const c=document.createElement('canvas');
+  c.width=cols*mbTileSize; c.height=rows*mbTileSize;
+  const ctx=c.getContext('2d');
+  mbTiles.forEach((t,i)=>{
+    const x=(i%cols)*mbTileSize, y=Math.floor(i/cols)*mbTileSize;
+    ctx.fillStyle=t.hex; ctx.fillRect(x,y,mbTileSize,mbTileSize);
+    /* hex label */
+    const _tc=h2r(t.hex)||{r:128,g:128,b:128};
+    ctx.fillStyle=isDark(_tc.r,_tc.g,_tc.b)?'rgba(255,255,255,.7)':'rgba(0,0,0,.5)';
+    ctx.font=`${Math.max(8,mbTileSize/6)}px monospace`;
+    ctx.textAlign='center';
+    ctx.fillText(t.hex,x+mbTileSize/2,y+mbTileSize-mbTileSize/10);
+  });
+  const a=document.createElement('a');
+  a.href=c.toDataURL('image/png');
+  a.download='grabucket-moodboard.png';
+  document.body.appendChild(a); a.click();
+  setTimeout(()=>document.body.removeChild(a),100);
+}
+
+/* Init: render streak badge on load */
 /* ─── Main ─── */
 function fc(v){document.getElementById('colorInput').value=v;convert();}
 
@@ -1966,6 +2564,7 @@ function convert(){
   const hsv=r2hsv(r,g,b);
   const ralMatches=topRAL(r,g,b,9);
   const ptMatches=topPantone(r,g,b,9);
+  const copicMatches=topCopic(r,g,b,9);
   const ral=ralMatches[0]||null;
   const pt=ptMatches[0]||null;
   const name=cname(r,g,b);
@@ -2061,6 +2660,7 @@ function convert(){
 
     ${makeMatchPanel('ral', ralMatches, _ralN)}
     ${makeMatchPanel('pt', ptMatches, _ptN)}
+    ${makeMatchPanel('copic', copicMatches, _copicN)}
     ${makeA11ySection(r,g,b,hex)}
     ${colorSystem(r,g,b,name)}
   `;
@@ -2092,6 +2692,8 @@ document.getElementById('colorPicker').addEventListener('input',e=>{
   cotdInit();
   syncClearBtn();
   wnInit();
+  chRenderStreak();
+  mbLoad();
 })();
 
 </script>
@@ -2210,6 +2812,70 @@ document.getElementById('colorPicker').addEventListener('input',e=>{
       <button class="wn-skip" onclick="wnClose()">Don't show again</button>
     </div>
   </div>
+
+<div class="challenge-modal" id="challengeModal" onclick="chClickOutside(event)">
+  <div class="challenge-box">
+    <div class="ch-header">
+      <div class="ch-title">🎮 Daily Color Challenge</div>
+      <div class="ch-streak"><span class="ch-streak-fire">🔥</span><span id="chStreakCount">0</span> day streak</div>
+      <button class="ch-close" onclick="chClose()">×</button>
+    </div>
+    <div class="ch-body">
+      <div id="chPlayArea">
+        <div class="ch-target-lbl">Today's color — match it as closely as you can</div>
+        <div class="ch-target-swatch" id="chTargetSwatch"></div>
+        <div class="ch-attempt">
+          <div class="ch-attempt-swatch" id="chAttemptSwatch" style="background:#888"></div>
+          <input class="ch-attempt-input" id="chAttemptInput" oninput="chPreview()" placeholder="#RRGGBB or color name…" autocomplete="off" spellcheck="false">
+          <button class="ch-submit" onclick="chSubmit()">Submit</button>
+        </div>
+        <div class="ch-score-bar" id="chScoreBar">
+          <div class="ch-score-fill" id="chScoreFill" style="width:0;background:#78d489"></div>
+          <div class="ch-score-text">
+            <div>
+              <div class="ch-score-num" id="chScoreNum">—</div>
+              <div class="ch-score-lbl">/ 100 points</div>
+            </div>
+            <div class="ch-delta" id="chDelta"></div>
+          </div>
+        </div>
+        <div class="ch-result-pair" id="chResultPair" style="display:none">
+          <div>
+            <div class="ch-result-swatch" id="chTargetResult"></div>
+            <div class="ch-result-lbl">Target</div>
+          </div>
+          <div>
+            <div class="ch-result-swatch" id="chAttemptResult"></div>
+            <div class="ch-result-lbl">Your guess</div>
+          </div>
+        </div>
+        <button class="ch-share-btn" id="chShareBtn" style="display:none" onclick="chShare()">
+          <svg width="13" height="13" viewBox="0 0 13 13" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="10" cy="2.5" r="1.4"/><circle cx="2.5" cy="6.5" r="1.4"/><circle cx="10" cy="10.5" r="1.4"/><line x1="3.8" y1="5.8" x2="8.7" y2="3.2"/><line x1="3.8" y1="7.2" x2="8.7" y2="9.8"/></svg>
+          Share result
+        </button>
+      </div>
+      <div id="chDoneArea" style="display:none" class="ch-already-done">
+        <div class="ch-done-score" id="chDoneScore">—</div>
+        <div class="ch-done-lbl">Today's score — come back tomorrow!</div>
+        <div class="ch-result-pair" style="margin-top:1rem">
+          <div>
+            <div class="ch-result-swatch" id="chDoneTarget"></div>
+            <div class="ch-result-lbl">Target</div>
+          </div>
+          <div>
+            <div class="ch-result-swatch" id="chDoneAttempt"></div>
+            <div class="ch-result-lbl">Your guess</div>
+          </div>
+        </div>
+        <button class="ch-share-btn" style="margin-top:.75rem" onclick="chShare()">
+          <svg width="13" height="13" viewBox="0 0 13 13" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="10" cy="2.5" r="1.4"/><circle cx="2.5" cy="6.5" r="1.4"/><circle cx="10" cy="10.5" r="1.4"/><line x1="3.8" y1="5.8" x2="8.7" y2="3.2"/><line x1="3.8" y1="7.2" x2="8.7" y2="9.8"/></svg>
+          Share again
+        </button>
+      </div>
+      <div class="ch-history" id="chHistory"></div>
+    </div>
+  </div>
+</div>
 </div>
 </body>
 </html>
