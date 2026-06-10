@@ -336,79 +336,6 @@ footer { border-top:1px solid var(--border); padding:1.75rem 3rem; display:flex;
 .v2-tab:hover { color:var(--text); }
 .v2-tab.on { color:var(--accent-text); border-bottom-color:var(--accent); font-weight:600; }
 
-/* ─── Daily Challenge ─── */
-.challenge-modal { position:fixed; inset:0; background:rgba(0,0,0,.7); z-index:900;
-  display:flex; align-items:center; justify-content:center; padding:1rem;
-  backdrop-filter:blur(6px); opacity:0; pointer-events:none; transition:opacity .25s; }
-.challenge-modal.vis { opacity:1; pointer-events:all; }
-.challenge-box { background:var(--surface); border:1px solid var(--border); border-radius:16px;
-  width:100%; max-width:480px; max-height:92vh; overflow-y:auto;
-  box-shadow:0 24px 60px rgba(0,0,0,.55);
-  transform:translateY(16px); transition:transform .28s; }
-.challenge-modal.vis .challenge-box { transform:translateY(0); }
-.ch-header { padding:1.4rem 1.5rem 1rem; border-bottom:1px solid var(--border);
-  display:flex; align-items:center; gap:.75rem; flex-wrap:wrap; }
-.ch-title { font-size:1rem; font-weight:700; color:var(--text); flex:1; letter-spacing:-.02em; }
-.ch-streak { display:flex; align-items:center; gap:5px; background:var(--surface2);
-  border:1px solid var(--border); border-radius:20px; padding:3px 10px;
-  font-size:.62rem; color:var(--muted); }
-.ch-streak-fire { font-size:.85rem; }
-.ch-close { background:transparent; border:none; color:var(--dim); font-size:1.1rem;
-  cursor:pointer; padding:3px 7px; border-radius:6px; transition:color .15s; }
-.ch-close:hover { color:var(--text); }
-.ch-body { padding:1.5rem; }
-.ch-target-lbl { font-size:.52rem; letter-spacing:.2em; text-transform:uppercase;
-  color:var(--dim); margin-bottom:.65rem; }
-.ch-target-swatch { width:100%; height:110px; border-radius:12px;
-  border:1px solid rgba(255,255,255,.07); margin-bottom:1.25rem;
-  transition:background .3s; position:relative; overflow:hidden; }
-.ch-target-swatch::after { content:'Match this color'; position:absolute;
-  inset:0; display:flex; align-items:flex-end; justify-content:flex-start;
-  padding:.6rem .85rem; font-size:.55rem; letter-spacing:.15em;
-  text-transform:uppercase; opacity:.45; }
-.ch-attempt { display:flex; gap:.75rem; align-items:stretch; margin-bottom:1rem; }
-.ch-attempt-swatch { width:60px; border-radius:10px; border:1px solid var(--border);
-  flex-shrink:0; transition:background .2s; }
-.ch-attempt-input { flex:1; background:var(--surface2); border:1px solid var(--border);
-  border-radius:10px; padding:.65rem 1rem; font-family:var(--mono); font-size:.85rem;
-  color:var(--text); outline:none; transition:border-color .15s; }
-.ch-attempt-input:focus { border-color:var(--accent); }
-.ch-attempt-input::placeholder { color:var(--dim); }
-.ch-submit { background:var(--accent); color:var(--on-accent); border:none;
-  border-radius:10px; padding:.65rem 1.25rem; font-family:var(--sans); font-size:.72rem;
-  font-weight:600; cursor:pointer; transition:opacity .15s; white-space:nowrap; }
-.ch-submit:hover { opacity:.85; }
-.ch-score-bar { background:var(--surface2); border:1px solid var(--border);
-  border-radius:12px; overflow:hidden; margin-bottom:1rem; display:none; }
-.ch-score-bar.vis { display:block; }
-.ch-score-fill { height:8px; border-radius:0; transition:width .6s ease; }
-.ch-score-text { display:flex; justify-content:space-between; align-items:center;
-  padding:.6rem 1rem; }
-.ch-score-num { font-family:var(--mono); font-size:1.5rem; font-weight:700; color:var(--text); }
-.ch-score-lbl { font-size:.62rem; color:var(--muted); }
-.ch-delta { font-size:.65rem; color:var(--dim); margin-top:2px; }
-.ch-result-pair { display:grid; grid-template-columns:1fr 1fr; gap:.75rem; margin:1rem 0; }
-.ch-result-swatch { border-radius:10px; height:64px; border:1px solid rgba(255,255,255,.07); }
-.ch-result-lbl { font-size:.55rem; color:var(--dim); text-align:center;
-  letter-spacing:.1em; text-transform:uppercase; margin-top:.35rem; }
-.ch-share-btn { width:100%; background:var(--surface2); border:1px solid var(--border);
-  border-radius:10px; padding:.65rem; font-family:var(--sans); font-size:.72rem;
-  font-weight:500; color:var(--text); cursor:pointer; transition:.15s;
-  display:flex; align-items:center; justify-content:center; gap:.5rem; }
-.ch-share-btn:hover { border-color:var(--accent); color:var(--accent-text); }
-.ch-history { margin-top:1.25rem; }
-.ch-history-lbl { font-size:.52rem; letter-spacing:.18em; text-transform:uppercase;
-  color:var(--dim); margin-bottom:.5rem; }
-.ch-history-row { display:flex; gap:4px; flex-wrap:wrap; }
-.ch-hist-dot { width:18px; height:18px; border-radius:4px; position:relative; }
-.ch-hist-dot[title]:hover::after { content:attr(title); position:absolute;
-  bottom:120%; left:50%; transform:translateX(-50%); background:#000;
-  color:#fff; font-size:.55rem; padding:2px 6px; border-radius:4px;
-  white-space:nowrap; pointer-events:none; }
-.ch-already-done { text-align:center; padding:1.5rem 0; }
-.ch-done-score { font-size:2.5rem; font-weight:700; color:var(--text); }
-.ch-done-lbl { font-size:.65rem; color:var(--muted); margin-top:.3rem; }
-
 /* ─── Mood Board ─── */
 .moodboard-panel { background:var(--surface); border:1px solid var(--border);
   border-radius:12px; overflow:hidden; margin-bottom:1.5rem; display:none; }
@@ -440,7 +367,7 @@ footer { border-top:1px solid var(--border); padding:1.75rem 3rem; display:flex;
   display:flex; align-items:center; justify-content:center; line-height:1; }
 .mb-tile:hover .mb-tile-rm { opacity:1; }
 .mb-tile .mb-tile-hex { position:absolute; bottom:0; left:0; right:0;
-  font-family:var(--mono); font-size:.45rem; text-align:center;
+  font-family:var(--mono); font-size:.55rem; text-align:center;
   padding:2px 0; background:rgba(0,0,0,.35); color:rgba(255,255,255,.8);
   opacity:0; transition:opacity .15s; }
 .mb-tile:hover .mb-tile-hex { opacity:1; }
@@ -460,15 +387,7 @@ footer { border-top:1px solid var(--border); padding:1.75rem 3rem; display:flex;
   color:#4CAF82; border:1px solid rgba(40,140,100,.2); border-radius:3px;
   padding:1px 5px; margin-left:5px; font-weight:600; }
 
-/* ─── Btn game ─── */
-.btn-game { display:inline-flex; align-items:center; gap:5px; font-family:var(--sans);
-  font-size:.64rem; font-weight:500; color:var(--muted); background:transparent;
-  border:1px solid var(--border); border-radius:20px; padding:5px 12px;
-  cursor:pointer; transition:border-color .18s,color .18s,background .18s;
-  letter-spacing:.03em; }
-.btn-game:hover { border-color:var(--accent); color:var(--accent-text); }
-.btn-game .game-streak { font-family:var(--mono); font-size:.58rem;
-  background:var(--surface2); border-radius:10px; padding:1px 6px; margin-left:2px; }
+/* ─── Btn moodboard ─── */
 .btn-moodboard { display:inline-flex; align-items:center; gap:5px; font-family:var(--sans);
   font-size:.64rem; font-weight:500; color:var(--muted); background:transparent;
   border:1px solid var(--border); border-radius:20px; padding:5px 12px;
@@ -556,7 +475,7 @@ footer { border-top:1px solid var(--border); padding:1.75rem 3rem; display:flex;
 /* ─── Swatch pick ─── */
 .swatch-pick{cursor:pointer;position:relative;}
 .swatch-pick:hover{opacity:.85;}
-.swatch-pick::after{content:'Pick';position:absolute;bottom:-8px;left:50%;transform:translateX(-50%);font-size:.48rem;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);white-space:nowrap;opacity:0;transition:opacity .15s;}
+.swatch-pick::after{content:'Pick';position:absolute;bottom:-8px;left:50%;transform:translateX(-50%);font-size:.52rem;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);white-space:nowrap;opacity:0;transition:opacity .15s;}
 .swatch-pick:hover::after{opacity:1;}
 
 /* ─── Dynamic logo ─── */
@@ -743,6 +662,77 @@ footer { border-top:1px solid var(--border); padding:1.75rem 3rem; display:flex;
     <span class="history-lbl">Recent</span>
     <div id="historyChips" style="display:flex;gap:7px;flex-wrap:wrap;"></div>
   </div>
+
+
+  <button class="wheel-top-btn" id="btnWheel" onclick="toggleWheel()">
+    <svg width="15" height="15" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="7" cy="7" r="6" stroke="currentColor" stroke-width="1.3"/><circle cx="7" cy="7" r="2" stroke="currentColor" stroke-width="1.3"/><line x1="7" y1="1" x2="7" y2="4.2" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/><line x1="7" y1="9.8" x2="7" y2="13" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/><line x1="1" y1="7" x2="4.2" y2="7" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/><line x1="9.8" y1="7" x2="13" y2="7" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+    Color Wheel
+    <span class="wheel-top-hint" id="wheelTopHint">open</span>
+  </button>
+  <div class="input-zone">
+    <div class="big-swatch swatch-pick" id="bigSwatch" onclick="document.getElementById('colorPicker').click()" title="Click to open color picker"></div>
+    <input type="color" id="colorPicker" style="position:absolute;opacity:0;width:0;height:0;pointer-events:none;" value="#ffffff">
+    <div class="input-inner">
+      <div class="input-lbl">Paste color value</div>
+      <input id="colorInput" autocomplete="off" spellcheck="false"
+        placeholder="#1D68FF  ·  rgb(29,104,255)  ·  cmyk(89,59,0,0)  ·  RAL 5015  ·  286 C  ·  Pantone 286 C …" />
+    </div>
+    <button class="input-clear" id="inputClear" onclick="clearInput()" title="Clear">&#x2715;</button>
+  </div>
+  <div class="examples">
+    <span class="ex-lbl">Try</span>
+    <button class="pill" onclick="fc('#1D68FF')">#1D68FF</button>
+    <button class="pill" onclick="fc('rgb(255, 87, 34)')">rgb(255,87,34)</button>
+    <button class="pill" onclick="fc('cmyk(37, 21, 0, 8)')">cmyk(37,21,0,8)</button>
+    <button class="pill" onclick="fc('RAL 3020')">RAL 3020</button>
+    <button class="pill" onclick="fc('Pantone 286 C')">Pantone 286 C</button>
+    <button class="pill" onclick="fc('hsl(220, 100%, 55%)')">hsl(220,100%,55%)</button>
+    <button class="pill" onclick="fc('Pantone Warm Red C')">Warm Red C</button>
+  </div>
+
+  <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:1rem;">
+
+    <button class="btn-save" id="btnSave" onclick="saveToPalette()" title="Save to palette">
+      <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 1l1.3 2.6 2.9.4-2.1 2 .5 2.9L6 7.6 3.4 8.9l.5-2.9-2.1-2 2.9-.4z"/></svg>
+      Grab Color
+    </button>
+    <button class="btn-palette" id="btnPalette" onclick="togglePalette()">
+      <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="1" width="4" height="4" rx="1"/><rect x="7" y="1" width="4" height="4" rx="1"/><rect x="1" y="7" width="4" height="4" rx="1"/><rect x="7" y="7" width="4" height="4" rx="1"/></svg>
+      My Bucket <span id="palCountBadge" style="font-family:var(--mono);font-size:.55rem;opacity:.6;"></span>
+    </button>
+    <button class="btn-moodboard" id="btnMoodboard" onclick="mbToggle()">
+      <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="1" y="1" width="4.5" height="4.5" rx=".8"/><rect x="6.5" y="1" width="4.5" height="4.5" rx=".8"/><rect x="1" y="6.5" width="4.5" height="4.5" rx=".8"/><rect x="6.5" y="6.5" width="4.5" height="4.5" rx=".8"/></svg>
+      Mood Board
+    </button>
+    <button class="btn-photo" id="btnPhoto" onclick="ppToggle()">
+      <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.3"><rect x="1" y="2.5" width="10" height="8" rx="1.2"/><circle cx="6" cy="6.5" r="2.2"/><path d="M4 2.5l.8-1.3h2.4l.8 1.3"/></svg>
+      Photo Palette
+    </button>
+    <button class="btn-share" id="btnShare" onclick="shareColor()">
+      <svg width="11" height="11" viewBox="0 0 11 11" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="9" cy="2" r="1.2"/><circle cx="2" cy="5.5" r="1.2"/><circle cx="9" cy="9" r="1.2"/><line x1="3.1" y1="4.8" x2="7.9" y2="2.7"/><line x1="3.1" y1="6.2" x2="7.9" y2="8.3"/></svg>
+      Share
+    </button>
+  </div>
+
+  <div class="palette-panel" id="palettePanel">
+    <div class="palette-head">
+      <span class="palette-head-title">My Bucket</span>
+      <span class="palette-count" id="palCount">0 colors</span>
+      <div class="palette-actions">
+        <button class="pal-btn" onclick="exportPaletteCSS()">↓ CSS vars</button>
+        <button class="pal-btn" onclick="exportPaletteJSON()">↓ JSON</button>
+        <button class="pal-btn" onclick="copyPaletteASText()">⎘ Copy list</button>
+        <button class="pal-btn danger" onclick="clearPalette()">Clear all</button>
+      </div>
+    </div>
+    <div class="palette-grid" id="paletteGrid"></div>
+    <div class="pal-confirm" id="palConfirm">
+      <span class="pal-confirm-txt">Remove all saved colors?</span>
+      <button class="pal-confirm-yes" onclick="clearPaletteConfirmed()">Yes, clear all</button>
+      <button class="pal-confirm-no" onclick="clearPaletteCancel()">Cancel</button>
+    </div>
+  </div>
+
   <div class="photo-panel" id="photoPanel">
     <div class="pp-head">
       <span class="pp-title">Photo Palette</span>
@@ -796,78 +786,6 @@ footer { border-top:1px solid var(--border); padding:1.75rem 3rem; display:flex;
     </div>
     <div class="mb-canvas-wrap">
       <div class="mb-canvas" id="mbCanvas"></div>
-    </div>
-  </div>
-
-  <button class="wheel-top-btn" id="btnWheel" onclick="toggleWheel()">
-    <svg width="15" height="15" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="7" cy="7" r="6" stroke="currentColor" stroke-width="1.3"/><circle cx="7" cy="7" r="2" stroke="currentColor" stroke-width="1.3"/><line x1="7" y1="1" x2="7" y2="4.2" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/><line x1="7" y1="9.8" x2="7" y2="13" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/><line x1="1" y1="7" x2="4.2" y2="7" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/><line x1="9.8" y1="7" x2="13" y2="7" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
-    Color Wheel
-    <span class="wheel-top-hint" id="wheelTopHint">open</span>
-  </button>
-  <div class="input-zone">
-    <div class="big-swatch swatch-pick" id="bigSwatch" onclick="document.getElementById('colorPicker').click()" title="Click to open color picker"></div>
-    <input type="color" id="colorPicker" style="position:absolute;opacity:0;width:0;height:0;pointer-events:none;" value="#ffffff">
-    <div class="input-inner">
-      <div class="input-lbl">Paste color value</div>
-      <input id="colorInput" autocomplete="off" spellcheck="false"
-        placeholder="#1D68FF  ·  rgb(29,104,255)  ·  cmyk(89,59,0,0)  ·  RAL 5015  ·  286 C  ·  Pantone 286 C …" />
-    </div>
-    <button class="input-clear" id="inputClear" onclick="clearInput()" title="Clear">&#x2715;</button>
-  </div>
-  <div class="examples">
-    <span class="ex-lbl">Try</span>
-    <button class="pill" onclick="fc('#1D68FF')">#1D68FF</button>
-    <button class="pill" onclick="fc('rgb(255, 87, 34)')">rgb(255,87,34)</button>
-    <button class="pill" onclick="fc('cmyk(37, 21, 0, 8)')">cmyk(37,21,0,8)</button>
-    <button class="pill" onclick="fc('RAL 3020')">RAL 3020</button>
-    <button class="pill" onclick="fc('Pantone 286 C')">Pantone 286 C</button>
-    <button class="pill" onclick="fc('hsl(220, 100%, 55%)')">hsl(220,100%,55%)</button>
-    <button class="pill" onclick="fc('Pantone Warm Red C')">Warm Red C</button>
-  </div>
-
-  <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:1rem;">
-
-    <button class="btn-save" id="btnSave" onclick="saveToPalette()" title="Save to palette">
-      <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 1l1.3 2.6 2.9.4-2.1 2 .5 2.9L6 7.6 3.4 8.9l.5-2.9-2.1-2 2.9-.4z"/></svg>
-      Grab Color
-    </button>
-    <button class="btn-palette" id="btnPalette" onclick="togglePalette()">
-      <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="1" width="4" height="4" rx="1"/><rect x="7" y="1" width="4" height="4" rx="1"/><rect x="1" y="7" width="4" height="4" rx="1"/><rect x="7" y="7" width="4" height="4" rx="1"/></svg>
-      My Bucket <span id="palCountBadge" style="font-family:var(--mono);font-size:.55rem;opacity:.6;"></span>
-    </button>
-    <button class="btn-game" id="btnGame" onclick="chOpen()">
-      🎮 Daily Challenge <span class="game-streak" id="gameStreakBadge"></span>
-    </button>
-    <button class="btn-moodboard" id="btnMoodboard" onclick="mbToggle()">
-      <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="1" y="1" width="4.5" height="4.5" rx=".8"/><rect x="6.5" y="1" width="4.5" height="4.5" rx=".8"/><rect x="1" y="6.5" width="4.5" height="4.5" rx=".8"/><rect x="6.5" y="6.5" width="4.5" height="4.5" rx=".8"/></svg>
-      Mood Board
-    </button>
-    <button class="btn-photo" id="btnPhoto" onclick="ppToggle()">
-      <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.3"><rect x="1" y="2.5" width="10" height="8" rx="1.2"/><circle cx="6" cy="6.5" r="2.2"/><path d="M4 2.5l.8-1.3h2.4l.8 1.3"/></svg>
-      Photo Palette
-    </button>
-    <button class="btn-share" id="btnShare" onclick="shareColor()">
-      <svg width="11" height="11" viewBox="0 0 11 11" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="9" cy="2" r="1.2"/><circle cx="2" cy="5.5" r="1.2"/><circle cx="9" cy="9" r="1.2"/><line x1="3.1" y1="4.8" x2="7.9" y2="2.7"/><line x1="3.1" y1="6.2" x2="7.9" y2="8.3"/></svg>
-      Share
-    </button>
-  </div>
-
-  <div class="palette-panel" id="palettePanel">
-    <div class="palette-head">
-      <span class="palette-head-title">My Bucket</span>
-      <span class="palette-count" id="palCount">0 colors</span>
-      <div class="palette-actions">
-        <button class="pal-btn" onclick="exportPaletteCSS()">↓ CSS vars</button>
-        <button class="pal-btn" onclick="exportPaletteJSON()">↓ JSON</button>
-        <button class="pal-btn" onclick="copyPaletteASText()">⎘ Copy list</button>
-        <button class="pal-btn danger" onclick="clearPalette()">Clear all</button>
-      </div>
-    </div>
-    <div class="palette-grid" id="paletteGrid"></div>
-    <div class="pal-confirm" id="palConfirm">
-      <span class="pal-confirm-txt">Remove all saved colors?</span>
-      <button class="pal-confirm-yes" onclick="clearPaletteConfirmed()">Yes, clear all</button>
-      <button class="pal-confirm-no" onclick="clearPaletteCancel()">Cancel</button>
     </div>
   </div>
 
@@ -2015,8 +1933,6 @@ if('serviceWorker' in navigator){
   });
 }
 
-
-
 /* ─── Curated Color of the Day palette (365 entries, cycles by day) ─── */
 const COTD_PALETTE = [
   ['#E63946','Alizarin Crimson'],['#F4A261','Sandy Amber'],['#2A9D8F','Persian Teal'],
@@ -2163,11 +2079,14 @@ function shareColor() {
   if (!hex) return;
   const url = `${location.origin}${location.pathname}?color=${hex}`;
   const btn = document.getElementById('btnShare');
-  navigator.clipboard.writeText(url).then(() => {
-    if (btn) { btn.classList.add('copied'); btn.querySelector('svg').style.display='none'; btn.childNodes[btn.childNodes.length-1].textContent=' Copied!'; setTimeout(() => { btn.classList.remove('copied'); btn.querySelector('svg').style.display=''; btn.childNodes[btn.childNodes.length-1].textContent='Share'; }, 1800); }
-  }).catch(() => {
-    if (btn) { const t = btn.childNodes[btn.childNodes.length-1]; t.textContent=' Copy failed'; setTimeout(() => { t.textContent='Share'; }, 1500); }
-  });
+  function flash(msg){
+    if(!btn) return;
+    const orig = btn.innerHTML;
+    btn.classList.add('copied');
+    btn.textContent = msg;
+    setTimeout(() => { btn.classList.remove('copied'); btn.innerHTML = orig; }, 1800);
+  }
+  navigator.clipboard.writeText(url).then(() => flash('✓ Link copied!')).catch(() => flash('Copy failed'));
 }
 
 /* ─── URL state (?color=HEX) ─── */
@@ -2348,195 +2267,6 @@ function topCopic(r,g,b,n){
   return all.slice(0,n||9);
 }
 
-/* ─── Daily Color Challenge ─── */
-const CH_KEY      = 'grabucket_ch_';   // + YYYYMMDD
-const CH_HIST_KEY = 'grabucket_ch_hist';
-const CH_STREAK_KEY = 'grabucket_ch_streak';
-
-function chTodayKey(){
-  const d=new Date(); 
-  return CH_KEY+d.getFullYear()+String(d.getMonth()+1).padStart(2,'0')+String(d.getDate()).padStart(2,'0');
-}
-
-function chGetTargetColor(){
-  /* Uses COTD palette — same deterministic approach */
-  const dayIndex=Math.floor(Date.now()/86400000);
-  return COTD_PALETTE[dayIndex % COTD_PALETTE.length];
-}
-
-function chScoreFromDist(dist){
-  /* dist 0 = perfect 100, dist 441 (max possible) = 0 */
-  return Math.max(0, Math.round(100 - (dist/4.41)));
-}
-
-function chScoreColor(score){
-  if(score>=90) return '#78d489';
-  if(score>=70) return '#F9D849';
-  if(score>=50) return '#FF7900';
-  return '#e07070';
-}
-
-function chEmoji(score){
-  if(score>=95) return '🎨🔥💯';
-  if(score>=85) return '🎨🔥';
-  if(score>=70) return '🎨✨';
-  if(score>=50) return '🎨';
-  return '🎨😅';
-}
-
-function chOpen(){
-  const modal=document.getElementById('challengeModal');
-  if(!modal) return;
-  modal.style.display='flex';
-  requestAnimationFrame(()=>modal.classList.add('vis'));
-
-  const [targetHex, targetName]=chGetTargetColor();
-  const sw=document.getElementById('chTargetSwatch');
-  if(sw){ sw.style.background=targetHex; }
-  const rgb=h2r(targetHex);
-  if(sw&&rgb) sw.style.setProperty('color', isDark(rgb.r,rgb.g,rgb.b)?'rgba(255,255,255,.45)':'rgba(0,0,0,.35)');
-
-  /* Check if already played today */
-  const saved=localStorage.getItem(chTodayKey());
-  if(saved){
-    const data=JSON.parse(saved);
-    document.getElementById('chPlayArea').style.display='none';
-    document.getElementById('chDoneArea').style.display='block';
-    document.getElementById('chDoneScore').textContent=data.score;
-    document.getElementById('chDoneScore').style.color=chScoreColor(data.score);
-    const dt=document.getElementById('chDoneTarget');
-    const da=document.getElementById('chDoneAttempt');
-    if(dt) dt.style.background=targetHex;
-    if(da) da.style.background=data.attempt;
-  } else {
-    document.getElementById('chPlayArea').style.display='block';
-    document.getElementById('chDoneArea').style.display='none';
-    document.getElementById('chScoreBar').classList.remove('vis');
-    document.getElementById('chResultPair').style.display='none';
-    document.getElementById('chShareBtn').style.display='none';
-    document.getElementById('chAttemptInput').value='';
-    document.getElementById('chAttemptSwatch').style.background='#888';
-  }
-  chRenderStreak();
-  chRenderHistory();
-
-}
-
-function chPreview(){
-  const v=document.getElementById('chAttemptInput').value.trim();
-  const rgb=parseInput(v);
-  const sw=document.getElementById('chAttemptSwatch');
-  if(sw&&rgb) sw.style.background=r2h(rgb.r,rgb.g,rgb.b);
-}
-
-function chClose(){
-  const modal=document.getElementById('challengeModal');
-  if(!modal) return;
-  modal.classList.remove('vis');
-  setTimeout(()=>{ modal.style.display='none'; },260);
-}
-
-function chClickOutside(e){
-  if(e.target===document.getElementById('challengeModal')) chClose();
-}
-
-function chSubmit(){
-  const raw=document.getElementById('chAttemptInput').value.trim();
-  const attempt=parseInput(raw);
-  if(!attempt){ 
-    document.getElementById('chAttemptInput').style.borderColor='#e07070';
-    setTimeout(()=>document.getElementById('chAttemptInput').style.borderColor='',1000);
-    return;
-  }
-  const [targetHex]=chGetTargetColor();
-  const trgb=h2r(targetHex);
-  const dist=Math.sqrt((attempt.r-trgb.r)**2+(attempt.g-trgb.g)**2+(attempt.b-trgb.b)**2);
-  const score=chScoreFromDist(dist);
-  const attemptHex=r2h(attempt.r,attempt.g,attempt.b);
-  const scoreColor=chScoreColor(score);
-
-  /* Show score bar */
-  const bar=document.getElementById('chScoreBar');
-  bar.classList.add('vis');
-  setTimeout(()=>{
-    const fill=document.getElementById('chScoreFill');
-    if(fill){ fill.style.width=score+'%'; fill.style.background=scoreColor; }
-  },50);
-  document.getElementById('chScoreNum').textContent=score;
-  document.getElementById('chScoreNum').style.color=scoreColor;
-  document.getElementById('chDelta').textContent=`ΔE ≈ ${dist.toFixed(1)} · ${raw}`;
-
-  /* Show result swatches */
-  const rp=document.getElementById('chResultPair');
-  if(rp){ rp.style.display='grid'; }
-  const tr=document.getElementById('chTargetResult');
-  const ar=document.getElementById('chAttemptResult');
-  if(tr) tr.style.background=targetHex;
-  if(ar) ar.style.background=attemptHex;
-  document.getElementById('chShareBtn').style.display='flex';
-
-  /* Save result */
-  localStorage.setItem(chTodayKey(), JSON.stringify({score, attempt:attemptHex, dist:dist.toFixed(1)}));
-
-  /* Update streak */
-  chUpdateStreak();
-
-  /* Save to history */
-  const hist=JSON.parse(localStorage.getItem(CH_HIST_KEY)||'[]');
-  hist.unshift({date:chTodayKey().replace(CH_KEY,''), score, hex:targetHex, attempt:attemptHex});
-  if(hist.length>30) hist.length=30;
-  localStorage.setItem(CH_HIST_KEY,JSON.stringify(hist));
-
-  chRenderHistory();
-  chRenderStreak();
-}
-
-function chUpdateStreak(){
-  const streak=JSON.parse(localStorage.getItem(CH_STREAK_KEY)||'{"count":0,"last":""}');
-  const today=chTodayKey().replace(CH_KEY,'');
-  const d=new Date(); d.setDate(d.getDate()-1);
-  const yesterday=d.getFullYear()+String(d.getMonth()+1).padStart(2,'0')+String(d.getDate()).padStart(2,'0');
-  if(streak.last===today) return;
-  streak.count = (streak.last===yesterday) ? streak.count+1 : 1;
-  streak.last=today;
-  localStorage.setItem(CH_STREAK_KEY,JSON.stringify(streak));
-}
-
-function chRenderStreak(){
-  const streak=JSON.parse(localStorage.getItem(CH_STREAK_KEY)||'{"count":0}');
-  const el=document.getElementById('chStreakCount');
-  if(el) el.textContent=streak.count||0;
-  const badge=document.getElementById('gameStreakBadge');
-  if(badge) badge.textContent=streak.count>0?'🔥'+streak.count:'';
-}
-
-function chRenderHistory(){
-  const hist=JSON.parse(localStorage.getItem(CH_HIST_KEY)||'[]');
-  const el=document.getElementById('chHistory');
-  if(!el) return;
-  if(!hist.length){ el.innerHTML=''; return; }
-  const dots=hist.slice(0,20).map(h=>{
-    const col=chScoreColor(h.score);
-    return `<div class="ch-hist-dot" style="background:${h.hex};border:2px solid ${col}" title="${h.date}: ${h.score}/100"></div>`;
-  }).join('');
-  el.innerHTML=`<div class="ch-history-lbl">Past results</div><div class="ch-history-row">${dots}</div>`;
-}
-
-function chShare(){
-  const saved=localStorage.getItem(chTodayKey());
-  if(!saved) return;
-  const data=JSON.parse(saved);
-  const [,name]=chGetTargetColor();
-  const score=data.score;
-  const bars=Math.round(score/10);
-  const visual='█'.repeat(bars)+'░'.repeat(10-bars);
-  const text=`🎨 Grabucket Daily Challenge\n${name} — ${chEmoji(score)}\n${visual} ${score}/100\n\nhttps://grabucket.com`;
-  navigator.clipboard.writeText(text).then(()=>{
-    const btns=document.querySelectorAll('.ch-share-btn');
-    btns.forEach(b=>{ const o=b.textContent; b.textContent='✓ Copied!'; setTimeout(()=>b.textContent=o,1800); });
-  });
-}
-
 /* ─── Mood Board ─── */
 const MB_KEY='grabucket_moodboard';
 let mbTiles=[];
@@ -2558,7 +2288,7 @@ function mbToggle(){
 function mbAddCurrent(){
   const hex=(document.getElementById('colorInput').value||'').trim().toUpperCase();
   if(!/^#[0-9A-Fa-f]{6}$/.test(hex)) return;
-  mbLoad();
+  if(mbTiles.find(t=>t.hex===hex)) return; /* no duplicates */
   mbTiles.push({hex, id:Date.now()});
   mbSave(); mbRender();
   if(!document.getElementById('moodboardPanel').classList.contains('open')) mbToggle();
@@ -3006,7 +2736,6 @@ document.getElementById('colorPicker').addEventListener('input',e=>{
   cotdInit();
   syncClearBtn();
   wnInit();
-  chRenderStreak();
   mbLoad();
 })();
 
@@ -3127,69 +2856,6 @@ document.getElementById('colorPicker').addEventListener('input',e=>{
     </div>
   </div>
 
-<div class="challenge-modal" id="challengeModal" onclick="chClickOutside(event)">
-  <div class="challenge-box">
-    <div class="ch-header">
-      <div class="ch-title">🎮 Daily Color Challenge</div>
-      <div class="ch-streak"><span class="ch-streak-fire">🔥</span><span id="chStreakCount">0</span> day streak</div>
-      <button class="ch-close" onclick="chClose()">×</button>
-    </div>
-    <div class="ch-body">
-      <div id="chPlayArea">
-        <div class="ch-target-lbl">Today's color — match it as closely as you can</div>
-        <div class="ch-target-swatch" id="chTargetSwatch"></div>
-        <div class="ch-attempt">
-          <div class="ch-attempt-swatch" id="chAttemptSwatch" style="background:#888"></div>
-          <input class="ch-attempt-input" id="chAttemptInput" oninput="chPreview()" placeholder="#RRGGBB or color name…" autocomplete="off" spellcheck="false">
-          <button class="ch-submit" onclick="chSubmit()">Submit</button>
-        </div>
-        <div class="ch-score-bar" id="chScoreBar">
-          <div class="ch-score-fill" id="chScoreFill" style="width:0;background:#78d489"></div>
-          <div class="ch-score-text">
-            <div>
-              <div class="ch-score-num" id="chScoreNum">—</div>
-              <div class="ch-score-lbl">/ 100 points</div>
-            </div>
-            <div class="ch-delta" id="chDelta"></div>
-          </div>
-        </div>
-        <div class="ch-result-pair" id="chResultPair" style="display:none">
-          <div>
-            <div class="ch-result-swatch" id="chTargetResult"></div>
-            <div class="ch-result-lbl">Target</div>
-          </div>
-          <div>
-            <div class="ch-result-swatch" id="chAttemptResult"></div>
-            <div class="ch-result-lbl">Your guess</div>
-          </div>
-        </div>
-        <button class="ch-share-btn" id="chShareBtn" style="display:none" onclick="chShare()">
-          <svg width="13" height="13" viewBox="0 0 13 13" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="10" cy="2.5" r="1.4"/><circle cx="2.5" cy="6.5" r="1.4"/><circle cx="10" cy="10.5" r="1.4"/><line x1="3.8" y1="5.8" x2="8.7" y2="3.2"/><line x1="3.8" y1="7.2" x2="8.7" y2="9.8"/></svg>
-          Share result
-        </button>
-      </div>
-      <div id="chDoneArea" style="display:none" class="ch-already-done">
-        <div class="ch-done-score" id="chDoneScore">—</div>
-        <div class="ch-done-lbl">Today's score — come back tomorrow!</div>
-        <div class="ch-result-pair" style="margin-top:1rem">
-          <div>
-            <div class="ch-result-swatch" id="chDoneTarget"></div>
-            <div class="ch-result-lbl">Target</div>
-          </div>
-          <div>
-            <div class="ch-result-swatch" id="chDoneAttempt"></div>
-            <div class="ch-result-lbl">Your guess</div>
-          </div>
-        </div>
-        <button class="ch-share-btn" style="margin-top:.75rem" onclick="chShare()">
-          <svg width="13" height="13" viewBox="0 0 13 13" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="10" cy="2.5" r="1.4"/><circle cx="2.5" cy="6.5" r="1.4"/><circle cx="10" cy="10.5" r="1.4"/><line x1="3.8" y1="5.8" x2="8.7" y2="3.2"/><line x1="3.8" y1="7.2" x2="8.7" y2="9.8"/></svg>
-          Share again
-        </button>
-      </div>
-      <div class="ch-history" id="chHistory"></div>
-    </div>
-  </div>
-</div>
 </div>
 </body>
 </html>
